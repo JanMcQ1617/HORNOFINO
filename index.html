@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hornofino — Bakery &amp; Café</title>
+  <title>Hornofino — Artisan Bakery &amp; Café</title>
   <meta name="description" content="Hornofino — an artisan bakery and café where the warmth of the oven meets the spirit of the Aegean. Fresh bread, pastries, and Mediterranean fare baked daily." />
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,19 +14,18 @@
 <body>
   <!-- ░░ Navigation ░░ -->
   <header class="nav" id="top">
-    <a class="nav__brand" href="#top" aria-label="Hornofino home">
-      <span class="nav__mark" aria-hidden="true">
-        <img src="assets/logo.svg" alt="" width="34" height="34" />
-      </span>
+    <a class="nav__brand" href="index.html" aria-label="Hornofino home">
+      <span class="nav__mark" aria-hidden="true"><img src="assets/logo.svg" alt="" width="34" height="34" /></span>
       <span class="nav__name">HORNOFINO</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="#menu">Menu</a>
-      <a href="#story">Our Story</a>
-      <a href="#locations">Locations</a>
-      <a href="#reviews">Reviews</a>
+      <a href="index.html" class="is-active" aria-current="page">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">Our Story</a>
+      <a href="locations.html">Locations</a>
+      <a href="contact.html">Contact</a>
     </nav>
-    <a class="btn btn--ghost nav__cta" href="#order">Order Online</a>
+    <a class="btn btn--ghost nav__cta" href="contact.html#order">Order Online</a>
     <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -42,8 +41,8 @@
         Mediterranean table, where simplicity is the highest craft.
       </p>
       <div class="hero__actions">
-        <a class="btn btn--solid" href="#order">Order Online</a>
-        <a class="btn btn--line" href="#menu">Explore the Menu</a>
+        <a class="btn btn--solid" href="contact.html#order">Order Online</a>
+        <a class="btn btn--line" href="menu.html">Explore the Menu</a>
       </div>
     </div>
     <div class="meander-rule" aria-hidden="true"></div>
@@ -61,7 +60,7 @@
     </div>
   </div>
 
-  <!-- ░░ Story ░░ -->
+  <!-- ░░ Story teaser ░░ -->
   <section class="story" id="story">
     <div class="story__art" aria-hidden="true">
       <div class="column">
@@ -79,19 +78,16 @@
         grandparents did along the coast — slowly, patiently, and with
         <em>φιλοξενία</em>, the Greek art of generous welcome.
       </p>
-      <p>
-        No shortcuts. No noise. Just flour, water, salt, and the warmth of the
-        oven carrying the scent of morning through the door.
-      </p>
       <ul class="story__stats">
         <li><strong>18h</strong><span>Slow ferment</span></li>
         <li><strong>05:00</strong><span>Oven lit daily</span></li>
         <li><strong>100%</strong><span>Baked in-house</span></li>
       </ul>
+      <p style="margin-top:1.6rem"><a class="btn btn--line" href="about.html">Read our story</a></p>
     </div>
   </section>
 
-  <!-- ░░ Menu ░░ -->
+  <!-- ░░ Menu teaser ░░ -->
   <section class="menu" id="menu">
     <header class="section-head">
       <p class="eyebrow">The Menu</p>
@@ -118,25 +114,8 @@
         <p>Baklava, galaktoboureko, and almond melomakarona by the piece.</p>
         <span class="card__price">from $3</span>
       </article>
-      <article class="card">
-        <span class="card__glyph">⌘</span>
-        <h3>Sandwiches</h3>
-        <p>Grilled halloumi, slow-roast lamb, and garden mezze on fresh bread.</p>
-        <span class="card__price">from $9</span>
-      </article>
-      <article class="card">
-        <span class="card__glyph">∿</span>
-        <h3>Soups</h3>
-        <p>Avgolemono, fava, and seasonal vegetable — ladled warm.</p>
-        <span class="card__price">from $7</span>
-      </article>
-      <article class="card">
-        <span class="card__glyph">❉</span>
-        <h3>Drinks</h3>
-        <p>Greek coffee, mountain tea, and cold-pressed seasonal juices.</p>
-        <span class="card__price">from $3</span>
-      </article>
     </div>
+    <p style="text-align:center;margin-top:2.5rem"><a class="btn btn--solid" href="menu.html">View the full menu</a></p>
   </section>
 
   <!-- ░░ Order CTA ░░ -->
@@ -146,32 +125,7 @@
       <p class="eyebrow eyebrow--light">Online Ordering</p>
       <h2>Order from our bakeries</h2>
       <p>Pickup or delivery — fresh from the morning bake, brought straight to your table.</p>
-      <a class="btn btn--solid btn--gold" href="#" onclick="return false;">Start an Order</a>
-    </div>
-  </section>
-
-  <!-- ░░ Locations ░░ -->
-  <section class="locations" id="locations">
-    <header class="section-head">
-      <p class="eyebrow">Locations</p>
-      <h2>Find us nearby</h2>
-    </header>
-    <div class="locations__grid">
-      <article class="place">
-        <h3>Harbor Street</h3>
-        <p>112 Harbor Street<br />Open · 6:00 – 19:00</p>
-        <a href="#" onclick="return false;">Directions →</a>
-      </article>
-      <article class="place">
-        <h3>Olive Square</h3>
-        <p>4 Olive Square<br />Open · 6:30 – 20:00</p>
-        <a href="#" onclick="return false;">Directions →</a>
-      </article>
-      <article class="place">
-        <h3>Marble Row</h3>
-        <p>27 Marble Row<br />Open · 7:00 – 18:00</p>
-        <a href="#" onclick="return false;">Directions →</a>
-      </article>
+      <a class="btn btn--solid btn--gold" href="contact.html#order">Start an Order</a>
     </div>
   </section>
 
@@ -207,10 +161,11 @@
       </div>
       <nav class="footer__col" aria-label="Footer menu">
         <h4>Explore</h4>
-        <a href="#menu">Menu</a>
-        <a href="#story">Our Story</a>
-        <a href="#locations">Locations</a>
-        <a href="#order">Order Online</a>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">Our Story</a>
+        <a href="locations.html">Locations</a>
+        <a href="contact.html">Contact</a>
       </nav>
       <div class="footer__col">
         <h4>Visit</h4>

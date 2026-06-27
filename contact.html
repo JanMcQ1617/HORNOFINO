@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; Order — Hornofino</title>
+  <meta name="description" content="Order online from Hornofino, ask about catering, or just say καλημέρα. Pickup and delivery from our bakeries." />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav" id="top">
+    <a class="nav__brand" href="index.html" aria-label="Hornofino home">
+      <span class="nav__mark" aria-hidden="true"><img src="assets/logo.svg" alt="" width="34" height="34" /></span>
+      <span class="nav__name">HORNOFINO</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">Our Story</a>
+      <a href="locations.html">Locations</a>
+      <a href="contact.html" class="is-active" aria-current="page">Contact</a>
+    </nav>
+    <a class="btn btn--ghost nav__cta" href="#order">Order Online</a>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+
+  <section class="page-banner" id="order">
+    <p class="crumbs"><a href="index.html">Home</a> · Contact &amp; Order</p>
+    <h1>Order &amp; Say Καλημέρα</h1>
+    <p>Place an order for pickup or delivery, ask about catering, or just send a kind word.</p>
+    <div class="meander-rule" aria-hidden="true"></div>
+  </section>
+
+  <main class="contact">
+    <div class="contact__info">
+      <h2>We'd love to hear from you</h2>
+      <p>
+        Pickup orders are ready the same day, fresh from the morning bake.
+        Delivery is available within the city. For events and large orders,
+        tell us a little about what you need and we'll take it from there.
+      </p>
+      <ul class="contact__list">
+        <li><strong>Order line</strong>(555) 010-1120</li>
+        <li><strong>Email</strong>hello@hornofino.example</li>
+        <li><strong>Catering</strong>events@hornofino.example</li>
+        <li><strong>Hours</strong>Daily · 6:00 – 19:00</li>
+        <li><strong>Flagship</strong>112 Harbor Street</li>
+      </ul>
+    </div>
+
+    <form class="form" id="orderForm" novalidate>
+      <label for="name">Your name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required placeholder="Maria Konstantopoulou" />
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+
+      <label for="location">Pickup location</label>
+      <select id="location" name="location">
+        <option>Harbor Street</option>
+        <option>Olive Square</option>
+        <option>Marble Row</option>
+        <option>Delivery within the city</option>
+      </select>
+
+      <label for="type">I'm reaching out about</label>
+      <select id="type" name="type">
+        <option>An online order</option>
+        <option>Catering / large order</option>
+        <option>A question</option>
+        <option>Just saying hello</option>
+      </select>
+
+      <label for="message">Your order or message</label>
+      <textarea id="message" name="message" required placeholder="2 sourdough loaves, a box of baklava, pickup at 8am…"></textarea>
+
+      <button class="btn btn--solid" type="submit">Send Request</button>
+      <p class="form__note">This is a demo form — submissions are confirmed on-screen and not sent anywhere yet.</p>
+      <p class="form__success" id="formSuccess">Ευχαριστώ! Your request has been noted — we'll be in touch shortly.</p>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="nav__mark" aria-hidden="true"><img src="assets/logo.svg" alt="" width="40" height="40" /></span>
+        <span class="nav__name">HORNOFINO</span>
+        <p class="footer__tag">Bread born of fire &amp; the Aegean.</p>
+      </div>
+      <nav class="footer__col" aria-label="Footer menu">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer__col"><h4>Visit</h4><p>112 Harbor Street<br />Open daily · 6:00 – 19:00</p></div>
+      <div class="footer__col"><h4>Follow</h4><div class="footer__social"><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a></div></div>
+    </div>
+    <div class="meander-rule meander-rule--thin" aria-hidden="true"></div>
+    <p class="footer__copy">© <span id="year"></span> Hornofino · Φούρνος. Crafted with fire and patience.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

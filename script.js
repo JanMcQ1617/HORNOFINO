@@ -24,6 +24,20 @@ const revealTargets = document.querySelectorAll(
 );
 revealTargets.forEach((el) => el.classList.add("reveal"));
 
+// Contact / order form — demo confirmation, no network call
+const orderForm = document.getElementById("orderForm");
+orderForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!orderForm.checkValidity()) {
+    orderForm.reportValidity();
+    return;
+  }
+  const success = document.getElementById("formSuccess");
+  orderForm.querySelectorAll("input, select, textarea, button").forEach((el) => (el.disabled = true));
+  success?.classList.add("show");
+  success?.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
 if ("IntersectionObserver" in window) {
   const io = new IntersectionObserver(
     (entries) => {

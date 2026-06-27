@@ -23,10 +23,16 @@ clean **Greek aesthetic**: marble whites, deep Aegean blue, olive gold, a Greek-
 
 ## Structure
 
+Multi-page static site — shared nav/footer, design system, and motif across every page.
+
 ```
-index.html      # single-page site
-styles.css      # design system + layout
-script.js       # mobile nav + reveal-on-scroll
+index.html      # Home — hero, story & menu teasers, reviews, CTA
+menu.html       # Full itemized menu by category, with prices
+about.html      # Our Story — values, φιλοξενία, timeline
+locations.html  # Three bakeries — hours, addresses, directions
+contact.html    # Contact & online-order form (demo)
+styles.css      # design system + layout for all pages
+script.js       # mobile nav, reveal-on-scroll, form handling
 assets/
   logo.svg      # amphora-in-meander emblem
   meander.svg   # tileable Greek-key band
@@ -41,7 +47,14 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-## Sections
+## Live site
 
-Hero · Story · Menu (Breakfast, Breads, Pastries, Sandwiches, Soups, Drinks) ·
-Online Ordering · Locations · Reviews · Footer.
+Hosted on GitHub Pages: **https://janmcq1617.github.io/HORNOFINO/**
+
+## Pages
+
+- **Home** — hero, story & menu teasers, online-ordering CTA, reviews
+- **Menu** — Breakfast, Breads, Pastries, Sandwiches, Soups, Drinks (itemized with prices)
+- **Our Story** — fire / time / φιλοξενία values and a short timeline
+- **Locations** — Harbor Street, Olive Square, Marble Row
+- **Contact** — order/contact form (demo, confirms on-screen)

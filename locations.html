@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Locations — Hornofino</title>
+  <meta name="description" content="Find your nearest Hornofino bakery — Harbor Street, Olive Square, and Marble Row. Hours, addresses, and directions." />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav" id="top">
+    <a class="nav__brand" href="index.html" aria-label="Hornofino home">
+      <span class="nav__mark" aria-hidden="true"><img src="assets/logo.svg" alt="" width="34" height="34" /></span>
+      <span class="nav__name">HORNOFINO</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">Our Story</a>
+      <a href="locations.html" class="is-active" aria-current="page">Locations</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="btn btn--ghost nav__cta" href="contact.html#order">Order Online</a>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </header>
+
+  <section class="page-banner">
+    <p class="crumbs"><a href="index.html">Home</a> · Locations</p>
+    <h1>Find Us Nearby</h1>
+    <p>Three bakeries, the same fire and welcome. Drop in for the morning bake.</p>
+    <div class="meander-rule" aria-hidden="true"></div>
+  </section>
+
+  <section class="locations">
+    <div class="locations__grid">
+      <article class="place">
+        <h3>Harbor Street</h3>
+        <p>112 Harbor Street<br />Open daily · 6:00 – 19:00<br />(555) 010-1120</p>
+        <a href="https://maps.google.com/?q=112+Harbor+Street" target="_blank" rel="noopener">Directions →</a>
+      </article>
+      <article class="place">
+        <h3>Olive Square</h3>
+        <p>4 Olive Square<br />Open daily · 6:30 – 20:00<br />(555) 010-0044</p>
+        <a href="https://maps.google.com/?q=4+Olive+Square" target="_blank" rel="noopener">Directions →</a>
+      </article>
+      <article class="place">
+        <h3>Marble Row</h3>
+        <p>27 Marble Row<br />Open daily · 7:00 – 18:00<br />(555) 010-2700</p>
+        <a href="https://maps.google.com/?q=27+Marble+Row" target="_blank" rel="noopener">Directions →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="values">
+    <header class="section-head">
+      <p class="eyebrow">Good to know</p>
+      <h2>Before you visit</h2>
+    </header>
+    <div class="values__grid">
+      <article class="value"><span class="glyph">⏰</span><h3>Bake times</h3><p>Bread is out by 7:00; pastries follow through the morning. Popular items sell out — come early.</p></article>
+      <article class="value"><span class="glyph">🛍</span><h3>Pickup &amp; delivery</h3><p>Order online for same-day pickup at any location, or delivery within the city.</p></article>
+      <article class="value"><span class="glyph">🎉</span><h3>Catering</h3><p>Hosting something? We bake bread boards and pastry platters to order — just reach out.</p></article>
+    </div>
+  </section>
+
+  <section class="order" id="order">
+    <div class="meander-rule meander-rule--light" aria-hidden="true"></div>
+    <div class="order__inner">
+      <p class="eyebrow eyebrow--light">Can't make it in?</p>
+      <h2>Bring the bakery home</h2>
+      <p>Order online and we'll have it ready, fresh from the morning bake.</p>
+      <a class="btn btn--solid btn--gold" href="contact.html#order">Order Online</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="nav__mark" aria-hidden="true"><img src="assets/logo.svg" alt="" width="40" height="40" /></span>
+        <span class="nav__name">HORNOFINO</span>
+        <p class="footer__tag">Bread born of fire &amp; the Aegean.</p>
+      </div>
+      <nav class="footer__col" aria-label="Footer menu">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="footer__col"><h4>Visit</h4><p>112 Harbor Street<br />Open daily · 6:00 – 19:00</p></div>
+      <div class="footer__col"><h4>Follow</h4><div class="footer__social"><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a></div></div>
+    </div>
+    <div class="meander-rule meander-rule--thin" aria-hidden="true"></div>
+    <p class="footer__copy">© <span id="year"></span> Hornofino · Φούρνος. Crafted with fire and patience.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
