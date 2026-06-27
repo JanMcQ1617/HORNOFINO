@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hornofino — Bakery &amp; Café</title>
+  <meta name="description" content="Hornofino — an artisan bakery and café where the warmth of the oven meets the spirit of the Aegean. Fresh bread, pastries, and Mediterranean fare baked daily." />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ░░ Navigation ░░ -->
+  <header class="nav" id="top">
+    <a class="nav__brand" href="#top" aria-label="Hornofino home">
+      <span class="nav__mark" aria-hidden="true">
+        <img src="assets/logo.svg" alt="" width="34" height="34" />
+      </span>
+      <span class="nav__name">HORNOFINO</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#menu">Menu</a>
+      <a href="#story">Our Story</a>
+      <a href="#locations">Locations</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
+    <a class="btn btn--ghost nav__cta" href="#order">Order Online</a>
+    <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ░░ Hero ░░ -->
+  <section class="hero">
+    <div class="hero__inner">
+      <p class="eyebrow">Φούρνος · Artisan Bakery &amp; Café</p>
+      <h1 class="hero__title">Bread born of<br /><em>fire &amp; the Aegean</em></h1>
+      <p class="hero__sub">
+        Every loaf is shaped by hand and baked at dawn — a small ode to the
+        Mediterranean table, where simplicity is the highest craft.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#order">Order Online</a>
+        <a class="btn btn--line" href="#menu">Explore the Menu</a>
+      </div>
+    </div>
+    <div class="meander-rule" aria-hidden="true"></div>
+  </section>
+
+  <!-- ░░ Marquee ░░ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Καλημέρα</span><span>·</span><span>Baked Daily</span><span>·</span>
+      <span>Stone Oven</span><span>·</span><span>Sourdough</span><span>·</span>
+      <span>Φιλοξενία</span><span>·</span><span>Mediterranean</span><span>·</span>
+      <span>Καλημέρα</span><span>·</span><span>Baked Daily</span><span>·</span>
+      <span>Stone Oven</span><span>·</span><span>Sourdough</span><span>·</span>
+      <span>Φιλοξενία</span><span>·</span><span>Mediterranean</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- ░░ Story ░░ -->
+  <section class="story" id="story">
+    <div class="story__art" aria-hidden="true">
+      <div class="column">
+        <div class="column__cap"></div>
+        <div class="column__shaft"></div>
+        <div class="column__base"></div>
+      </div>
+    </div>
+    <div class="story__text">
+      <p class="eyebrow">Our Story</p>
+      <h2>A table set in the old way</h2>
+      <p>
+        Hornofino began with a single stone oven and a belief that good bread
+        needs only time, fire, and honest hands. We bake the way our
+        grandparents did along the coast — slowly, patiently, and with
+        <em>φιλοξενία</em>, the Greek art of generous welcome.
+      </p>
+      <p>
+        No shortcuts. No noise. Just flour, water, salt, and the warmth of the
+        oven carrying the scent of morning through the door.
+      </p>
+      <ul class="story__stats">
+        <li><strong>18h</strong><span>Slow ferment</span></li>
+        <li><strong>05:00</strong><span>Oven lit daily</span></li>
+        <li><strong>100%</strong><span>Baked in-house</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ░░ Menu ░░ -->
+  <section class="menu" id="menu">
+    <header class="section-head">
+      <p class="eyebrow">The Menu</p>
+      <h2>From the oven, with care</h2>
+      <p class="section-head__sub">A small, seasonal selection — made fresh, sold the same day.</p>
+    </header>
+
+    <div class="menu__grid">
+      <article class="card">
+        <span class="card__glyph">☀</span>
+        <h3>Breakfast</h3>
+        <p>Bougatsa, honey-yogurt bowls, and warm spanakopita to start the day.</p>
+        <span class="card__price">from $5</span>
+      </article>
+      <article class="card">
+        <span class="card__glyph">🜂</span>
+        <h3>Breads</h3>
+        <p>Country sourdough, sesame koulouri, and olive-rosemary loaves.</p>
+        <span class="card__price">from $4</span>
+      </article>
+      <article class="card">
+        <span class="card__glyph">◍</span>
+        <h3>Pastries</h3>
+        <p>Baklava, galaktoboureko, and almond melomakarona by the piece.</p>
+        <span class="card__price">from $3</span>
+      </article>
+      <article class="card">
+        <span class="card__glyph">⌘</span>
+        <h3>Sandwiches</h3>
+        <p>Grilled halloumi, slow-roast lamb, and garden mezze on fresh bread.</p>
+        <span class="card__price">from $9</span>
+      </article>
+      <article class="card">
+        <span class="card__glyph">∿</span>
+        <h3>Soups</h3>
+        <p>Avgolemono, fava, and seasonal vegetable — ladled warm.</p>
+        <span class="card__price">from $7</span>
+      </article>
+      <article class="card">
+        <span class="card__glyph">❉</span>
+        <h3>Drinks</h3>
+        <p>Greek coffee, mountain tea, and cold-pressed seasonal juices.</p>
+        <span class="card__price">from $3</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- ░░ Order CTA ░░ -->
+  <section class="order" id="order">
+    <div class="meander-rule meander-rule--light" aria-hidden="true"></div>
+    <div class="order__inner">
+      <p class="eyebrow eyebrow--light">Online Ordering</p>
+      <h2>Order from our bakeries</h2>
+      <p>Pickup or delivery — fresh from the morning bake, brought straight to your table.</p>
+      <a class="btn btn--solid btn--gold" href="#" onclick="return false;">Start an Order</a>
+    </div>
+  </section>
+
+  <!-- ░░ Locations ░░ -->
+  <section class="locations" id="locations">
+    <header class="section-head">
+      <p class="eyebrow">Locations</p>
+      <h2>Find us nearby</h2>
+    </header>
+    <div class="locations__grid">
+      <article class="place">
+        <h3>Harbor Street</h3>
+        <p>112 Harbor Street<br />Open · 6:00 – 19:00</p>
+        <a href="#" onclick="return false;">Directions →</a>
+      </article>
+      <article class="place">
+        <h3>Olive Square</h3>
+        <p>4 Olive Square<br />Open · 6:30 – 20:00</p>
+        <a href="#" onclick="return false;">Directions →</a>
+      </article>
+      <article class="place">
+        <h3>Marble Row</h3>
+        <p>27 Marble Row<br />Open · 7:00 – 18:00</p>
+        <a href="#" onclick="return false;">Directions →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ░░ Reviews ░░ -->
+  <section class="reviews" id="reviews">
+    <header class="section-head">
+      <p class="eyebrow">Tell us your experience</p>
+      <h2>Kind words</h2>
+    </header>
+    <div class="reviews__grid">
+      <figure class="quote">
+        <blockquote>“The koulouri tastes like a morning in Thessaloniki. I'm hooked.”</blockquote>
+        <figcaption>— Elena P.</figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote>“Simple, beautiful, and the bread is unreal. My new daily stop.”</blockquote>
+        <figcaption>— Marcus T.</figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote>“Feels like being welcomed into someone's home. Pure φιλοξενία.”</blockquote>
+        <figcaption>— Sofia R.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ░░ Footer ░░ -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="nav__mark" aria-hidden="true"><img src="assets/logo.svg" alt="" width="40" height="40" /></span>
+        <span class="nav__name">HORNOFINO</span>
+        <p class="footer__tag">Bread born of fire &amp; the Aegean.</p>
+      </div>
+      <nav class="footer__col" aria-label="Footer menu">
+        <h4>Explore</h4>
+        <a href="#menu">Menu</a>
+        <a href="#story">Our Story</a>
+        <a href="#locations">Locations</a>
+        <a href="#order">Order Online</a>
+      </nav>
+      <div class="footer__col">
+        <h4>Visit</h4>
+        <p>112 Harbor Street<br />Open daily · 6:00 – 19:00</p>
+      </div>
+      <div class="footer__col">
+        <h4>Follow</h4>
+        <div class="footer__social">
+          <a href="#" onclick="return false;" aria-label="Instagram">Instagram</a>
+          <a href="#" onclick="return false;" aria-label="Facebook">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="meander-rule meander-rule--thin" aria-hidden="true"></div>
+    <p class="footer__copy">© <span id="year"></span> Hornofino · Φούρνος. Crafted with fire and patience.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
