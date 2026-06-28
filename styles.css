@@ -106,6 +106,9 @@ img { display: block; max-width: 100%; }
 .nav__brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--ink); margin-right: auto; }
 .nav__mark { color: var(--aegean); display: grid; place-items: center; }
 .nav__name { font-family: var(--serif-display); font-weight: 600; letter-spacing: 0.28em; font-size: 1.05rem; }
+.nav__logo { height: 30px; width: auto; display: block; }
+.footer__logo { height: 46px; width: auto; display: block; }
+@media (max-width: 480px) { .nav__logo { height: 24px; } }
 .nav__links { display: flex; gap: 2rem; }
 .nav__links a {
   text-decoration: none; color: var(--ink); font-size: 0.82rem;

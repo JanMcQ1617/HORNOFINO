@@ -47,14 +47,19 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-## Image credits & notice
+## Brand assets
 
-The food photographs in `assets/` (breakfast, breads, pastries, sandwiches, soups,
-drinks) were sourced from the reference site **hornofino.com** for this mockup. They
-remain the **copyright of that business** and are used here for demonstration only —
-**replace them with your own or licensed imagery before any real/commercial launch.**
-The hero/breads marble scene is an original AI-generated image. The logo and
-Greek-key motif are original to this project.
+This site is built **for Hornofino** using the brand's own assets:
+
+- **Logo** — `logo-dark.png` (nav, on light marble) and `logo-white.png` (footer, on
+  dark) are the Hornofino *Pan · Café · Vino* wordmark, recolored from the brand's
+  original white logo. `favicon.png` is the brand "H" letterform on Aegean blue.
+- **Food photography** — breakfast, pastries, sandwiches, soups, and drinks are
+  Hornofino's own product photos. The hero banner is composed from three of them.
+- **`breads.jpg`** is a placeholder marble scene (no bread photo exists in the brand
+  set yet) — swap in a real bread shot when available.
+- The **Greek-key (meander) motif** and the marble / Aegean-blue / olive-gold styling
+  are original design work for this project.
 
 ## Live site
 
