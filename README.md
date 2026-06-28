@@ -47,6 +47,15 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
+## Image credits & notice
+
+The food photographs in `assets/` (breakfast, breads, pastries, sandwiches, soups,
+drinks) were sourced from the reference site **hornofino.com** for this mockup. They
+remain the **copyright of that business** and are used here for demonstration only —
+**replace them with your own or licensed imagery before any real/commercial launch.**
+The hero/breads marble scene is an original AI-generated image. The logo and
+Greek-key motif are original to this project.
+
 ## Live site
 
 Hosted on GitHub Pages: **https://janmcq1617.github.io/HORNOFINO/**
