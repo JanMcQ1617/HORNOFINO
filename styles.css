@@ -1,22 +1,21 @@
 /* ============================================================
    HORNOFINO — bakery & café
-   Brand colorway: near-black · white · red-orange · warm gold
-   (taken from hornofino.com — dark ground, white logo, orange accent)
+   Orange colorway: warm cream ground · bold orange lead · charcoal
    ============================================================ */
 
 :root {
-  --marble:    #14110e;   /* warm near-black — main ground */
-  --marble-2:  #1d1915;   /* lifted dark — alternating sections */
-  --surface:   #221d18;   /* cards & panels */
-  --surface-2: #2a2420;   /* inputs */
-  --ink:       #f5efe6;   /* primary light text (on dark) */
-  --muted:     #c3b8a8;   /* muted body text */
-  --muted-2:   #8f8576;   /* dimmer captions */
-  --aegean:    #fc4c02;   /* PRIMARY accent — brand red-orange */
-  --aegean-2:  #df3131;   /* secondary — brand red (hover) */
-  --gold:      #e0a23a;   /* warm gold accent */
-  --gold-soft: #f3c877;
-  --line:      rgba(245, 239, 230, 0.13);
+  --marble:    #fdf3ea;   /* warm cream — main ground */
+  --marble-2:  #f6e7d6;   /* deeper cream — alternating sections */
+  --surface:   #ffffff;   /* cards & panels */
+  --surface-2: #fbf1e7;   /* inputs */
+  --ink:       #241a12;   /* dark warm charcoal text */
+  --muted:     #6a5b4d;   /* muted body text */
+  --muted-2:   #9a8a79;   /* dimmer captions */
+  --aegean:    #fc4c02;   /* PRIMARY — brand orange */
+  --aegean-2:  #d83a00;   /* darker orange (hover) */
+  --gold:      #d98a1e;   /* warm amber accent */
+  --gold-soft: #b3741a;
+  --line:      rgba(40, 25, 12, 0.14);
 
   --serif-display: "Cinzel", serif;
   --serif-body:    "Cormorant Garamond", Georgia, serif;
@@ -104,7 +103,7 @@ img { display: block; max-width: 100%; }
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; gap: 2rem;
   padding: 1.1rem clamp(1.2rem, 4vw, 3rem);
-  background: rgba(18, 15, 12, 0.85);
+  background: rgba(253, 243, 234, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -150,7 +149,7 @@ img { display: block; max-width: 100%; }
 }
 .hero__visual img {
   width: 100%; height: clamp(220px, 38vw, 460px); object-fit: cover;
-  border: 1px solid var(--line); box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+  border: 1px solid var(--line); box-shadow: 0 30px 60px rgba(40,25,12,0.20);
 }
 .hero__visual::before, .hero__visual::after {
   content: ""; position: absolute; width: 34px; height: 34px; border: 2px solid var(--gold);
@@ -182,7 +181,7 @@ img { display: block; max-width: 100%; }
 
 /* Decorative Greek column, pure CSS */
 .story__art { display: grid; place-items: center; }
-.column { width: 120px; filter: drop-shadow(0 18px 30px rgba(0,0,0,0.5)); }
+.column { width: 120px; filter: drop-shadow(0 18px 30px rgba(40,25,12,0.16)); }
 .column__cap   { height: 26px; background: var(--marble-2); border: 1px solid var(--line); border-radius: 3px 3px 0 0; }
 .column__shaft {
   height: 280px; margin: 0 14px;
@@ -204,14 +203,14 @@ img { display: block; max-width: 100%; }
   content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 3px; z-index: 2;
   background: var(--gold); transform: scaleY(0); transform-origin: top; transition: transform 0.4s var(--ease);
 }
-.card:hover { transform: translateY(-6px); box-shadow: 0 22px 50px rgba(0,0,0,0.5); border-color: rgba(252,76,2,0.4); }
+.card:hover { transform: translateY(-6px); box-shadow: 0 22px 50px rgba(40,25,12,0.14); border-color: rgba(252,76,2,0.45); }
 .card:hover::before { transform: scaleY(1); }
 .card__media {
   height: 200px; display: grid; place-items: center; overflow: hidden;
-  background: radial-gradient(circle at 50% 55%, #2c2622 0%, #16120f 100%);
+  background: radial-gradient(circle at 50% 55%, #ffffff 0%, var(--marble-2) 100%);
   border-bottom: 1px solid var(--line);
 }
-.card__media img { max-width: 84%; max-height: 168px; object-fit: contain; filter: drop-shadow(0 14px 22px rgba(0,0,0,0.6)); transition: transform 0.5s var(--ease); }
+.card__media img { max-width: 84%; max-height: 168px; object-fit: contain; filter: drop-shadow(0 14px 22px rgba(40,25,12,0.22)); transition: transform 0.5s var(--ease); }
 .card:hover .card__media img { transform: scale(1.05); }
 .card__media--cover img { max-width: none; max-height: none; width: 100%; height: 100%; object-fit: cover; filter: none; }
 .card__body { padding: 1.6rem 2rem 2.2rem; }
@@ -221,15 +220,18 @@ img { display: block; max-width: 100%; }
 
 /* ---- Order CTA ------------------------------------------ */
 .order {
-  position: relative; text-align: center; color: var(--ink);
+  position: relative; text-align: center; color: #fff;
   background:
-    radial-gradient(circle at 50% 0%, rgba(252,76,2,0.22), transparent 62%),
-    #1a1510;
+    radial-gradient(circle at 50% -20%, #ff6a2b, transparent 60%),
+    var(--aegean);
 }
-.order .meander-rule { position: absolute; top: 0; left: 0; }
+.order .meander-rule { position: absolute; top: 0; left: 0; background: #fff; opacity: 0.9; }
 .order__inner { max-width: 640px; margin: 0 auto; padding: clamp(4rem, 9vw, 7rem) 1.5rem; }
 .order__inner h2 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 1rem; }
-.order__inner p { font-family: var(--serif-body); font-size: 1.3rem; color: var(--muted); margin-bottom: 2rem; }
+.order__inner p { font-family: var(--serif-body); font-size: 1.3rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; }
+.order .eyebrow, .order .eyebrow--light { color: rgba(255,255,255,0.85); }
+.order .btn--gold { background: #fff; color: var(--aegean); }
+.order .btn--gold:hover { background: var(--marble); color: var(--aegean-2); }
 
 /* ---- Locations ------------------------------------------ */
 .locations { max-width: var(--maxw); margin: 0 auto; padding: clamp(4rem, 8vw, 6rem) clamp(1.2rem, 4vw, 3rem); }
@@ -291,7 +293,7 @@ img { display: block; max-width: 100%; }
 .menu-section__thumb {
   width: 66px; height: 66px; flex: 0 0 66px; border-radius: 50%; overflow: hidden;
   border: 1px solid var(--line); display: grid; place-items: center;
-  background: radial-gradient(circle at 50% 55%, #2c2622 0%, #16120f 100%);
+  background: radial-gradient(circle at 50% 55%, #ffffff 0%, var(--marble-2) 100%);
 }
 .menu-section__thumb img { max-width: 86%; max-height: 56px; object-fit: contain; }
 .menu-section__thumb--cover img { max-width: none; max-height: none; width: 100%; height: 100%; object-fit: cover; }

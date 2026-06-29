@@ -1,25 +1,25 @@
 # HORNOFINO
 
-A website for **Hornofino** — an artisan bakery & café — using the **brand's own
-colorway** (dark ground, white logo, bold red-orange accent, taken from
-[hornofino.com](https://www.hornofino.com/)) with a clean, minimal layout, a Greek-key
-(meander) motif, and inscriptional Cinzel typography.
+A website for **Hornofino** — an artisan bakery & café — in an **orange-forward
+colorway**: a warm cream ground with the brand's bold orange (`#fc4c02`, from
+[hornofino.com](https://www.hornofino.com/)) leading, plus solid-orange hero/CTA
+bands, a Greek-key (meander) motif, and inscriptional Cinzel typography.
 
 > Structure follows hornofino.com (menu categories, locations, online-ordering, and
 > customer reviews), rebuilt as a fast static multi-page site.
 
 ## Design system
 
-Colorway pulled from the brand's site (near-black ground, white wordmark, red-orange).
+Orange-forward: warm cream ground with the brand orange leading.
 
 | Token         | Value     | Use                          |
 | ------------- | --------- | ---------------------------- |
-| Near-black    | `#14110e` | Background                   |
-| Dark surface  | `#221d18` | Cards & panels               |
-| Red-orange    | `#fc4c02` | Primary accent               |
-| Brand red     | `#df3131` | Secondary / hover            |
-| Warm gold     | `#e0a23a` | Highlights, eyebrows         |
-| Off-white     | `#f5efe6` | Text, logo                   |
+| Warm cream    | `#fdf3ea` | Background                   |
+| White         | `#ffffff` | Cards & panels               |
+| Brand orange  | `#fc4c02` | Primary — buttons, bands, accents |
+| Deep orange   | `#d83a00` | Hover                        |
+| Warm amber    | `#d98a1e` | Highlights, eyebrows         |
+| Warm charcoal | `#241a12` | Text                         |
 
 - **Display type:** Cinzel · **Body serif:** Cormorant Garamond · **UI sans:** Jost
 - **Motif:** Greek-key meander dividers (`assets/meander.svg` used as a CSS mask)
