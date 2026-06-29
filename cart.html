@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Locations — Hornofino</title>
-  <meta name="description" content="Find your nearest Hornofino bakery — Harbor Street, Olive Square, and Marble Row. Hours, addresses, and directions." />
+  <title>Your Basket — Hornofino</title>
+  <meta name="description" content="Review your Hornofino basket and proceed to checkout." />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,66 +20,36 @@
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
       <a href="about.html">Our Story</a>
-      <a href="locations.html" class="is-active" aria-current="page">Locations</a>
+      <a href="locations.html">Locations</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a class="btn btn--ghost nav__cta" href="contact.html#order">Order Online</a>
     <a class="nav__cart" href="cart.html" aria-label="View basket">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
       <span class="nav__cart-count" data-cart-count>0</span>
     </a>
-
     <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
 
   <section class="page-banner">
-    <p class="crumbs"><a href="index.html">Home</a> · Locations</p>
-    <h1>Find Us Nearby</h1>
-    <p>Three bakeries, the same fire and welcome. Drop in for the morning bake.</p>
+    <p class="crumbs"><a href="index.html">Home</a> · Basket</p>
+    <h1>Your Basket</h1>
+    <p>Review your order, then head to checkout.</p>
     <div class="meander-rule" aria-hidden="true"></div>
   </section>
 
-  <section class="locations">
-    <div class="locations__grid">
-      <article class="place">
-        <h3>Harbor Street</h3>
-        <p>112 Harbor Street<br />Open daily · 6:00 – 19:00<br />(555) 010-1120</p>
-        <a href="https://maps.google.com/?q=112+Harbor+Street" target="_blank" rel="noopener">Directions →</a>
-      </article>
-      <article class="place">
-        <h3>Olive Square</h3>
-        <p>4 Olive Square<br />Open daily · 6:30 – 20:00<br />(555) 010-0044</p>
-        <a href="https://maps.google.com/?q=4+Olive+Square" target="_blank" rel="noopener">Directions →</a>
-      </article>
-      <article class="place">
-        <h3>Marble Row</h3>
-        <p>27 Marble Row<br />Open daily · 7:00 – 18:00<br />(555) 010-2700</p>
-        <a href="https://maps.google.com/?q=27+Marble+Row" target="_blank" rel="noopener">Directions →</a>
-      </article>
-    </div>
-  </section>
+  <main class="cart-page">
+    <div id="cartItems"><!-- rows injected by cart.js --></div>
 
-  <section class="values">
-    <header class="section-head">
-      <p class="eyebrow">Good to know</p>
-      <h2>Before you visit</h2>
-    </header>
-    <div class="values__grid">
-      <article class="value"><span class="glyph">⏰</span><h3>Bake times</h3><p>Bread is out by 7:00; pastries follow through the morning. Popular items sell out — come early.</p></article>
-      <article class="value"><span class="glyph">🛍</span><h3>Pickup &amp; delivery</h3><p>Order online for same-day pickup at any location, or delivery within the city.</p></article>
-      <article class="value"><span class="glyph">🎉</span><h3>Catering</h3><p>Hosting something? We bake bread boards and pastry platters to order — just reach out.</p></article>
+    <div class="cart-summary" id="cartSummary">
+      <div class="cart-summary__total">
+        <span>Total</span><strong id="cartTotal">$0.00</strong>
+      </div>
+      <div class="cart-actions">
+        <a class="btn btn--line" href="menu.html">Add more</a>
+        <a class="btn btn--solid" href="checkout.html">Checkout →</a>
+      </div>
     </div>
-  </section>
-
-  <section class="order" id="order">
-    <div class="meander-rule meander-rule--light" aria-hidden="true"></div>
-    <div class="order__inner">
-      <p class="eyebrow eyebrow--light">Can't make it in?</p>
-      <h2>Bring the bakery home</h2>
-      <p>Order online and we'll have it ready, fresh from the morning bake.</p>
-      <a class="btn btn--solid btn--gold" href="contact.html#order">Order Online</a>
-    </div>
-  </section>
+  </main>
 
   <footer class="footer">
     <div class="footer__top">

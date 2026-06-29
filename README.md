@@ -78,3 +78,14 @@ Hosted on GitHub Pages: **https://janmcq1617.github.io/HORNOFINO/**
 - **Our Story** — fire / time / φιλοξενία values and a short timeline
 - **Locations** — Harbor Street, Olive Square, Marble Row
 - **Contact** — order/contact form (demo, confirms on-screen)
+- **Basket** (`cart.html`) — line items, quantity steppers, live totals
+- **Checkout** (`checkout.html`) — customer details + secure pay button
+
+## Cart & payments
+
+- Client-side cart in `cart.js` — add-to-cart on every menu item, basket persists in
+  `localStorage`, live count badge in the nav, quantity/remove on the basket page.
+- Checkout is **stubbed for Stripe**: it confirms on-screen today and takes no money.
+  To enable real card payments, follow **[STRIPE-SETUP.md](STRIPE-SETUP.md)** (deploy a
+  small serverless function + set two values in `cart.js`). Card data never touches the
+  site — Stripe handles it on its own secure page.

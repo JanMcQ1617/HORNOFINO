@@ -24,6 +24,11 @@
       <a href="contact.html">Contact</a>
     </nav>
     <a class="btn btn--ghost nav__cta" href="contact.html#order">Order Online</a>
+    <a class="nav__cart" href="cart.html" aria-label="View basket">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      <span class="nav__cart-count" data-cart-count>0</span>
+    </a>
+
     <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
 
@@ -37,48 +42,48 @@
   <main class="menu-page">
     <section class="menu-section">
       <div class="menu-section__head"><span class="menu-section__thumb"><img src="assets/breakfast.png" alt="" loading="lazy" /></span><h2>Breakfast</h2></div>
-      <div class="menu-item"><span class="menu-item__name">Bougatsa</span><span class="menu-item__desc">Custard in crisp phyllo, dusted with cinnamon</span><span class="menu-item__dots"></span><span class="menu-item__price">$5</span></div>
-      <div class="menu-item"><span class="menu-item__name">Spanakopita</span><span class="menu-item__desc">Spinach &amp; feta in golden layered pastry</span><span class="menu-item__dots"></span><span class="menu-item__price">$6</span></div>
-      <div class="menu-item"><span class="menu-item__name">Honey-Yogurt Bowl</span><span class="menu-item__desc">Strained yogurt, thyme honey, walnuts</span><span class="menu-item__dots"></span><span class="menu-item__price">$7</span></div>
-      <div class="menu-item"><span class="menu-item__name">Tsoureki French Toast</span><span class="menu-item__desc">Braided sweet bread, orange blossom syrup</span><span class="menu-item__dots"></span><span class="menu-item__price">$9</span></div>
+      <div class="menu-item"><span class="menu-item__name">Bougatsa</span><span class="menu-item__desc">Custard in crisp phyllo, dusted with cinnamon</span><span class="menu-item__dots"></span><span class="menu-item__price">$5</span><button class="menu-item__add" data-add-to-cart data-name="Bougatsa" data-price="5" aria-label="Add Bougatsa to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Spanakopita</span><span class="menu-item__desc">Spinach &amp; feta in golden layered pastry</span><span class="menu-item__dots"></span><span class="menu-item__price">$6</span><button class="menu-item__add" data-add-to-cart data-name="Spanakopita" data-price="6" aria-label="Add Spanakopita to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Honey-Yogurt Bowl</span><span class="menu-item__desc">Strained yogurt, thyme honey, walnuts</span><span class="menu-item__dots"></span><span class="menu-item__price">$7</span><button class="menu-item__add" data-add-to-cart data-name="Honey-Yogurt Bowl" data-price="7" aria-label="Add Honey-Yogurt Bowl to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Tsoureki French Toast</span><span class="menu-item__desc">Braided sweet bread, orange blossom syrup</span><span class="menu-item__dots"></span><span class="menu-item__price">$9</span><button class="menu-item__add" data-add-to-cart data-name="Tsoureki French Toast" data-price="9" aria-label="Add Tsoureki French Toast to basket" title="Add to basket">+</button></div>
     </section>
 
     <section class="menu-section">
       <div class="menu-section__head"><span class="menu-section__thumb menu-section__thumb--cover"><img src="assets/breads.jpg" alt="" loading="lazy" /></span><h2>Breads</h2></div>
-      <div class="menu-item"><span class="menu-item__name">Country Sourdough</span><span class="menu-item__desc">18-hour ferment, thick crust</span><span class="menu-item__dots"></span><span class="menu-item__price">$6</span></div>
-      <div class="menu-item"><span class="menu-item__name">Sesame Koulouri</span><span class="menu-item__desc">The classic Greek street ring</span><span class="menu-item__dots"></span><span class="menu-item__price">$4</span></div>
-      <div class="menu-item"><span class="menu-item__name">Olive &amp; Rosemary Loaf</span><span class="menu-item__desc">Kalamata olives, fresh rosemary</span><span class="menu-item__dots"></span><span class="menu-item__price">$7</span></div>
-      <div class="menu-item"><span class="menu-item__name">Lagana Flatbread</span><span class="menu-item__desc">Soft, sesame-strewn, made daily</span><span class="menu-item__dots"></span><span class="menu-item__price">$5</span></div>
+      <div class="menu-item"><span class="menu-item__name">Country Sourdough</span><span class="menu-item__desc">18-hour ferment, thick crust</span><span class="menu-item__dots"></span><span class="menu-item__price">$6</span><button class="menu-item__add" data-add-to-cart data-name="Country Sourdough" data-price="6" aria-label="Add Country Sourdough to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Sesame Koulouri</span><span class="menu-item__desc">The classic Greek street ring</span><span class="menu-item__dots"></span><span class="menu-item__price">$4</span><button class="menu-item__add" data-add-to-cart data-name="Sesame Koulouri" data-price="4" aria-label="Add Sesame Koulouri to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Olive &amp; Rosemary Loaf</span><span class="menu-item__desc">Kalamata olives, fresh rosemary</span><span class="menu-item__dots"></span><span class="menu-item__price">$7</span><button class="menu-item__add" data-add-to-cart data-name="Olive &amp; Rosemary Loaf" data-price="7" aria-label="Add Olive &amp; Rosemary Loaf to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Lagana Flatbread</span><span class="menu-item__desc">Soft, sesame-strewn, made daily</span><span class="menu-item__dots"></span><span class="menu-item__price">$5</span><button class="menu-item__add" data-add-to-cart data-name="Lagana Flatbread" data-price="5" aria-label="Add Lagana Flatbread to basket" title="Add to basket">+</button></div>
     </section>
 
     <section class="menu-section">
       <div class="menu-section__head"><span class="menu-section__thumb"><img src="assets/pastries.png" alt="" loading="lazy" /></span><h2>Pastries</h2></div>
-      <div class="menu-item"><span class="menu-item__name">Baklava</span><span class="menu-item__desc">Phyllo, walnuts, honey syrup</span><span class="menu-item__dots"></span><span class="menu-item__price">$4</span></div>
-      <div class="menu-item"><span class="menu-item__name">Galaktoboureko</span><span class="menu-item__desc">Semolina custard in syrup-soaked phyllo</span><span class="menu-item__dots"></span><span class="menu-item__price">$5</span></div>
-      <div class="menu-item"><span class="menu-item__name">Melomakarona</span><span class="menu-item__desc">Honey-almond spiced cookies</span><span class="menu-item__dots"></span><span class="menu-item__price">$3</span></div>
-      <div class="menu-item"><span class="menu-item__name">Kourabiedes</span><span class="menu-item__desc">Almond shortbread, powdered sugar</span><span class="menu-item__dots"></span><span class="menu-item__price">$3</span></div>
+      <div class="menu-item"><span class="menu-item__name">Baklava</span><span class="menu-item__desc">Phyllo, walnuts, honey syrup</span><span class="menu-item__dots"></span><span class="menu-item__price">$4</span><button class="menu-item__add" data-add-to-cart data-name="Baklava" data-price="4" aria-label="Add Baklava to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Galaktoboureko</span><span class="menu-item__desc">Semolina custard in syrup-soaked phyllo</span><span class="menu-item__dots"></span><span class="menu-item__price">$5</span><button class="menu-item__add" data-add-to-cart data-name="Galaktoboureko" data-price="5" aria-label="Add Galaktoboureko to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Melomakarona</span><span class="menu-item__desc">Honey-almond spiced cookies</span><span class="menu-item__dots"></span><span class="menu-item__price">$3</span><button class="menu-item__add" data-add-to-cart data-name="Melomakarona" data-price="3" aria-label="Add Melomakarona to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Kourabiedes</span><span class="menu-item__desc">Almond shortbread, powdered sugar</span><span class="menu-item__dots"></span><span class="menu-item__price">$3</span><button class="menu-item__add" data-add-to-cart data-name="Kourabiedes" data-price="3" aria-label="Add Kourabiedes to basket" title="Add to basket">+</button></div>
     </section>
 
     <section class="menu-section">
       <div class="menu-section__head"><span class="menu-section__thumb"><img src="assets/sandwiches.png" alt="" loading="lazy" /></span><h2>Sandwiches</h2></div>
-      <div class="menu-item"><span class="menu-item__name">Grilled Halloumi</span><span class="menu-item__desc">Tomato, cucumber, oregano, olive oil</span><span class="menu-item__dots"></span><span class="menu-item__price">$10</span></div>
-      <div class="menu-item"><span class="menu-item__name">Slow-Roast Lamb</span><span class="menu-item__desc">Tzatziki, red onion, herbs on lagana</span><span class="menu-item__dots"></span><span class="menu-item__price">$12</span></div>
-      <div class="menu-item"><span class="menu-item__name">Garden Mezze</span><span class="menu-item__desc">Hummus, roasted peppers, greens</span><span class="menu-item__dots"></span><span class="menu-item__price">$9</span></div>
+      <div class="menu-item"><span class="menu-item__name">Grilled Halloumi</span><span class="menu-item__desc">Tomato, cucumber, oregano, olive oil</span><span class="menu-item__dots"></span><span class="menu-item__price">$10</span><button class="menu-item__add" data-add-to-cart data-name="Grilled Halloumi" data-price="10" aria-label="Add Grilled Halloumi to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Slow-Roast Lamb</span><span class="menu-item__desc">Tzatziki, red onion, herbs on lagana</span><span class="menu-item__dots"></span><span class="menu-item__price">$12</span><button class="menu-item__add" data-add-to-cart data-name="Slow-Roast Lamb" data-price="12" aria-label="Add Slow-Roast Lamb to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Garden Mezze</span><span class="menu-item__desc">Hummus, roasted peppers, greens</span><span class="menu-item__dots"></span><span class="menu-item__price">$9</span><button class="menu-item__add" data-add-to-cart data-name="Garden Mezze" data-price="9" aria-label="Add Garden Mezze to basket" title="Add to basket">+</button></div>
     </section>
 
     <section class="menu-section">
       <div class="menu-section__head"><span class="menu-section__thumb"><img src="assets/soups.png" alt="" loading="lazy" /></span><h2>Soups</h2></div>
-      <div class="menu-item"><span class="menu-item__name">Avgolemono</span><span class="menu-item__desc">Egg-lemon with rice, the comfort classic</span><span class="menu-item__dots"></span><span class="menu-item__price">$8</span></div>
-      <div class="menu-item"><span class="menu-item__name">Fava</span><span class="menu-item__desc">Santorini yellow split pea, olive oil</span><span class="menu-item__dots"></span><span class="menu-item__price">$7</span></div>
-      <div class="menu-item"><span class="menu-item__name">Seasonal Vegetable</span><span class="menu-item__desc">Ask us what the market brought</span><span class="menu-item__dots"></span><span class="menu-item__price">$7</span></div>
+      <div class="menu-item"><span class="menu-item__name">Avgolemono</span><span class="menu-item__desc">Egg-lemon with rice, the comfort classic</span><span class="menu-item__dots"></span><span class="menu-item__price">$8</span><button class="menu-item__add" data-add-to-cart data-name="Avgolemono" data-price="8" aria-label="Add Avgolemono to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Fava</span><span class="menu-item__desc">Santorini yellow split pea, olive oil</span><span class="menu-item__dots"></span><span class="menu-item__price">$7</span><button class="menu-item__add" data-add-to-cart data-name="Fava" data-price="7" aria-label="Add Fava to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Seasonal Vegetable</span><span class="menu-item__desc">Ask us what the market brought</span><span class="menu-item__dots"></span><span class="menu-item__price">$7</span><button class="menu-item__add" data-add-to-cart data-name="Seasonal Vegetable" data-price="7" aria-label="Add Seasonal Vegetable to basket" title="Add to basket">+</button></div>
     </section>
 
     <section class="menu-section">
       <div class="menu-section__head"><span class="menu-section__thumb"><img src="assets/drinks.png" alt="" loading="lazy" /></span><h2>Drinks</h2></div>
-      <div class="menu-item"><span class="menu-item__name">Greek Coffee</span><span class="menu-item__desc">Brewed in the briki, sketo to glyko</span><span class="menu-item__dots"></span><span class="menu-item__price">$3</span></div>
-      <div class="menu-item"><span class="menu-item__name">Freddo Espresso</span><span class="menu-item__desc">Iced, hand-frothed</span><span class="menu-item__dots"></span><span class="menu-item__price">$4</span></div>
-      <div class="menu-item"><span class="menu-item__name">Mountain Tea</span><span class="menu-item__desc">Sideritis, honey on the side</span><span class="menu-item__dots"></span><span class="menu-item__price">$3</span></div>
-      <div class="menu-item"><span class="menu-item__name">Cold-Pressed Juice</span><span class="menu-item__desc">Orange, or the day's seasonal blend</span><span class="menu-item__dots"></span><span class="menu-item__price">$5</span></div>
+      <div class="menu-item"><span class="menu-item__name">Greek Coffee</span><span class="menu-item__desc">Brewed in the briki, sketo to glyko</span><span class="menu-item__dots"></span><span class="menu-item__price">$3</span><button class="menu-item__add" data-add-to-cart data-name="Greek Coffee" data-price="3" aria-label="Add Greek Coffee to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Freddo Espresso</span><span class="menu-item__desc">Iced, hand-frothed</span><span class="menu-item__dots"></span><span class="menu-item__price">$4</span><button class="menu-item__add" data-add-to-cart data-name="Freddo Espresso" data-price="4" aria-label="Add Freddo Espresso to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Mountain Tea</span><span class="menu-item__desc">Sideritis, honey on the side</span><span class="menu-item__dots"></span><span class="menu-item__price">$3</span><button class="menu-item__add" data-add-to-cart data-name="Mountain Tea" data-price="3" aria-label="Add Mountain Tea to basket" title="Add to basket">+</button></div>
+      <div class="menu-item"><span class="menu-item__name">Cold-Pressed Juice</span><span class="menu-item__desc">Orange, or the day's seasonal blend</span><span class="menu-item__dots"></span><span class="menu-item__price">$5</span><button class="menu-item__add" data-add-to-cart data-name="Cold-Pressed Juice" data-price="5" aria-label="Add Cold-Pressed Juice to basket" title="Add to basket">+</button></div>
     </section>
 
     <p class="menu-note">Prices in USD. Vegetarian options throughout — just ask about allergens.</p>
@@ -103,5 +108,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="cart.js"></script>
 </body>
 </html>
