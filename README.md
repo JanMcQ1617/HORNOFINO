@@ -1,21 +1,25 @@
 # HORNOFINO
 
-A minimalist website for **Hornofino** — an artisan bakery & café — rebuilt with a
-clean **Greek aesthetic**: marble whites, deep Aegean blue, olive gold, a Greek-key
+A website for **Hornofino** — an artisan bakery & café — using the **brand's own
+colorway** (dark ground, white logo, bold red-orange accent, taken from
+[hornofino.com](https://www.hornofino.com/)) with a clean, minimal layout, a Greek-key
 (meander) motif, and inscriptional Cinzel typography.
 
-> Inspired in structure by [hornofino.com](https://www.hornofino.com/) (menu categories,
-> locations, online-ordering, and customer reviews), reinterpreted as a minimal,
-> Mediterranean-themed brand.
+> Structure follows hornofino.com (menu categories, locations, online-ordering, and
+> customer reviews), rebuilt as a fast static multi-page site.
 
 ## Design system
 
-| Token        | Value     | Use                         |
-| ------------ | --------- | --------------------------- |
-| Marble white | `#f7f4ec` | Background                  |
-| Aegean blue  | `#15324f` | Primary / accents           |
-| Olive gold   | `#c2992f` | Highlights, eyebrows        |
-| Charcoal ink | `#1d2733` | Text, footer                |
+Colorway pulled from the brand's site (near-black ground, white wordmark, red-orange).
+
+| Token         | Value     | Use                          |
+| ------------- | --------- | ---------------------------- |
+| Near-black    | `#14110e` | Background                   |
+| Dark surface  | `#221d18` | Cards & panels               |
+| Red-orange    | `#fc4c02` | Primary accent               |
+| Brand red     | `#df3131` | Secondary / hover            |
+| Warm gold     | `#e0a23a` | Highlights, eyebrows         |
+| Off-white     | `#f5efe6` | Text, logo                   |
 
 - **Display type:** Cinzel · **Body serif:** Cormorant Garamond · **UI sans:** Jost
 - **Motif:** Greek-key meander dividers (`assets/meander.svg` used as a CSS mask)
@@ -34,8 +38,10 @@ contact.html    # Contact & online-order form (demo)
 styles.css      # design system + layout for all pages
 script.js       # mobile nav, reveal-on-scroll, form handling
 assets/
-  logo.svg      # amphora-in-meander emblem
-  meander.svg   # tileable Greek-key band
+  logo-white.png / logo-dark.png  # brand wordmark (white for dark, dark spare)
+  favicon.png     # brand "H" on orange
+  meander.svg     # tileable Greek-key band
+  hero.jpg, breakfast/breads/pastries/sandwiches/soups/drinks  # food imagery
 ```
 
 ## Run locally
