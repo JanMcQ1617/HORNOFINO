@@ -81,6 +81,17 @@ Hosted on GitHub Pages: **https://janmcq1617.github.io/HORNOFINO/**
 - **Basket** (`cart.html`) — line items, quantity steppers, live totals
 - **Checkout** (`checkout.html`) — customer details + secure pay button
 
+## 3D arrow journey (home page)
+
+A stylized Greek marble archer (built from Three.js primitives, no model files)
+stands beside the hero. Scrolling draws his bow and releases a 3D arrow that flies
+along a spline through the page's waypoints — story, menu cards, order CTA, and
+reviews — flashing each one and popping a label chip as it passes. Click the statue
+or the **Release the Arrow** button for an auto-scroll tour. Implementation in
+[journey.js](journey.js) (Three.js via CDN import map, fixed transparent canvas,
+1 world unit = 1 CSS px at z=0, `pointer-events: none` so the page stays fully
+interactive). Disabled under `prefers-reduced-motion`.
+
 ## Cart & payments
 
 - Client-side cart in `cart.js` — add-to-cart on every menu item, basket persists in

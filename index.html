@@ -47,10 +47,15 @@
       <div class="hero__actions">
         <a class="btn btn--solid" href="contact.html#order">Order Online</a>
         <a class="btn btn--line" href="menu.html">Explore the Menu</a>
+        <button class="btn btn--line journey-cta" id="journeyTour" type="button" title="Watch the arrow fly through the menu">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21 21 3"/><path d="M21 3h-7M21 3v7"/></svg>
+          Release the Arrow
+        </button>
       </div>
     </div>
     <div class="hero__visual">
       <img src="assets/hero.jpg" alt="Fresh sourdough loaves and sesame koulouri cooling on a marble counter" />
+      <div id="statueAnchor" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -75,7 +80,7 @@
         <div class="column__base"></div>
       </div>
     </div>
-    <div class="story__text">
+    <div class="story__text" data-waypoint="Our Story">
       <p class="eyebrow">Our Story</p>
       <h2>A table set in the old way</h2>
       <p>
@@ -102,7 +107,7 @@
     </header>
 
     <div class="menu__grid">
-      <article class="card">
+      <article class="card" data-waypoint="Breakfast · from $5">
         <div class="card__media"><img src="assets/breakfast.png" alt="Breakfast plate of waffles, eggs and bacon" loading="lazy" /></div>
         <div class="card__body">
           <h3>Breakfast</h3>
@@ -110,7 +115,7 @@
           <span class="card__price">from $5</span>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-waypoint="Breads · from $4">
         <div class="card__media card__media--cover"><img src="assets/breads.jpg" alt="Artisan sourdough and sesame koulouri" loading="lazy" /></div>
         <div class="card__body">
           <h3>Breads</h3>
@@ -118,7 +123,7 @@
           <span class="card__price">from $4</span>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-waypoint="Pastries · from $3">
         <div class="card__media"><img src="assets/pastries.png" alt="Golden flaky pastry" loading="lazy" /></div>
         <div class="card__body">
           <h3>Pastries</h3>
@@ -133,7 +138,7 @@
   <!-- ░░ Order CTA ░░ -->
   <section class="order" id="order">
     <div class="meander-rule meander-rule--light" aria-hidden="true"></div>
-    <div class="order__inner">
+    <div class="order__inner" data-waypoint="Order Online">
       <p class="eyebrow eyebrow--light">Online Ordering</p>
       <h2>Order from our bakeries</h2>
       <p>Pickup or delivery — fresh from the morning bake, brought straight to your table.</p>
@@ -148,15 +153,15 @@
       <h2>Kind words</h2>
     </header>
     <div class="reviews__grid">
-      <figure class="quote">
+      <figure class="quote" data-waypoint="Elena loves the koulouri">
         <blockquote>“The koulouri tastes like a morning in Thessaloniki. I'm hooked.”</blockquote>
         <figcaption>— Elena P.</figcaption>
       </figure>
-      <figure class="quote">
+      <figure class="quote" data-waypoint="Marcus is a regular">
         <blockquote>“Simple, beautiful, and the bread is unreal. My new daily stop.”</blockquote>
         <figcaption>— Marcus T.</figcaption>
       </figure>
-      <figure class="quote">
+      <figure class="quote" data-waypoint="Pure φιλοξενία">
         <blockquote>“Feels like being welcomed into someone's home. Pure φιλοξενία.”</blockquote>
         <figcaption>— Sofia R.</figcaption>
       </figure>
@@ -166,7 +171,7 @@
   <!-- ░░ Footer ░░ -->
   <footer class="footer">
     <div class="footer__top">
-      <div class="footer__brand">
+      <div class="footer__brand" data-waypoint="Φούρνος · The end of the flight">
         <img class="footer__logo" src="assets/logo-white.png" alt="Hornofino — Pan · Café · Vino" />
         <p class="footer__tag">Bread born of fire &amp; the Aegean.</p>
       </div>
@@ -194,7 +199,13 @@
     <p class="footer__copy">© <span id="year"></span> Hornofino · Φούρνος. Crafted with fire and patience.</p>
   </footer>
 
+  <!-- ░░ 3D arrow journey ░░ -->
+  <canvas id="journeyCanvas" aria-hidden="true"></canvas>
   <script src="script.js"></script>
   <script src="cart.js"></script>
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js" } }
+  </script>
+  <script type="module" src="journey.js"></script>
 </body>
 </html>
