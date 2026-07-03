@@ -167,9 +167,15 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
   // ============================================================
   var activeStatue = statueGroup;  // whichever statue is on stage (primitives or GLB)
 
+  var MODEL_TWEAK = { rotY: 0 };  // quick orientation fix if the GLB faces the wrong way
+
   new GLTFLoader().load("assets/atlas.glb", function (gltf) {
     var model = gltf.scene;
-    model.traverse(function (o) { if (o.isMesh) { o.material = marbleMat; } });
+    // keep the baked photo texture where present; marble fallback otherwise
+    model.traverse(function (o) {
+      if (o.isMesh && !(o.material && o.material.map)) o.material = marbleMat;
+    });
+    model.rotation.y = MODEL_TWEAK.rotY;
 
     // fit: height 520, base on the ground, centred
     var box = new THREE.Box3().setFromObject(model);
