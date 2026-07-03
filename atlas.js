@@ -1,17 +1,20 @@
 /* ============================================================
-   Hornofino — Atlas globe scroll journey (Three.js / WebGL)
+   Hornofino — Atlas hero: 3D scroll orbit (Three.js / WebGL)
 
-   A marble Atlas kneels under a bronze celestial globe. The
-   section pins while you scroll; scroll progress orbits the
-   camera around the globe, revealing menu panels arranged in
-   a ring. Panels are PLACEHOLDERS — swap `src` in PANELS below
-   to assign real images (label shows over each panel).
+   Atlas kneels under a marble celestial globe — modelled on the
+   classical reference: globe resting on his shoulders, arms up
+   and back steadying it, one knee down, head bowed, stone base.
 
-   - Sticky scrollytelling: .atlas is tall, .atlas__sticky pins.
-   - Renders only while the section is near the viewport.
-   - prefers-reduced-motion: renders a single static frame.
+   The hero section pins while you scroll; progress orbits the
+   camera 360° around the globe, revealing menu panels arranged
+   in a ring. Panels are PLACEHOLDERS — set `src` in PANELS.
+
+   If `assets/atlas.glb` exists (generated from the reference
+   photo), it automatically replaces the primitive statue and
+   the ring re-centres on the model's globe.
    ============================================================ */
 import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 (function () {
   "use strict";
@@ -20,6 +23,7 @@ import * as THREE from "three";
   var section = document.getElementById("atlas");
   var labelEl = document.getElementById("atlasLabel");
   var hintEl = document.getElementById("atlasHint");
+  var heroEl = document.getElementById("atlasHero");
   if (!canvas || !section) return;
 
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -40,18 +44,17 @@ import * as THREE from "three";
   ];
 
   // ---------- palette ----------
-  var MARBLE  = 0xf2ece1;
-  var MARBLE2 = 0xe0d8c8;
+  var MARBLE  = 0xf0e9db;
+  var MARBLE2 = 0xdfd5c2;
   var ORANGE  = 0xfc4c02;
   var BRONZE  = 0x9a6a33;
-  var DARKB   = 0x2a1d12;
 
   // ---------- renderer / scene / camera ----------
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 820 ? 1.5 : 2));
 
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(45, 1, 1, 6000);
+  var camera = new THREE.PerspectiveCamera(45, 1, 1, 8000);
 
   function size() {
     var w = section.clientWidth || window.innerWidth;
@@ -63,24 +66,23 @@ import * as THREE from "three";
   size();
   window.addEventListener("resize", size);
 
-  // lights
-  scene.add(new THREE.AmbientLight(0xfff2e2, 0.9));
-  var sun = new THREE.DirectionalLight(0xffffff, 1.7);
-  sun.position.set(400, 700, 500);
+  // lights — warm museum key + brand ember
+  scene.add(new THREE.AmbientLight(0xfff2e2, 0.85));
+  var sun = new THREE.DirectionalLight(0xffffff, 1.8);
+  sun.position.set(500, 800, 600);
   scene.add(sun);
-  var glow = new THREE.PointLight(ORANGE, 60000, 0, 2);    // ember at the globe's heart
-  glow.position.set(0, 330, 0);
-  scene.add(glow);
-  var up = new THREE.PointLight(0xffd9b0, 60000, 0, 2);    // warm uplight on Atlas
-  up.position.set(0, 40, 260);
-  scene.add(up);
+  var ember = new THREE.PointLight(ORANGE, 50000, 0, 2);
+  ember.position.set(-260, 120, 260);
+  scene.add(ember);
+  var fill = new THREE.PointLight(0xffd9b0, 45000, 0, 2);
+  fill.position.set(0, 60, 320);
+  scene.add(fill);
 
   // ---------- materials ----------
-  var marbleMat  = new THREE.MeshStandardMaterial({ color: MARBLE,  roughness: 0.55, metalness: 0.05 });
-  var marble2Mat = new THREE.MeshStandardMaterial({ color: MARBLE2, roughness: 0.7,  metalness: 0.05 });
+  var marbleMat  = new THREE.MeshStandardMaterial({ color: MARBLE,  roughness: 0.5,  metalness: 0.04 });
+  var marble2Mat = new THREE.MeshStandardMaterial({ color: MARBLE2, roughness: 0.68, metalness: 0.04 });
   var bronzeMat  = new THREE.MeshStandardMaterial({ color: BRONZE,  roughness: 0.35, metalness: 0.65 });
-  var orangeMat  = new THREE.MeshStandardMaterial({ color: ORANGE,  roughness: 0.3,  metalness: 0.2, emissive: ORANGE, emissiveIntensity: 0.45 });
-  var darkMat    = new THREE.MeshStandardMaterial({ color: DARKB,   roughness: 0.6,  metalness: 0.2 });
+  var orangeMat  = new THREE.MeshStandardMaterial({ color: ORANGE,  roughness: 0.35, metalness: 0.2, emissive: ORANGE, emissiveIntensity: 0.35 });
 
   function mesh(geo, mat, x, y, z, rx, ry, rz) {
     var m = new THREE.Mesh(geo, mat);
@@ -89,76 +91,109 @@ import * as THREE from "three";
     return m;
   }
 
+  // ------------------------------------------------------------
+  // RIG — shared layout targets (updated if the GLB loads)
+  // ------------------------------------------------------------
+  var RIG = {
+    globeC: new THREE.Vector3(0, 400, -6),  // globe centre
+    globeR: 132,                            // globe radius
+    lookY: 300                              // orbit look-at height
+  };
+
   // ============================================================
-  // ATLAS — kneeling titan, built from primitives (marble)
-  // Local origin at ground centre. He holds the globe overhead.
+  // PRIMITIVE ATLAS (reference pose) — replaced by GLB if present
   // ============================================================
-  var atlas = new THREE.Group();
+  var statueGroup = new THREE.Group();
   (function buildAtlas() {
-    // rocky base
-    var rock = mesh(new THREE.DodecahedronGeometry(95, 0), marble2Mat, 0, -18, 0);
-    rock.scale.set(1.5, 0.42, 1.2);
-    atlas.add(rock);
+    // octagonal stone base
+    statueGroup.add(mesh(new THREE.CylinderGeometry(112, 122, 22, 8), marble2Mat, 0, 11, 0));
 
-    // kneeling leg (his right): knee down, shin flat behind
-    atlas.add(mesh(new THREE.CylinderGeometry(13, 15, 62, 12), marbleMat, -32, 44, -6, 0.9, 0, 0.25));  // thigh
-    atlas.add(mesh(new THREE.CylinderGeometry(11, 12, 56, 12), marbleMat, -40, 16, -44, 1.5, 0, 0));    // shin
-    // planted leg (his left): foot forward, knee up
-    atlas.add(mesh(new THREE.CylinderGeometry(13, 15, 60, 12), marbleMat, 36, 52, 18, -0.75, 0, -0.2)); // thigh
-    atlas.add(mesh(new THREE.CylinderGeometry(11, 12, 58, 12), marbleMat, 44, 32, 46, 0.55, 0, 0));     // shin
-    atlas.add(mesh(new THREE.BoxGeometry(20, 10, 34), marbleMat, 46, 6, 66));                            // foot
+    // kneeling leg (his right): knee down at rear, shin flat back
+    statueGroup.add(mesh(new THREE.CylinderGeometry(15, 17, 78, 12), marbleMat, -28, 96, -22, 1.15, 0, 0.28)); // thigh down-back
+    statueGroup.add(mesh(new THREE.SphereGeometry(15, 12, 10), marbleMat, -44, 40, -52));                       // knee at ground
+    statueGroup.add(mesh(new THREE.CylinderGeometry(12, 13, 64, 12), marbleMat, -44, 32, -86, 1.52, 0, 0));     // shin flat
+    statueGroup.add(mesh(new THREE.BoxGeometry(20, 12, 30), marbleMat, -44, 30, -122));                          // foot back
 
-    // hips / torso leaning forward under the weight
-    atlas.add(mesh(new THREE.SphereGeometry(26, 16, 12), marbleMat, 0, 86, 0));
-    var torso = mesh(new THREE.CylinderGeometry(28, 24, 78, 16), marbleMat, 0, 128, 8, 0.28, 0, 0);
-    atlas.add(torso);
-    atlas.add(mesh(new THREE.SphereGeometry(30, 18, 14), marbleMat, 0, 168, 16));                        // chest/shoulders
+    // planted leg (his left): knee up, foot forward
+    statueGroup.add(mesh(new THREE.CylinderGeometry(15, 17, 74, 12), marbleMat, 36, 118, 26, -0.9, 0, -0.15));  // thigh forward-up
+    statueGroup.add(mesh(new THREE.SphereGeometry(15, 12, 10), marbleMat, 44, 148, 58));                         // knee
+    statueGroup.add(mesh(new THREE.CylinderGeometry(12, 13, 96, 12), marbleMat, 46, 98, 66, 0.18, 0, 0));       // shin down
+    statueGroup.add(mesh(new THREE.BoxGeometry(22, 12, 38), marbleMat, 48, 28, 78));                             // foot
 
-    // head bowed under the burden
-    atlas.add(mesh(new THREE.CylinderGeometry(9, 11, 16, 10), marbleMat, 0, 192, 24, 0.5, 0, 0));
-    var head = mesh(new THREE.SphereGeometry(17, 18, 14), marbleMat, 0, 206, 34, 0.55, 0, 0);
-    atlas.add(head);
+    // hips + torso, leaning slightly forward under the load
+    statueGroup.add(mesh(new THREE.SphereGeometry(30, 16, 12), marbleMat, 0, 170, 0));
+    statueGroup.add(mesh(new THREE.CylinderGeometry(31, 27, 92, 16), marbleMat, 0, 222, 8, 0.16, 0, 0));
+    statueGroup.add(mesh(new THREE.SphereGeometry(34, 18, 14), marbleMat, 0, 272, 14));                          // chest/shoulders
 
-    // arms raised to the globe (hands near its underside)
-    atlas.add(mesh(new THREE.CylinderGeometry(9, 11, 62, 12), marbleMat, -44, 202, 18, 0, 0, 0.55));     // upper L
-    atlas.add(mesh(new THREE.CylinderGeometry(8, 9, 58, 12), marbleMat, -62, 252, 12, 0, 0, 0.18));      // fore L
-    atlas.add(mesh(new THREE.SphereGeometry(9, 10, 8), marbleMat, -66, 282, 10));                        // hand L
-    atlas.add(mesh(new THREE.CylinderGeometry(9, 11, 62, 12), marbleMat, 44, 202, 18, 0, 0, -0.55));     // upper R
-    atlas.add(mesh(new THREE.CylinderGeometry(8, 9, 58, 12), marbleMat, 62, 252, 12, 0, 0, -0.18));      // fore R
-    atlas.add(mesh(new THREE.SphereGeometry(9, 10, 8), marbleMat, 66, 282, 10));                         // hand R
+    // head — forward of the globe, bowed; bearded
+    statueGroup.add(mesh(new THREE.CylinderGeometry(10, 12, 16, 10), marbleMat, 0, 296, 34, 0.5, 0, 0));
+    statueGroup.add(mesh(new THREE.SphereGeometry(18, 18, 14), marbleMat, 0, 312, 46, 0.5, 0, 0));               // head
+    statueGroup.add(mesh(new THREE.ConeGeometry(10, 22, 10), marbleMat, 0, 296, 56, 0.7, 0, 0));                 // beard
+    statueGroup.add(mesh(new THREE.SphereGeometry(19, 14, 10), marble2Mat, 0, 322, 40, 0.4, 0, 0));              // curls cap
 
-    // draped cloth hint across the hips
-    atlas.add(mesh(new THREE.TorusGeometry(27, 6, 8, 20, Math.PI * 1.1), marble2Mat, 0, 84, 4, 0.2, 0, 2.6));
-  })();
-  scene.add(atlas);
+    // arms — raised up and back, hands on the globe's lower sides
+    statueGroup.add(mesh(new THREE.CylinderGeometry(10, 12, 70, 12), marbleMat, -52, 300, 4, 0.15, 0, 0.85));    // upper L
+    statueGroup.add(mesh(new THREE.CylinderGeometry(9, 10, 62, 12), marbleMat, -86, 352, -4, 0.1, 0, 0.25));     // fore L
+    statueGroup.add(mesh(new THREE.SphereGeometry(10, 10, 8), marbleMat, -95, 382, -6));                          // hand L
+    statueGroup.add(mesh(new THREE.CylinderGeometry(10, 12, 70, 12), marbleMat, 52, 300, 4, 0.15, 0, -0.85));    // upper R
+    statueGroup.add(mesh(new THREE.CylinderGeometry(9, 10, 62, 12), marbleMat, 86, 352, -4, 0.1, 0, -0.25));     // fore R
+    statueGroup.add(mesh(new THREE.SphereGeometry(10, 10, 8), marbleMat, 95, 382, -6));                           // hand R
 
-  // ============================================================
-  // GLOBE — bronze celestial lattice with a glowing equator band
-  // ============================================================
-  var GLOBE_C = new THREE.Vector3(0, 372, 10); // rests just above his hands
-  var GLOBE_R = 96;
-  var globe = new THREE.Group();
-  globe.position.copy(GLOBE_C);
-  (function buildGlobe() {
-    globe.add(mesh(new THREE.SphereGeometry(GLOBE_R - 4, 28, 20), darkMat, 0, 0, 0)); // dark core
+    // cloth drape over the left shoulder, falling to the hip
+    statueGroup.add(mesh(new THREE.CylinderGeometry(8, 16, 120, 10), marble2Mat, 34, 226, 20, 0.1, 0, -0.22));
+    statueGroup.add(mesh(new THREE.TorusGeometry(30, 7, 8, 20, Math.PI * 0.9), marble2Mat, 0, 168, 6, 0.3, 0, 2.8));
+
+    // ---- celestial globe on his shoulders ----
+    var globe = new THREE.Group();
+    globe.position.copy(RIG.globeC);
+    globe.name = "globe";
+    globe.add(mesh(new THREE.SphereGeometry(RIG.globeR, 32, 24), marbleMat, 0, 0, 0));
+    // faint engraved lattice
     var lattice = new THREE.LineSegments(
-      new THREE.WireframeGeometry(new THREE.SphereGeometry(GLOBE_R, 16, 10)),
-      new THREE.LineBasicMaterial({ color: BRONZE, transparent: true, opacity: 0.75 })
+      new THREE.WireframeGeometry(new THREE.SphereGeometry(RIG.globeR + 0.6, 18, 12)),
+      new THREE.LineBasicMaterial({ color: 0xc9bda6, transparent: true, opacity: 0.5 })
     );
     globe.add(lattice);
-    // glowing meander-equator + tropics
-    globe.add(mesh(new THREE.TorusGeometry(GLOBE_R + 2, 2.4, 8, 64), orangeMat, 0, 0, 0, Math.PI / 2, 0, 0));
-    var tropic = new THREE.MeshStandardMaterial({ color: BRONZE, roughness: 0.4, metalness: 0.6 });
-    globe.add(mesh(new THREE.TorusGeometry(GLOBE_R * 0.82, 1.4, 6, 48), tropic, 0, GLOBE_R * 0.5, 0, Math.PI / 2, 0, 0));
-    globe.add(mesh(new THREE.TorusGeometry(GLOBE_R * 0.82, 1.4, 6, 48), tropic, 0, -GLOBE_R * 0.5, 0, Math.PI / 2, 0, 0));
+    // armillary rings — one equatorial (brand ember), two crossing diagonals (bronze)
+    globe.add(mesh(new THREE.TorusGeometry(RIG.globeR + 3, 2.2, 8, 72), orangeMat, 0, 0, 0, Math.PI / 2, 0, 0));
+    globe.add(mesh(new THREE.TorusGeometry(RIG.globeR + 2, 1.8, 8, 72), bronzeMat, 0, 0, 0, Math.PI / 2, 0, Math.PI / 3.2));
+    globe.add(mesh(new THREE.TorusGeometry(RIG.globeR + 2, 1.8, 8, 72), bronzeMat, 0, 0, 0, Math.PI / 2, 0, -Math.PI / 3.2));
+    statueGroup.add(globe);
   })();
-  scene.add(globe);
+  scene.add(statueGroup);
 
   // ============================================================
-  // PANELS — ring of placeholder cards orbiting the globe
+  // GLB auto-swap — drop assets/atlas.glb in and it takes over
   // ============================================================
-  var RING_R = 260;
-  var PANEL_W = 170, PANEL_H = 128;
+  new GLTFLoader().load("assets/atlas.glb", function (gltf) {
+    var model = gltf.scene;
+    model.traverse(function (o) { if (o.isMesh) { o.material = marbleMat; } });
+
+    // fit: height 520, base on the ground, centred
+    var box = new THREE.Box3().setFromObject(model);
+    var sizeV = box.getSize(new THREE.Vector3());
+    var scale = 520 / (sizeV.y || 1);
+    model.scale.setScalar(scale);
+    box.setFromObject(model);
+    var center = box.getCenter(new THREE.Vector3());
+    model.position.x -= center.x;
+    model.position.z -= center.z;
+    model.position.y -= box.min.y;
+
+    scene.remove(statueGroup);
+    scene.add(model);
+
+    // in the reference, the globe's centre sits ~72% up, radius ~27% of height
+    RIG.globeC.set(0, 520 * 0.72, 0);
+    RIG.globeR = 520 * 0.27;
+    RIG.lookY = 520 * 0.55;
+    layoutRing();
+  }, undefined, function () { /* no GLB yet — primitives stay */ });
+
+  // ============================================================
+  // PANELS — ring of placeholder cards around the globe
+  // ============================================================
+  var PANEL_W = 175, PANEL_H = 130;
   var panelMeshes = [];
   var texLoader = new THREE.TextureLoader();
 
@@ -168,7 +203,6 @@ import * as THREE from "three";
     var g = c.getContext("2d");
     g.fillStyle = "#fdf3ea"; g.fillRect(0, 0, 512, 384);
     g.strokeStyle = "#fc4c02"; g.lineWidth = 14; g.strokeRect(12, 12, 488, 360);
-    // greek-key corners
     g.fillStyle = "#fc4c02";
     [[28, 28], [452, 28], [28, 324], [452, 324]].forEach(function (p) {
       g.fillRect(p[0], p[1], 32, 8); g.fillRect(p[0], p[1], 8, 32);
@@ -186,26 +220,37 @@ import * as THREE from "three";
   }
 
   PANELS.forEach(function (p, i) {
-    var theta = ((i + 1) / (PANELS.length + 1)) * Math.PI * 2;  // spread; camera loops back to start
+    var theta = ((i + 1) / (PANELS.length + 1)) * Math.PI * 2;
     var tex = p.src ? texLoader.load(p.src, function (t) { t.colorSpace = THREE.SRGBColorSpace; })
                     : placeholderTexture(i, p.label);
-    var mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0 });
-    var m = new THREE.Mesh(new THREE.PlaneGeometry(PANEL_W, PANEL_H), mat);
-    m.position.set(GLOBE_C.x + RING_R * Math.sin(theta), GLOBE_C.y, GLOBE_C.z + RING_R * Math.cos(theta));
-    m.rotation.y = theta;                    // face outward toward the orbiting camera
-    m.userData = { theta: theta, label: p.label };
-    // thin bronze frame just behind
-    var frame = new THREE.Mesh(new THREE.PlaneGeometry(PANEL_W + 10, PANEL_H + 10),
-      new THREE.MeshStandardMaterial({ color: BRONZE, roughness: 0.4, metalness: 0.6, transparent: true, opacity: 0 }));
-    frame.position.copy(m.position).addScaledVector(new THREE.Vector3(Math.sin(theta), 0, Math.cos(theta)), -2);
-    frame.rotation.y = theta;
+    var m = new THREE.Mesh(
+      new THREE.PlaneGeometry(PANEL_W, PANEL_H),
+      new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0 })
+    );
+    var frame = new THREE.Mesh(
+      new THREE.PlaneGeometry(PANEL_W + 10, PANEL_H + 10),
+      new THREE.MeshStandardMaterial({ color: BRONZE, roughness: 0.4, metalness: 0.6, transparent: true, opacity: 0 })
+    );
+    m.userData = { theta: theta, label: p.label, frame: frame };
     scene.add(frame);
-    m.userData.frame = frame;
     scene.add(m);
     panelMeshes.push(m);
   });
 
-  // ---------- scroll progress within the pinned section ----------
+  function layoutRing() {
+    var R = RIG.globeR + 150;
+    panelMeshes.forEach(function (m) {
+      var th = m.userData.theta;
+      var dir = new THREE.Vector3(Math.sin(th), 0, Math.cos(th));
+      m.position.copy(RIG.globeC).addScaledVector(dir, R);
+      m.rotation.y = th;
+      m.userData.frame.position.copy(m.position).addScaledVector(dir, -2);
+      m.userData.frame.rotation.y = th;
+    });
+  }
+  layoutRing();
+
+  // ---------- scroll progress within the pinned hero ----------
   function progress() {
     var r = section.getBoundingClientRect();
     var total = r.height - window.innerHeight;
@@ -218,20 +263,18 @@ import * as THREE from "three";
   }
 
   // ---------- camera orbit ----------
-  var CAM_DIST = 640;
-  var CAM_H = 60;       // above globe centre
-  var LOOK = new THREE.Vector3(0, 300, 0);
-
   function placeCamera(p) {
-    var theta = p * Math.PI * 2;                       // one full orbit
-    var dip = Math.sin(p * Math.PI) * 70;              // sweep slightly down mid-orbit
+    var theta = p * Math.PI * 2;                 // one full orbit
+    var dist = RIG.globeR * 4.6 + 40;
+    var camY = RIG.globeC.y + 40 + (1 - Math.min(1, p * 5)) * 30;
     camera.position.set(
-      GLOBE_C.x + CAM_DIST * Math.sin(theta),
-      GLOBE_C.y + CAM_H - dip * 0.4 + 40 * (1 - Math.min(1, p * 6)), // start a touch higher, seeing Atlas
-      GLOBE_C.z + CAM_DIST * Math.cos(theta)
+      RIG.globeC.x + dist * Math.sin(theta),
+      camY - Math.sin(p * Math.PI) * 26,
+      RIG.globeC.z + dist * Math.cos(theta)
     );
-    // at the start, look lower to frame Atlas' whole body; settle on the globe as the orbit begins
-    camera.lookAt(LOOK.x, LOOK.y - (1 - Math.min(1, p * 4)) * 60, LOOK.z);
+    // start framing the whole statue; settle onto the globe as the orbit begins
+    var lookY = RIG.lookY - (1 - Math.min(1, p * 4)) * 40;
+    camera.lookAt(RIG.globeC.x, lookY, RIG.globeC.z);
     return theta;
   }
 
@@ -241,17 +284,24 @@ import * as THREE from "three";
     return d > Math.PI ? TWO_PI - d : d;
   }
 
-  // ---------- caption ----------
+  // ---------- overlays ----------
   var lastLabel = "";
-  function caption(theta) {
+  function overlays(theta, p) {
+    // hero copy fades as the orbit begins
+    if (heroEl) {
+      var o = Math.max(0, 1 - p * 4.5);
+      heroEl.style.opacity = String(o);
+      heroEl.style.pointerEvents = o < 0.35 ? "none" : "";
+    }
+    // caption: nearest facing panel
     var best = null, bestD = Infinity;
     panelMeshes.forEach(function (m) {
       var d = angDiff(theta, m.userData.theta);
       if (d < bestD) { bestD = d; best = m; }
     });
-    var text = bestD < 0.42 && best ? best.userData.label : "Ο Άτλας — he carries the whole menu";
+    var text = p > 0.03 && bestD < 0.42 && best ? best.userData.label : "";
     if (labelEl && text !== lastLabel) { labelEl.textContent = text; lastLabel = text; }
-    if (hintEl) hintEl.style.opacity = progress() > 0.02 ? "0" : "1";
+    if (hintEl) hintEl.style.opacity = p > 0.02 ? "0" : "1";
   }
 
   // ---------- loop ----------
@@ -260,28 +310,22 @@ import * as THREE from "three";
       var p = REDUCED ? 0 : progress();
       var theta = placeCamera(p);
 
-      // panel visibility: fade in by angular closeness to the camera
       panelMeshes.forEach(function (m) {
         var d = angDiff(theta, m.userData.theta);
         var o = Math.max(0, Math.min(1, 1.45 - d * 1.6));
-        if (p < 0.01) o = 0;                         // hidden until the orbit begins
+        if (p < 0.015) o = 0;
         m.material.opacity = o;
         m.userData.frame.material.opacity = o * 0.85;
-        var s = 1 + Math.max(0, 0.5 - d) * 0.35;     // slight pop when centred
-        m.scale.setScalar(s);
+        m.scale.setScalar(1 + Math.max(0, 0.5 - d) * 0.35);
       });
 
-      globe.rotation.y = now * 0.00012;              // slow idle spin of the lattice
-      atlas.rotation.y = 0;                          // Atlas holds still; the world turns
-
-      caption(theta);
+      overlays(theta, p);
       renderer.render(scene, camera);
     }
     if (!REDUCED) requestAnimationFrame(frame);
   }
 
   if (REDUCED) {
-    // single static frame
     placeCamera(0);
     renderer.render(scene, camera);
     if (hintEl) hintEl.style.display = "none";

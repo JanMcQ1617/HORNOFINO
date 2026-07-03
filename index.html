@@ -35,32 +35,23 @@
     </button>
   </header>
 
-  <!-- ░░ Hero ░░ -->
-  <section class="hero">
-    <div class="hero__inner">
-      <p class="eyebrow">Φούρνος · Artisan Bakery &amp; Café</p>
-      <h1 class="hero__title">Bread born of<br /><em>fire &amp; the Aegean</em></h1>
-      <p class="hero__sub">
-        Every loaf is shaped by hand and baked at dawn — a small ode to the
-        Mediterranean table, where simplicity is the highest craft.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--solid" href="contact.html#order">Order Online</a>
-        <a class="btn btn--line" href="menu.html">Explore the Menu</a>
-      </div>
-    </div>
-    <div class="hero__visual">
-      <img src="assets/hero.jpg" alt="Fresh sourdough loaves and sesame koulouri cooling on a marble counter" />
-    </div>
-  </section>
-
-  <!-- ░░ Atlas globe — scroll to orbit ░░ -->
+  <!-- ░░ Atlas hero — scroll to orbit the globe ░░ -->
   <section class="atlas" id="atlas">
     <div class="atlas__sticky">
       <canvas id="atlasCanvas" aria-hidden="true"></canvas>
+      <div class="atlas__hero" id="atlasHero">
+        <p class="eyebrow eyebrow--light">Φούρνος · Artisan Bakery &amp; Café</p>
+        <h1 class="atlas__title">Bread born of<br /><em>fire &amp; the Aegean</em></h1>
+        <p class="atlas__sub">
+          Atlas carries the whole menu on his shoulders — scroll, and the world turns.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="contact.html#order">Order Online</a>
+          <a class="btn btn--line btn--light" href="menu.html">Explore the Menu</a>
+        </div>
+      </div>
       <div class="atlas__overlay">
-        <p class="eyebrow eyebrow--light">Ο Άτλας</p>
-        <h2 id="atlasLabel">Atlas carries the whole menu</h2>
+        <h2 id="atlasLabel"></h2>
         <p class="atlas__hint" id="atlasHint">Keep scrolling — the world turns</p>
       </div>
     </div>
@@ -209,7 +200,10 @@
   <script src="script.js"></script>
   <script src="cart.js"></script>
   <script type="importmap">
-    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js" } }
+    { "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+    } }
   </script>
   <script type="module" src="atlas.js"></script>
 </body>
