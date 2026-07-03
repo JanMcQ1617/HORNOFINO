@@ -54,7 +54,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
   // photoreal pipeline: filmic tone curve + correct colour + soft shadows
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.12;
+  renderer.toneMappingExposure = 1.28;   // lift so the cream marble reads bright against the night
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -224,17 +224,20 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     t.colorSpace = THREE.SRGBColorSpace;
     return t;
   }
-  var marbleTex  = makeMarbleTexture("#f3eee2", "125,115,98");
-  var marbleTex2 = makeMarbleTexture("#e6dcc9", "110,100,84");
+  var marbleTex  = makeMarbleTexture("#f6ecd2", "150,132,96");   // warm cream ground
+  var marbleTex2 = makeMarbleTexture("#efe2c4", "140,122,88");
 
   var marbleMat = new THREE.MeshPhysicalMaterial({
     map: marbleTex, bumpMap: marbleTex, bumpScale: 0.4,
+    color: 0xf7eccf,                             // cream tint over the texture
     roughness: 0.42, metalness: 0,
-    clearcoat: 0.3, clearcoatRoughness: 0.3,   // polished-stone sheen
-    envMapIntensity: 1.1
+    clearcoat: 0.3, clearcoatRoughness: 0.3,     // polished-stone sheen
+    sheen: 0.4, sheenColor: new THREE.Color(0xfff3dc),
+    envMapIntensity: 1.05
   });
   var marble2Mat = new THREE.MeshPhysicalMaterial({
     map: marbleTex2, bumpMap: marbleTex2, bumpScale: 0.5,
+    color: 0xf1e5c6,
     roughness: 0.55, metalness: 0,
     clearcoat: 0.15, clearcoatRoughness: 0.45,
     envMapIntensity: 1.0
