@@ -165,6 +165,8 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
   // ============================================================
   // GLB auto-swap — drop assets/atlas.glb in and it takes over
   // ============================================================
+  var activeStatue = statueGroup;  // whichever statue is on stage (primitives or GLB)
+
   new GLTFLoader().load("assets/atlas.glb", function (gltf) {
     var model = gltf.scene;
     model.traverse(function (o) { if (o.isMesh) { o.material = marbleMat; } });
@@ -181,7 +183,12 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
     model.position.y -= box.min.y;
 
     scene.remove(statueGroup);
-    scene.add(model);
+    // pivot group so drag/turntable spin happens around the statue's centre,
+    // not the GLB file's arbitrary origin
+    var pivot = new THREE.Group();
+    pivot.add(model);
+    scene.add(pivot);
+    activeStatue = pivot;
 
     // in the reference, the globe's centre sits ~72% up, radius ~27% of height
     RIG.globeC.set(0, 520 * 0.72, 0);
@@ -262,6 +269,35 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
     return r.bottom > -200 && r.top < window.innerHeight + 200;
   }
 
+  // ---------- drag-to-spin + idle turntable (hero stage) ----------
+  var statueRot = 0;          // current display rotation
+  var userRot = 0;            // accumulated user drag
+  var AUTO_VEL = 0.0025;      // slow museum turntable
+  var autoPausedUntil = 0;    // resume auto-spin a moment after the user lets go
+  var dragging = false;
+  var lastX = 0;
+
+  canvas.style.touchAction = "pan-y";   // horizontal drag spins; vertical still scrolls
+  canvas.style.cursor = "grab";
+
+  canvas.addEventListener("pointerdown", function (e) {
+    if (progress() > 0.05) return;      // orbit has taken over — no manual spin
+    dragging = true;
+    lastX = e.clientX;
+    canvas.style.cursor = "grabbing";
+    canvas.setPointerCapture && canvas.setPointerCapture(e.pointerId);
+  });
+  window.addEventListener("pointermove", function (e) {
+    if (!dragging) return;
+    userRot += (e.clientX - lastX) * 0.01;
+    lastX = e.clientX;
+    autoPausedUntil = performance.now() + 3000;
+  }, { passive: true });
+  window.addEventListener("pointerup", function () {
+    dragging = false;
+    canvas.style.cursor = "grab";
+  });
+
   // ---------- camera orbit ----------
   function placeCamera(p) {
     var theta = p * Math.PI * 2;                 // one full orbit
@@ -309,6 +345,16 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
     if (nearViewport()) {
       var p = REDUCED ? 0 : progress();
       var theta = placeCamera(p);
+
+      // statue spin: turntable + user drag at the top; eases home for the orbit
+      if (p < 0.03 && !REDUCED) {
+        if (!dragging && now > autoPausedUntil) userRot += AUTO_VEL;
+        statueRot = userRot;
+      } else {
+        statueRot *= 0.92;                 // settle back so panels stay aligned
+        userRot = statueRot;
+      }
+      activeStatue.rotation.y = statueRot;
 
       panelMeshes.forEach(function (m) {
         var d = angDiff(theta, m.userData.theta);
