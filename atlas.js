@@ -56,8 +56,8 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.18;   // grey stone visible against the night, not washed out
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  // shadows off: there's no floor to catch them, and self-shadowing was
+  // blacking out the generated mesh
 
   var scene = new THREE.Scene();
   // image-based lighting — makes marble read as marble
@@ -83,23 +83,18 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   size();
   window.addEventListener("resize", size);
 
-  // lights — reference-photo look: warm key from the side, dark backdrop, ember fill
-  scene.add(new THREE.AmbientLight(0xfff2e2, 0.25)); // env map carries most ambient
-  var sun = new THREE.DirectionalLight(0xfff1dd, 2.2);
-  sun.position.set(560, 780, 520);
-  sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
-  sun.shadow.camera.near = 100; sun.shadow.camera.far = 2800;
-  sun.shadow.camera.left = -520; sun.shadow.camera.right = 520;
-  sun.shadow.camera.top = 780;  sun.shadow.camera.bottom = -120;
-  sun.shadow.bias = -0.0004;
+  // lights — bright, even museum lighting so the stone reads clearly at night
+  scene.add(new THREE.AmbientLight(0xf4f1ea, 0.9));
+  scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x2a2320, 1.1)); // cool sky / warm ground
+  var sun = new THREE.DirectionalLight(0xfff6ec, 2.6);            // warm key, front-right
+  sun.position.set(500, 700, 620);
   scene.add(sun);
-  var ember = new THREE.PointLight(ORANGE, 28000, 0, 2);
-  ember.position.set(-300, 110, 240);
+  var camKey = new THREE.DirectionalLight(0xffffff, 1.2);         // camera-facing fill
+  camKey.position.set(0, 300, 900);
+  scene.add(camKey);
+  var ember = new THREE.PointLight(ORANGE, 22000, 0, 2);          // brand rim accent
+  ember.position.set(-320, 140, 220);
   scene.add(ember);
-  var fill = new THREE.PointLight(0xffd9b0, 18000, 0, 2);
-  fill.position.set(60, 80, 340);
-  scene.add(fill);
 
   // (no platform/floor — the statue floats in the night sky;
   //  shadows are self-cast on the marble itself)
@@ -333,13 +328,17 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
   new GLTFLoader().load("assets/atlas.glb", function (gltf) {
     var model = gltf.scene;
-    // force true cream veined marble everywhere — the baked photo texture
-    // carries painted-in shading that reads toon-ish, so it's dropped
+    // force grey cast-stone everywhere; the generated mesh often has flipped/
+    // missing normals (which rendered it black), so rebuild them and draw
+    // double-sided as a safety net
     model.traverse(function (o) {
       if (!o.isMesh) return;
-      o.castShadow = true;
-      o.receiveShadow = true;   // marble self-shadowing for depth
-      o.material = marbleMat;
+      if (o.geometry) { o.geometry.deleteAttribute("normal"); o.geometry.computeVertexNormals(); }
+      var m = marbleMat.clone();
+      m.side = THREE.DoubleSide;
+      o.material = m;
+      o.castShadow = false;
+      o.receiveShadow = false;
     });
     model.rotation.y = MODEL_TWEAK.rotY;
 
