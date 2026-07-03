@@ -370,12 +370,20 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       function () { /* no GLB either — primitives stay */ });
   }
 
+  // orient a raw scan so its tallest axis stands up (Y); print/scan STLs vary
+  function standUp(geo) {
+    geo.computeBoundingBox();
+    var s = geo.boundingBox.getSize(new THREE.Vector3());
+    if (s.z >= s.y && s.z >= s.x) geo.rotateX(-Math.PI / 2);      // Z-up -> Y-up
+    else if (s.x >= s.y && s.x >= s.z) geo.rotateZ(Math.PI / 2);  // X-up -> Y-up
+    if (MODEL_TWEAK.flipUp) geo.rotateX(Math.PI);                 // if it lands upside down
+    geo.center();
+    return geo;
+  }
+
   // try the real scan first, fall back to the generated GLB
   new STLLoader().load("assets/atlas.stl",
-    function (geo) {
-      geo.center();
-      mountModel(new THREE.Mesh(geo, marbleMat.clone()));
-    },
+    function (geo) { mountModel(new THREE.Mesh(standUp(geo), marbleMat.clone())); },
     undefined,
     loadGLB);
 
