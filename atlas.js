@@ -63,7 +63,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   // image-based lighting — makes marble read as marble
   var pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.fog = new THREE.Fog(0x080b16, 1500, 3600);   // night air
+  scene.fog = new THREE.Fog(0x05070f, 1500, 3600);   // night air
 
   var camera = new THREE.PerspectiveCamera(45, 1, 1, 12000);
 
@@ -101,15 +101,8 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   fill.position.set(60, 80, 340);
   scene.add(fill);
 
-  // night terrace floor — catches the contact shadow and grounds the statue
-  var floor = new THREE.Mesh(
-    new THREE.CircleGeometry(1400, 48),
-    new THREE.MeshStandardMaterial({ color: 0x14121e, roughness: 0.95, metalness: 0 })
-  );
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -1;
-  floor.receiveShadow = true;
-  scene.add(floor);
+  // (no platform/floor — the statue floats in the night sky;
+  //  shadows are self-cast on the marble itself)
 
   // ============================================================
   // NIGHT SKY — starfield + floating constellations, cursor-reactive
@@ -178,6 +171,21 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     skyCX = e.clientX / window.innerWidth - 0.5;
     skyCY = e.clientY / window.innerHeight - 0.5;
   }, { passive: true });
+
+  // transparent nav while over the night hero, so the top blends into the sky
+  var navEl = document.querySelector(".nav");
+  var navLogo = navEl && navEl.querySelector(".nav__logo");
+  function navSync() {
+    if (!navEl) return;
+    var clear = section.getBoundingClientRect().bottom > 90;
+    navEl.classList.toggle("nav--clear", clear);
+    if (navLogo) {
+      var want = clear ? "assets/logo-white.png" : "assets/logo-dark.png";
+      if (navLogo.getAttribute("src") !== want) navLogo.setAttribute("src", want);
+    }
+  }
+  navSync();
+  window.addEventListener("scroll", navSync, { passive: true });
 
   // ---------- materials ----------
   // procedural Carrara-style veining: warm cream ground, layered grey-gold veins
@@ -322,25 +330,13 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
   new GLTFLoader().load("assets/atlas.glb", function (gltf) {
     var model = gltf.scene;
-    var maxAniso = renderer.capabilities.getMaxAnisotropy();
-    // keep the baked photo texture where present; marble fallback otherwise
+    // force true cream veined marble everywhere — the baked photo texture
+    // carries painted-in shading that reads toon-ish, so it's dropped
     model.traverse(function (o) {
       if (!o.isMesh) return;
       o.castShadow = true;
-      if (o.material && o.material.map) {
-        // rebuild as physical marble: baked photo texture + polished-stone clearcoat
-        var map = o.material.map;
-        map.anisotropy = maxAniso;                   // crisp texture at glancing angles
-        map.colorSpace = THREE.SRGBColorSpace;
-        o.material = new THREE.MeshPhysicalMaterial({
-          map: map,
-          roughness: 0.48, metalness: 0,
-          clearcoat: 0.28, clearcoatRoughness: 0.32,
-          envMapIntensity: 1.2
-        });
-      } else {
-        o.material = marbleMat;
-      }
+      o.receiveShadow = true;   // marble self-shadowing for depth
+      o.material = marbleMat;
     });
     model.rotation.y = MODEL_TWEAK.rotY;
 
