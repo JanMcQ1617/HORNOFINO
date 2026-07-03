@@ -15,6 +15,7 @@
    ============================================================ */
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { STLLoader } from "three/addons/loaders/STLLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 (function () {
@@ -320,53 +321,63 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   scene.add(statueGroup);
 
   // ============================================================
-  // GLB auto-swap — drop assets/atlas.glb in and it takes over
+  // Real-model auto-swap — priority:
+  //   1. assets/atlas.stl  (a real photogrammetry scan, e.g. Farnese Atlas —
+  //      most realistic; STL is geometry-only, we apply the stone in-engine)
+  //   2. assets/atlas.glb  (current image-to-3D reconstruction)
+  //   3. built-in primitives
+  // Drop a better file in and it takes over on next load, no code changes.
   // ============================================================
-  var activeStatue = statueGroup;  // whichever statue is on stage (primitives or GLB)
+  var activeStatue = statueGroup;
+  var MODEL_TWEAK = { rotY: 0, standing: false };  // standing:true skips the globe ring offset
 
-  var MODEL_TWEAK = { rotY: 0 };  // quick orientation fix if the GLB faces the wrong way
-
-  new GLTFLoader().load("assets/atlas.glb", function (gltf) {
-    var model = gltf.scene;
-    // force grey cast-stone everywhere; the generated mesh often has flipped/
-    // missing normals (which rendered it black), so rebuild them and draw
-    // double-sided as a safety net
-    model.traverse(function (o) {
+  function mountModel(root) {
+    root.traverse(function (o) {
       if (!o.isMesh) return;
+      // rebuild normals (scans/reconstructions often ship bad or missing ones)
       if (o.geometry) { o.geometry.deleteAttribute("normal"); o.geometry.computeVertexNormals(); }
       var m = marbleMat.clone();
       m.side = THREE.DoubleSide;
       o.material = m;
-      o.castShadow = false;
-      o.receiveShadow = false;
+      o.castShadow = false; o.receiveShadow = false;
     });
-    model.rotation.y = MODEL_TWEAK.rotY;
+    root.rotation.y = MODEL_TWEAK.rotY;
 
-    // fit: height 520, base on the ground, centred
-    var box = new THREE.Box3().setFromObject(model);
-    var sizeV = box.getSize(new THREE.Vector3());
-    var scale = 520 / (sizeV.y || 1);
-    model.scale.setScalar(scale);
-    box.setFromObject(model);
-    var center = box.getCenter(new THREE.Vector3());
-    model.position.x -= center.x;
-    model.position.z -= center.z;
-    model.position.y -= box.min.y;
+    // fit to height 520, base at y=0, centred on x/z
+    var box = new THREE.Box3().setFromObject(root);
+    var sv = box.getSize(new THREE.Vector3());
+    root.scale.setScalar(520 / (sv.y || 1));
+    box.setFromObject(root);
+    var c = box.getCenter(new THREE.Vector3());
+    root.position.x -= c.x; root.position.z -= c.z; root.position.y -= box.min.y;
 
     scene.remove(statueGroup);
-    // pivot group so drag/turntable spin happens around the statue's centre,
-    // not the GLB file's arbitrary origin
-    var pivot = new THREE.Group();
-    pivot.add(model);
+    var pivot = new THREE.Group();  // spin around the statue centre, not the file origin
+    pivot.add(root);
     scene.add(pivot);
     activeStatue = pivot;
 
-    // in the reference, the globe's centre sits ~72% up, radius ~27% of height
-    RIG.globeC.set(0, 520 * 0.72, 0);
+    RIG.globeC.set(0, 520 * 0.72, 0);   // globe sits ~72% up
     RIG.globeR = 520 * 0.27;
     RIG.lookY = 520 * 0.55;
     layoutRing();
-  }, undefined, function () { /* no GLB yet — primitives stay */ });
+  }
+
+  function loadGLB() {
+    new GLTFLoader().load("assets/atlas.glb",
+      function (gltf) { mountModel(gltf.scene); },
+      undefined,
+      function () { /* no GLB either — primitives stay */ });
+  }
+
+  // try the real scan first, fall back to the generated GLB
+  new STLLoader().load("assets/atlas.stl",
+    function (geo) {
+      geo.center();
+      mountModel(new THREE.Mesh(geo, marbleMat.clone()));
+    },
+    undefined,
+    loadGLB);
 
   // ============================================================
   // PANELS — ring of placeholder cards around the globe
