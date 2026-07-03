@@ -15,6 +15,7 @@
    ============================================================ */
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 (function () {
   "use strict";
@@ -52,8 +53,19 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
   // ---------- renderer / scene / camera ----------
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 820 ? 1.5 : 2));
+  // photoreal pipeline: filmic tone curve + correct colour + soft shadows
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.12;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   var scene = new THREE.Scene();
+  // image-based lighting — makes marble read as marble
+  var pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.fog = new THREE.Fog(0x140d08, 1500, 3400);
+
   var camera = new THREE.PerspectiveCamera(45, 1, 1, 8000);
 
   function size() {
@@ -66,17 +78,33 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
   size();
   window.addEventListener("resize", size);
 
-  // lights — warm museum key + brand ember
-  scene.add(new THREE.AmbientLight(0xfff2e2, 0.85));
-  var sun = new THREE.DirectionalLight(0xffffff, 1.8);
-  sun.position.set(500, 800, 600);
+  // lights — reference-photo look: warm key from the side, dark backdrop, ember fill
+  scene.add(new THREE.AmbientLight(0xfff2e2, 0.25)); // env map carries most ambient
+  var sun = new THREE.DirectionalLight(0xfff1dd, 2.2);
+  sun.position.set(560, 780, 520);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.near = 100; sun.shadow.camera.far = 2800;
+  sun.shadow.camera.left = -520; sun.shadow.camera.right = 520;
+  sun.shadow.camera.top = 780;  sun.shadow.camera.bottom = -120;
+  sun.shadow.bias = -0.0004;
   scene.add(sun);
-  var ember = new THREE.PointLight(ORANGE, 50000, 0, 2);
-  ember.position.set(-260, 120, 260);
+  var ember = new THREE.PointLight(ORANGE, 28000, 0, 2);
+  ember.position.set(-300, 110, 240);
   scene.add(ember);
-  var fill = new THREE.PointLight(0xffd9b0, 45000, 0, 2);
-  fill.position.set(0, 60, 320);
+  var fill = new THREE.PointLight(0xffd9b0, 18000, 0, 2);
+  fill.position.set(60, 80, 340);
   scene.add(fill);
+
+  // studio floor — catches the contact shadow and grounds the statue
+  var floor = new THREE.Mesh(
+    new THREE.CircleGeometry(1200, 48),
+    new THREE.MeshStandardMaterial({ color: 0x1e1510, roughness: 0.95, metalness: 0 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -1;
+  floor.receiveShadow = true;
+  scene.add(floor);
 
   // ---------- materials ----------
   var marbleMat  = new THREE.MeshStandardMaterial({ color: MARBLE,  roughness: 0.5,  metalness: 0.04 });
@@ -88,6 +116,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
     var m = new THREE.Mesh(geo, mat);
     m.position.set(x || 0, y || 0, z || 0);
     m.rotation.set(rx || 0, ry || 0, rz || 0);
+    m.castShadow = true;
     return m;
   }
 
@@ -171,9 +200,21 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
   new GLTFLoader().load("assets/atlas.glb", function (gltf) {
     var model = gltf.scene;
+    var maxAniso = renderer.capabilities.getMaxAnisotropy();
     // keep the baked photo texture where present; marble fallback otherwise
     model.traverse(function (o) {
-      if (o.isMesh && !(o.material && o.material.map)) o.material = marbleMat;
+      if (!o.isMesh) return;
+      o.castShadow = true;
+      if (o.material && o.material.map) {
+        o.material.map.anisotropy = maxAniso;        // crisp texture at glancing angles
+        o.material.map.colorSpace = THREE.SRGBColorSpace;
+        o.material.roughness = Math.min(0.55, o.material.roughness || 0.55);
+        o.material.metalness = 0;
+        o.material.envMapIntensity = 1.15;           // let the IBL sculpt the marble
+        o.material.needsUpdate = true;
+      } else {
+        o.material = marbleMat;
+      }
     });
     model.rotation.y = MODEL_TWEAK.rotY;
 
