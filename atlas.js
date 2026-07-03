@@ -54,7 +54,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
   // photoreal pipeline: filmic tone curve + correct colour + soft shadows
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.28;   // lift so the cream marble reads bright against the night
+  renderer.toneMappingExposure = 1.18;   // grey stone visible against the night, not washed out
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -224,23 +224,23 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     t.colorSpace = THREE.SRGBColorSpace;
     return t;
   }
-  var marbleTex  = makeMarbleTexture("#f6ecd2", "150,132,96");   // warm cream ground
-  var marbleTex2 = makeMarbleTexture("#efe2c4", "140,122,88");
+  // weathered grey cast-stone / concrete, matte — matches the store statue
+  var marbleTex  = makeMarbleTexture("#bdbbb3", "96,94,86");
+  var marbleTex2 = makeMarbleTexture("#aba99f", "88,86,78");
 
   var marbleMat = new THREE.MeshPhysicalMaterial({
-    map: marbleTex, bumpMap: marbleTex, bumpScale: 0.4,
-    color: 0xf7eccf,                             // cream tint over the texture
-    roughness: 0.42, metalness: 0,
-    clearcoat: 0.3, clearcoatRoughness: 0.3,     // polished-stone sheen
-    sheen: 0.4, sheenColor: new THREE.Color(0xfff3dc),
-    envMapIntensity: 1.05
+    map: marbleTex, bumpMap: marbleTex, bumpScale: 0.8,   // gritty stone relief
+    color: 0xc3c1b8,                                       // cool-neutral stone
+    roughness: 0.9, metalness: 0,
+    clearcoat: 0.03, clearcoatRoughness: 0.75,             // matte, not polished
+    envMapIntensity: 0.7
   });
   var marble2Mat = new THREE.MeshPhysicalMaterial({
-    map: marbleTex2, bumpMap: marbleTex2, bumpScale: 0.5,
-    color: 0xf1e5c6,
-    roughness: 0.55, metalness: 0,
-    clearcoat: 0.15, clearcoatRoughness: 0.45,
-    envMapIntensity: 1.0
+    map: marbleTex2, bumpMap: marbleTex2, bumpScale: 0.9,
+    color: 0xb4b2a8,
+    roughness: 0.94, metalness: 0,
+    clearcoat: 0.02, clearcoatRoughness: 0.85,
+    envMapIntensity: 0.65
   });
   var bronzeMat  = new THREE.MeshStandardMaterial({ color: BRONZE,  roughness: 0.35, metalness: 0.65 });
   var orangeMat  = new THREE.MeshStandardMaterial({ color: ORANGE,  roughness: 0.35, metalness: 0.2, emissive: ORANGE, emissiveIntensity: 0.35 });
