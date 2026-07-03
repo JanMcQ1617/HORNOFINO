@@ -81,16 +81,19 @@ Hosted on GitHub Pages: **https://janmcq1617.github.io/HORNOFINO/**
 - **Basket** (`cart.html`) — line items, quantity steppers, live totals
 - **Checkout** (`checkout.html`) — customer details + secure pay button
 
-## 3D arrow journey (home page)
+## Atlas globe — 3D scroll orbit (home page)
 
-A stylized Greek marble archer (built from Three.js primitives, no model files)
-stands beside the hero. Scrolling draws his bow and releases a 3D arrow that flies
-along a spline through the page's waypoints — story, menu cards, order CTA, and
-reviews — flashing each one and popping a label chip as it passes. Click the statue
-or the **Release the Arrow** button for an auto-scroll tour. Implementation in
-[journey.js](journey.js) (Three.js via CDN import map, fixed transparent canvas,
-1 world unit = 1 CSS px at z=0, `pointer-events: none` so the page stays fully
-interactive). Disabled under `prefers-reduced-motion`.
+A marble **Atlas** kneels under a bronze celestial globe ([atlas.js](atlas.js),
+Three.js/WebGL via CDN import map — figure and globe built from primitives, no
+model files). The section pins while you scroll; scroll progress orbits the camera
+a full 360° around the globe, revealing **8 menu panels** arranged in a ring, each
+fading in and popping as it faces the camera, with its label shown in the caption.
+
+**The panels are placeholders** — assign real images by editing the `PANELS` array
+at the top of `atlas.js` (`{ label: "Baklava", src: "assets/pastries.png" }`).
+Renders only while the section is on screen; static single frame under
+`prefers-reduced-motion`. The earlier archer experience ([journey.js](journey.js))
+is kept in the repo but no longer wired to the page.
 
 ## Cart & payments
 
