@@ -51,8 +51,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   var BRONZE  = 0x9a6a33;
 
   // ---------- renderer / scene / camera ----------
-  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 820 ? 1.5 : 2));
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
   // photoreal pipeline: filmic tone curve + correct colour + soft shadows
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.12;
@@ -64,13 +63,19 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   // image-based lighting — makes marble read as marble
   var pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.fog = new THREE.Fog(0x140d08, 1500, 3400);
+  scene.fog = new THREE.Fog(0x080b16, 1500, 3600);   // night air
 
-  var camera = new THREE.PerspectiveCamera(45, 1, 1, 8000);
+  var camera = new THREE.PerspectiveCamera(45, 1, 1, 12000);
 
+  function pixelRatio(w) {
+    if (window.innerWidth < 820) return Math.min(window.devicePixelRatio || 1, 1.5);
+    // render into a ~4K internal buffer (supersampled if the display is lower-res)
+    return Math.min(3840 / Math.max(1, w), 3);
+  }
   function size() {
     var w = section.clientWidth || window.innerWidth;
     var h = window.innerHeight;
+    renderer.setPixelRatio(pixelRatio(w));
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
@@ -96,19 +101,136 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   fill.position.set(60, 80, 340);
   scene.add(fill);
 
-  // studio floor — catches the contact shadow and grounds the statue
+  // night terrace floor — catches the contact shadow and grounds the statue
   var floor = new THREE.Mesh(
-    new THREE.CircleGeometry(1200, 48),
-    new THREE.MeshStandardMaterial({ color: 0x1e1510, roughness: 0.95, metalness: 0 })
+    new THREE.CircleGeometry(1400, 48),
+    new THREE.MeshStandardMaterial({ color: 0x14121e, roughness: 0.95, metalness: 0 })
   );
   floor.rotation.x = -Math.PI / 2;
   floor.position.y = -1;
   floor.receiveShadow = true;
   scene.add(floor);
 
+  // ============================================================
+  // NIGHT SKY — starfield + floating constellations, cursor-reactive
+  // ============================================================
+  var skyGroup = new THREE.Group();
+  scene.add(skyGroup);
+
+  function starLayer(count, radius, size, opacity) {
+    var pos = new Float32Array(count * 3);
+    for (var i = 0; i < count; i++) {
+      var u = Math.random() * 2 - 1, phi = Math.random() * Math.PI * 2;
+      var sq = Math.sqrt(1 - u * u), r = radius * (0.92 + Math.random() * 0.16);
+      pos[i * 3] = sq * Math.cos(phi) * r;
+      pos[i * 3 + 1] = u * r;
+      pos[i * 3 + 2] = sq * Math.sin(phi) * r;
+    }
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    var mat = new THREE.PointsMaterial({
+      color: 0xffffff, size: size, sizeAttenuation: true,
+      transparent: true, opacity: opacity,
+      blending: THREE.AdditiveBlending, depthWrite: false, fog: false
+    });
+    return new THREE.Points(geo, mat);
+  }
+  var starsA = starLayer(2200, 3000, 9, 0.8);    // dense field
+  var starsB = starLayer(700, 3600, 16, 0.55);   // sparse bright layer
+  skyGroup.add(starsA); skyGroup.add(starsB);
+
+  // simplified classical constellations (2D strokes draped on the sky shell)
+  var CONSTELLATIONS = [
+    { pts: [[0,0],[70,25],[150,15],[210,55],[185,115],[110,100],[45,70],[0,0]] },                 // Leo
+    { pts: [[0,60],[60,30],[130,45],[130,45],[200,0],[130,45],[150,120]] },                        // Taurus
+    { pts: [[0,0],[55,10],[110,0],[160,30],[110,70],[55,60],[0,0],[80,140]] },                     // Ursa
+    { pts: [[0,40],[50,0],[100,45],[150,5],[200,50]] },                                            // Cassiopeia
+    { pts: [[0,0],[40,60],[85,120],[40,60],[100,55],[40,60],[-20,70]] }                            // Lyra-ish
+  ];
+  var constGroups = [];
+  CONSTELLATIONS.forEach(function (cst, i) {
+    var group = new THREE.Group();
+    var az = (i / CONSTELLATIONS.length) * Math.PI * 2 + 0.6;
+    var el = 0.25 + (i % 3) * 0.18;                       // spread above the horizon
+    var R = 2400;
+    var dir = new THREE.Vector3(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el));
+    group.position.copy(dir.multiplyScalar(R));
+    group.lookAt(0, 400, 0);
+
+    var pts3 = cst.pts.map(function (p) { return new THREE.Vector3((p[0] - 100) * 2.4, (p[1] - 60) * 2.4, 0); });
+    var line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(pts3),
+      new THREE.LineBasicMaterial({ color: 0xf3c877, transparent: true, opacity: 0.38, fog: false })
+    );
+    group.add(line);
+    var starGeo = new THREE.BufferGeometry().setFromPoints(pts3);
+    group.add(new THREE.Points(starGeo, new THREE.PointsMaterial({
+      color: 0xffe9c4, size: 26, sizeAttenuation: true,
+      transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false, fog: false
+    })));
+    skyGroup.add(group);
+    constGroups.push(group);
+  });
+
+  // cursor parallax for the sky (separate from statue dragging)
+  var skyCX = 0, skyCY = 0;
+  window.addEventListener("pointermove", function (e) {
+    skyCX = e.clientX / window.innerWidth - 0.5;
+    skyCY = e.clientY / window.innerHeight - 0.5;
+  }, { passive: true });
+
   // ---------- materials ----------
-  var marbleMat  = new THREE.MeshStandardMaterial({ color: MARBLE,  roughness: 0.5,  metalness: 0.04 });
-  var marble2Mat = new THREE.MeshStandardMaterial({ color: MARBLE2, roughness: 0.68, metalness: 0.04 });
+  // procedural Carrara-style veining: warm cream ground, layered grey-gold veins
+  function makeMarbleTexture(base, veinTone) {
+    var c = document.createElement("canvas");
+    c.width = c.height = 1024;
+    var g = c.getContext("2d");
+    g.fillStyle = base; g.fillRect(0, 0, 1024, 1024);
+    // soft tonal clouds
+    for (var k = 0; k < 26; k++) {
+      var x = Math.random() * 1024, y = Math.random() * 1024, r = 90 + Math.random() * 240;
+      var grad = g.createRadialGradient(x, y, 0, x, y, r);
+      grad.addColorStop(0, "rgba(190,178,155," + (0.05 + Math.random() * 0.06) + ")");
+      grad.addColorStop(1, "rgba(190,178,155,0)");
+      g.fillStyle = grad; g.fillRect(x - r, y - r, r * 2, r * 2);
+    }
+    // wandering veins
+    for (var v = 0; v < 60; v++) {
+      var px = Math.random() * 1024, py = Math.random() * 1024;
+      var ang = Math.random() * Math.PI * 2;
+      g.beginPath(); g.moveTo(px, py);
+      var segs = 6 + (Math.random() * 8) | 0;
+      for (var s = 0; s < segs; s++) {
+        ang += (Math.random() - 0.5) * 1.1;
+        var len = 30 + Math.random() * 90;
+        var nx = px + Math.cos(ang) * len, ny = py + Math.sin(ang) * len;
+        g.quadraticCurveTo(px + (Math.random() - 0.5) * 40, py + (Math.random() - 0.5) * 40, nx, ny);
+        px = nx; py = ny;
+      }
+      g.strokeStyle = "rgba(" + veinTone + "," + (0.04 + Math.random() * 0.08) + ")";
+      g.lineWidth = 0.6 + Math.random() * 2.2;
+      g.stroke();
+    }
+    var t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }
+  var marbleTex  = makeMarbleTexture("#f3eee2", "125,115,98");
+  var marbleTex2 = makeMarbleTexture("#e6dcc9", "110,100,84");
+
+  var marbleMat = new THREE.MeshPhysicalMaterial({
+    map: marbleTex, bumpMap: marbleTex, bumpScale: 0.4,
+    roughness: 0.42, metalness: 0,
+    clearcoat: 0.3, clearcoatRoughness: 0.3,   // polished-stone sheen
+    envMapIntensity: 1.1
+  });
+  var marble2Mat = new THREE.MeshPhysicalMaterial({
+    map: marbleTex2, bumpMap: marbleTex2, bumpScale: 0.5,
+    roughness: 0.55, metalness: 0,
+    clearcoat: 0.15, clearcoatRoughness: 0.45,
+    envMapIntensity: 1.0
+  });
   var bronzeMat  = new THREE.MeshStandardMaterial({ color: BRONZE,  roughness: 0.35, metalness: 0.65 });
   var orangeMat  = new THREE.MeshStandardMaterial({ color: ORANGE,  roughness: 0.35, metalness: 0.2, emissive: ORANGE, emissiveIntensity: 0.35 });
 
@@ -206,12 +328,16 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       if (!o.isMesh) return;
       o.castShadow = true;
       if (o.material && o.material.map) {
-        o.material.map.anisotropy = maxAniso;        // crisp texture at glancing angles
-        o.material.map.colorSpace = THREE.SRGBColorSpace;
-        o.material.roughness = Math.min(0.55, o.material.roughness || 0.55);
-        o.material.metalness = 0;
-        o.material.envMapIntensity = 1.15;           // let the IBL sculpt the marble
-        o.material.needsUpdate = true;
+        // rebuild as physical marble: baked photo texture + polished-stone clearcoat
+        var map = o.material.map;
+        map.anisotropy = maxAniso;                   // crisp texture at glancing angles
+        map.colorSpace = THREE.SRGBColorSpace;
+        o.material = new THREE.MeshPhysicalMaterial({
+          map: map,
+          roughness: 0.48, metalness: 0,
+          clearcoat: 0.28, clearcoatRoughness: 0.32,
+          envMapIntensity: 1.2
+        });
       } else {
         o.material = marbleMat;
       }
@@ -411,6 +537,16 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
         m.userData.frame.material.opacity = o * 0.85;
         m.scale.setScalar(1 + Math.max(0, 0.5 - d) * 0.35);
       });
+
+      // living night sky: slow drift + cursor parallax + twinkle + floating constellations
+      skyGroup.rotation.y = now * 0.000045 + skyCX * 0.22;
+      skyGroup.rotation.x = skyCY * 0.11;
+      starsA.material.opacity = 0.72 + Math.sin(now * 0.0011) * 0.1;
+      starsB.material.opacity = 0.45 + Math.sin(now * 0.0007 + 2) * 0.14;
+      for (var ci = 0; ci < constGroups.length; ci++) {
+        constGroups[ci].rotation.z = Math.sin(now * 0.0002 + ci * 1.7) * 0.4;
+        constGroups[ci].position.y += Math.sin(now * 0.0004 + ci * 2.3) * 0.4;
+      }
 
       overlays(theta, p);
       renderer.render(scene, camera);

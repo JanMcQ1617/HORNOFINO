@@ -459,8 +459,8 @@ img { display: block; max-width: 100%; }
   position: relative;
   height: 560vh;                     /* scroll runway for one full orbit */
   background:
-    radial-gradient(90% 60% at 50% 32%, rgba(252, 76, 2, 0.20), transparent 65%),
-    linear-gradient(180deg, #221610 0%, #170f0a 55%, #100d0b 100%);
+    radial-gradient(110% 55% at 50% 108%, rgba(252, 76, 2, 0.16), transparent 60%),
+    radial-gradient(100% 80% at 50% 0%, #10162e 0%, #0a0e1e 45%, #05070f 100%);
 }
 .atlas__sticky {
   position: sticky; top: 0; height: 100vh; height: 100dvh;
