@@ -329,7 +329,32 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   // Drop a better file in and it takes over on next load, no code changes.
   // ============================================================
   var activeStatue = statueGroup;
-  var MODEL_TWEAK = { rotY: 0, standing: false };  // standing:true skips the globe ring offset
+  // quick knobs (nudge if the scan lands rotated/upside-down or the drape is off)
+  var MODEL_TWEAK = {
+    rotY: 0, flipUp: false,
+    // marble loincloth covering the groin — position in fitted-model space
+    // (base at y=0, total height 520). Adjust y/z/scale to seat it.
+    cloth: { show: true, x: 0, y: 208, z: 18, scale: 1, rotY: 0 }
+  };
+
+  function addLoincloth(pivot) {
+    var t = MODEL_TWEAK.cloth;
+    if (!t.show) return;
+    var g = new THREE.Group();
+    var clothMat = new THREE.MeshStandardMaterial({ color: 0xe9e3d5, roughness: 0.9, metalness: 0, side: THREE.DoubleSide });
+    // hip wrap all the way around
+    var wrap = new THREE.Mesh(new THREE.TorusGeometry(54, 18, 14, 30), clothMat);
+    wrap.rotation.x = Math.PI / 2; wrap.scale.set(1, 0.62, 1);
+    g.add(wrap);
+    // front apron hanging over the groin
+    var apron = new THREE.Mesh(new THREE.BoxGeometry(66, 76, 12), clothMat);
+    apron.position.set(0, -34, 34); apron.rotation.x = 0.18;
+    g.add(apron);
+    g.position.set(t.x, t.y, t.z);
+    g.scale.setScalar(t.scale);
+    g.rotation.y = t.rotY;
+    pivot.add(g);
+  }
 
   function mountModel(root) {
     root.traverse(function (o) {
@@ -354,6 +379,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     scene.remove(statueGroup);
     var pivot = new THREE.Group();  // spin around the statue centre, not the file origin
     pivot.add(root);
+    addLoincloth(pivot);            // drape moves/rotates with the statue
     scene.add(pivot);
     activeStatue = pivot;
 
@@ -488,19 +514,38 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     canvas.style.cursor = "grab";
   });
 
-  // ---------- camera orbit ----------
+  // ---------- camera: zoom into the globe, then orbit the model ----------
+  var ZOOM_END = 0.22;   // first ~22% of scroll = the zoom-in; rest = the orbit
+  function easeInOut(t) { t = Math.min(1, Math.max(0, t)); return 0.5 - 0.5 * Math.cos(Math.PI * t); }
+
   function placeCamera(p) {
-    var theta = p * Math.PI * 2;                 // one full orbit
-    var dist = RIG.globeR * 4.6 + 40;
-    var camY = RIG.globeC.y + 40 + (1 - Math.min(1, p * 5)) * 30;
-    camera.position.set(
-      RIG.globeC.x + dist * Math.sin(theta),
-      camY - Math.sin(p * Math.PI) * 26,
-      RIG.globeC.z + dist * Math.cos(theta)
-    );
-    // start framing the whole statue; settle onto the globe as the orbit begins
-    var lookY = RIG.lookY - (1 - Math.min(1, p * 4)) * 40;
-    camera.lookAt(RIG.globeC.x, lookY, RIG.globeC.z);
+    var gc = RIG.globeC;
+    var wide  = RIG.globeR * 6.4;   // establishing shot — whole statue
+    var close = RIG.globeR * 2.1;   // tight on the globe
+    var orbit = RIG.globeR * 4.7;   // frames the model while circling
+    var theta, dist, lookY;
+
+    if (p <= ZOOM_END) {
+      // Phase A — dolly straight in from the establishing shot onto the globe
+      var t = easeInOut(p / ZOOM_END);
+      theta = 0;
+      dist = wide + (close - wide) * t;
+      lookY = gc.y;
+      camera.position.set(gc.x, gc.y + (1 - t) * 70, gc.z + dist);
+    } else {
+      // Phase B — circle the whole model, pulling back out of the close-up
+      var pp = (p - ZOOM_END) / (1 - ZOOM_END);
+      theta = pp * Math.PI * 2;
+      var pull = easeInOut(Math.min(1, pp / 0.16));      // close -> orbit distance
+      dist = close + (orbit - close) * pull;
+      lookY = gc.y - pull * (gc.y - RIG.lookY);           // pan down globe -> model centre
+      camera.position.set(
+        gc.x + dist * Math.sin(theta),
+        gc.y + 24 - Math.sin(pp * Math.PI) * 22,
+        gc.z + dist * Math.cos(theta)
+      );
+    }
+    camera.lookAt(gc.x, lookY, gc.z);
     return theta;
   }
 
@@ -549,7 +594,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       panelMeshes.forEach(function (m) {
         var d = angDiff(theta, m.userData.theta);
         var o = Math.max(0, Math.min(1, 1.45 - d * 1.6));
-        if (p < 0.015) o = 0;
+        if (p < ZOOM_END + 0.01) o = 0;    // panels appear only once the orbit starts
         m.material.opacity = o;
         m.userData.frame.material.opacity = o * 0.85;
         m.scale.setScalar(1 + Math.max(0, 0.5 - d) * 0.35);
