@@ -20,9 +20,31 @@ nav?.querySelectorAll(".nav__links a").forEach((a) =>
 
 // Reveal-on-scroll for major blocks
 const revealTargets = document.querySelectorAll(
-  ".story, .menu, .order, .locations, .reviews, .section-head, .card, .place, .quote"
+  ".story, .menu, .order, .locations, .reviews, .section-head, .card, .place, .quote, .value, .faq__item, .signature, .timeline__row, .pullquote, .ritual__act, .pane__body"
 );
 revealTargets.forEach((el) => el.classList.add("reveal"));
+
+// "Why we bake" — scroll lights each sensory line in turn (scroll-driven, no rAF)
+const senses = document.querySelector(".senses");
+if (senses && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const senseLines = senses.querySelectorAll(".senses__line");
+  let litIdx = -2;
+  const lightLines = () => {
+    const r = senses.getBoundingClientRect();
+    const total = r.height - window.innerHeight;
+    if (total <= 0) return;
+    const p = Math.min(0.999, Math.max(0, -r.top / total));
+    const idx = r.top > 0 ? -1 : Math.floor(p * senseLines.length);
+    if (idx === litIdx) return;
+    litIdx = idx;
+    senseLines.forEach((l, i) => {
+      l.classList.toggle("is-lit", i === idx);
+      l.classList.toggle("was-lit", i < idx);
+    });
+  };
+  window.addEventListener("scroll", lightLines, { passive: true });
+  lightLines();
+}
 
 // Contact / order form — demo confirmation, no network call
 const orderForm = document.getElementById("orderForm");
@@ -43,8 +65,18 @@ if ("IntersectionObserver" in window) {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-in");
-          io.unobserve(entry.target);
+          const el = entry.target;
+          // stagger siblings inside card grids as they enter together
+          const grid = el.closest(".values__grid, .menu__grid, .reviews__grid, .locations__grid");
+          if (grid) {
+            const i = Array.prototype.indexOf.call(grid.children, el);
+            if (i > 0) {
+              el.style.transitionDelay = `${Math.min(i, 4) * 90}ms`;
+              el.addEventListener("transitionend", () => (el.style.transitionDelay = ""), { once: true });
+            }
+          }
+          el.classList.add("is-in");
+          io.unobserve(el);
         }
       });
     },

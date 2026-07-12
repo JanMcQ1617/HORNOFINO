@@ -17,6 +17,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { STLLoader } from "three/addons/loaders/STLLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 
 (function () {
   "use strict";
@@ -31,18 +32,22 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ------------------------------------------------------------
-  // PLACEHOLDER PANELS — assign images later by setting `src`
-  // e.g. { label: "Baklava", src: "assets/pastries.png" }
+  // MENU PLACEHOLDERS — a ring of cards orbits the globe. Replace
+  // `label` with your menu item and set `src` to a photo when you
+  // have one, e.g. { label: "Baklava", src: "assets/pastries.png" }.
+  // Add or remove entries freely; the ring re-spaces automatically.
   // ------------------------------------------------------------
+  // Real Hornofino categories, photos extracted from hornofino.com
+  // (assets/menu-hf/). Leave src null to show the styled name card.
   var PANELS = [
-    { label: "Placeholder 1", src: null },
-    { label: "Placeholder 2", src: null },
-    { label: "Placeholder 3", src: null },
-    { label: "Placeholder 4", src: null },
-    { label: "Placeholder 5", src: null },
-    { label: "Placeholder 6", src: null },
-    { label: "Placeholder 7", src: null },
-    { label: "Placeholder 8", src: null }
+    { label: "Mega Quesito", src: "assets/menu-hf/mega-quesito.jpg" },
+    { label: "Panes",        src: "assets/menu-hf/panes.jpg" },
+    { label: "Sandwiches",   src: "assets/menu-hf/sandwiches.jpg" },
+    { label: "Desayuno",     src: "assets/menu-hf/desayuno.jpg" },
+    { label: "Repostería",   src: "assets/menu-hf/reposteria.jpg" },
+    { label: "Pastelería",   src: "assets/menu-hf/pasteleria.jpg" },
+    { label: "Brunch",       src: "assets/menu-hf/brunch.jpg" },
+    { label: "Café y Té",    src: "assets/menu-hf/cafe-y-te.jpg" }
   ];
 
   // ---------- palette ----------
@@ -84,17 +89,21 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   size();
   window.addEventListener("resize", size);
 
-  // lights — bright, even museum lighting so the stone reads clearly at night
-  scene.add(new THREE.AmbientLight(0xf4f1ea, 0.9));
-  scene.add(new THREE.HemisphereLight(0xdfe6ff, 0x2a2320, 1.1)); // cool sky / warm ground
-  var sun = new THREE.DirectionalLight(0xfff6ec, 2.6);            // warm key, front-right
-  sun.position.set(500, 700, 620);
+  // lights — moody "statue in the void": low warm ambient, a warm ember key
+  // from below-left and a cool rim from behind, echoing the approved video look
+  scene.add(new THREE.AmbientLight(0x3a2f28, 0.42));                 // dim warm fill
+  scene.add(new THREE.HemisphereLight(0x1b2536, 0x2a1a10, 0.5));     // cool sky / warm ground
+  var sun = new THREE.DirectionalLight(0xffb066, 2.3);               // warm ember key, low-left
+  sun.position.set(-420, 260, 520);
   scene.add(sun);
-  var camKey = new THREE.DirectionalLight(0xffffff, 1.2);         // camera-facing fill
-  camKey.position.set(0, 300, 900);
+  var rim = new THREE.DirectionalLight(0x9fc0ff, 1.35);              // cool rim from behind
+  rim.position.set(300, 520, -640);
+  scene.add(rim);
+  var camKey = new THREE.DirectionalLight(0xffe6cf, 0.45);           // gentle camera fill
+  camKey.position.set(0, 240, 900);
   scene.add(camKey);
-  var ember = new THREE.PointLight(ORANGE, 22000, 0, 2);          // brand rim accent
-  ember.position.set(-320, 140, 220);
+  var ember = new THREE.PointLight(ORANGE, 42000, 0, 2);             // ember accent glow
+  ember.position.set(-320, 120, 240);
   scene.add(ember);
 
   // (no platform/floor — the statue floats in the night sky;
@@ -253,8 +262,8 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   // RIG — shared layout targets (updated if the GLB loads)
   // ------------------------------------------------------------
   var RIG = {
-    globeC: new THREE.Vector3(0, 400, -6),  // globe centre
-    globeR: 132,                            // globe radius
+    globeC: new THREE.Vector3(0, 410, -6),  // globe centre
+    globeR: 178,                            // globe radius — big stone world
     lookY: 300                              // orbit look-at height
   };
 
@@ -305,17 +314,16 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     var globe = new THREE.Group();
     globe.position.copy(RIG.globeC);
     globe.name = "globe";
-    globe.add(mesh(new THREE.SphereGeometry(RIG.globeR, 32, 24), marbleMat, 0, 0, 0));
-    // faint engraved lattice
+    // big sphere carved from the same weathered stone as the statue
+    globe.add(mesh(new THREE.SphereGeometry(RIG.globeR, 48, 36), marbleMat, 0, 0, 0));
+    // faint carved latitude / longitude lines (grey stone, not metal)
     var lattice = new THREE.LineSegments(
-      new THREE.WireframeGeometry(new THREE.SphereGeometry(RIG.globeR + 0.6, 18, 12)),
-      new THREE.LineBasicMaterial({ color: 0xc9bda6, transparent: true, opacity: 0.5 })
+      new THREE.WireframeGeometry(new THREE.SphereGeometry(RIG.globeR + 0.6, 24, 16)),
+      new THREE.LineBasicMaterial({ color: 0x8f8578, transparent: true, opacity: 0.35 })
     );
     globe.add(lattice);
-    // armillary rings — one equatorial (brand ember), two crossing diagonals (bronze)
-    globe.add(mesh(new THREE.TorusGeometry(RIG.globeR + 3, 2.2, 8, 72), orangeMat, 0, 0, 0, Math.PI / 2, 0, 0));
-    globe.add(mesh(new THREE.TorusGeometry(RIG.globeR + 2, 1.8, 8, 72), bronzeMat, 0, 0, 0, Math.PI / 2, 0, Math.PI / 3.2));
-    globe.add(mesh(new THREE.TorusGeometry(RIG.globeR + 2, 1.8, 8, 72), bronzeMat, 0, 0, 0, Math.PI / 2, 0, -Math.PI / 3.2));
+    // one subtle equatorial band, same stone tone (a whisper of an armillary)
+    globe.add(mesh(new THREE.TorusGeometry(RIG.globeR + 2, 1.4, 8, 80), marble2Mat, 0, 0, 0, Math.PI / 2, 0, 0));
     statueGroup.add(globe);
   })();
   scene.add(statueGroup);
@@ -331,24 +339,24 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   var activeStatue = statueGroup;
   // quick knobs (nudge if the scan lands rotated/upside-down or the drape is off)
   var MODEL_TWEAK = {
-    rotY: 0, flipUp: false,
-    // marble loincloth covering the groin — position in fitted-model space
-    // (base at y=0, total height 520). Adjust y/z/scale to seat it.
-    cloth: { show: true, x: 0, y: 208, z: 18, scale: 1, rotY: 0 }
+    rotY: 0, flipUp: false,   // front faces the establishing camera
+    // procedural loincloth is OFF — the statue scan has its own carved cloth,
+    // and the flat apron box read as a floating blank rectangle mid-orbit
+    cloth: { show: false, x: 0, y: 258, z: 26, scale: 1.4, rotY: 0 }
   };
 
   function addLoincloth(pivot) {
     var t = MODEL_TWEAK.cloth;
     if (!t.show) return;
     var g = new THREE.Group();
-    var clothMat = new THREE.MeshStandardMaterial({ color: 0xe9e3d5, roughness: 0.9, metalness: 0, side: THREE.DoubleSide });
-    // hip wrap all the way around
-    var wrap = new THREE.Mesh(new THREE.TorusGeometry(54, 18, 14, 30), clothMat);
-    wrap.rotation.x = Math.PI / 2; wrap.scale.set(1, 0.62, 1);
+    var clothMat = new THREE.MeshStandardMaterial({ color: 0xcac3b6, roughness: 0.93, metalness: 0, side: THREE.DoubleSide });
+    // slim hip wrap around the waist
+    var wrap = new THREE.Mesh(new THREE.TorusGeometry(50, 10, 14, 32), clothMat);
+    wrap.rotation.x = Math.PI / 2; wrap.scale.set(1.02, 0.42, 1);
     g.add(wrap);
-    // front apron hanging over the groin
-    var apron = new THREE.Mesh(new THREE.BoxGeometry(66, 76, 12), clothMat);
-    apron.position.set(0, -34, 34); apron.rotation.x = 0.18;
+    // front apron / fold hanging over the groin
+    var apron = new THREE.Mesh(new THREE.BoxGeometry(74, 96, 7), clothMat);
+    apron.position.set(0, -50, 34); apron.rotation.x = 0.16;
     g.add(apron);
     g.position.set(t.x, t.y, t.z);
     g.scale.setScalar(t.scale);
@@ -389,11 +397,15 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     layoutRing();
   }
 
+  // ?v bump forces browsers to re-fetch when the model file is replaced
+  var GLB_URL = "assets/atlas.glb?v=hd3";
   function loadGLB() {
-    new GLTFLoader().load("assets/atlas.glb",
+    var loader = new GLTFLoader();
+    loader.setMeshoptDecoder(MeshoptDecoder);   // model is meshopt-compressed
+    loader.load(GLB_URL,
       function (gltf) { mountModel(gltf.scene); },
       undefined,
-      function () { /* no GLB either — primitives stay */ });
+      loadSTL);   // no GLB — fall back to the raw scan
   }
 
   // orient a raw scan so its tallest axis stands up (Y); print/scan STLs vary
@@ -407,57 +419,94 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     return geo;
   }
 
-  // try the real scan first, fall back to the generated GLB
-  new STLLoader().load("assets/atlas.stl",
-    function (geo) { mountModel(new THREE.Mesh(standUp(geo), marbleMat.clone())); },
-    undefined,
-    loadGLB);
+  function loadSTL() {
+    new STLLoader().load("assets/atlas.stl",
+      function (geo) { mountModel(new THREE.Mesh(standUp(geo), marbleMat.clone())); },
+      undefined,
+      function () { /* no scan either — primitives stay */ });
+  }
+
+  // the brand statue reconstruction (atlas.glb, cleaned) is the model the
+  // site is designed around — load it first; the generic scan is a fallback
+  loadGLB();
 
   // ============================================================
   // PANELS — ring of placeholder cards around the globe
   // ============================================================
-  var PANEL_W = 175, PANEL_H = 130;
+  var PANEL_W = 180, PANEL_H = 135;
   var panelMeshes = [];
-  var texLoader = new THREE.TextureLoader();
 
-  function placeholderTexture(i, label) {
+  // gallery-card texture: dish photo in a warm cream matte with a gold
+  // hairline, orange corner ticks and an inscriptional Cinzel caption
+  function cardTexture(i, label, img) {
+    var W = 640, H = 480;
     var c = document.createElement("canvas");
-    c.width = 512; c.height = 384;
+    c.width = W; c.height = H;
     var g = c.getContext("2d");
-    g.fillStyle = "#fdf3ea"; g.fillRect(0, 0, 512, 384);
-    g.strokeStyle = "#fc4c02"; g.lineWidth = 14; g.strokeRect(12, 12, 488, 360);
-    g.fillStyle = "#fc4c02";
-    [[28, 28], [452, 28], [28, 324], [452, 324]].forEach(function (p) {
-      g.fillRect(p[0], p[1], 32, 8); g.fillRect(p[0], p[1], 8, 32);
+    g.fillStyle = "#fdf3ea"; g.fillRect(0, 0, W, H);
+    var pad = 24, capH = 92;
+    var wx = pad, wy = pad, ww = W - pad * 2, wh = H - capH - pad * 1.4;
+    if (img) {
+      // cover-crop the photo into the window
+      var ia = img.width / img.height, pa = ww / wh, sw, sh, sx, sy;
+      if (ia > pa) { sh = img.height; sw = sh * pa; sx = (img.width - sw) / 2; sy = 0; }
+      else { sw = img.width; sh = sw / pa; sx = 0; sy = (img.height - sh) / 2; }
+      g.drawImage(img, sx, sy, sw, sh, wx, wy, ww, wh);
+    } else {
+      g.fillStyle = "#f6e7d6"; g.fillRect(wx, wy, ww, wh);
+      g.fillStyle = "#d98a1e";
+      g.font = "600 130px Cinzel, Georgia, serif";
+      g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText(String(i + 1), W / 2, wy + wh / 2 + 8);
+    }
+    // gold hairline around the photo window
+    g.strokeStyle = "#d98a1e"; g.lineWidth = 3;
+    g.strokeRect(wx + 1.5, wy + 1.5, ww - 3, wh - 3);
+    // orange corner ticks
+    g.strokeStyle = "#fc4c02"; g.lineWidth = 7; g.lineCap = "square";
+    [[wx, wy, 1, 1], [wx + ww, wy, -1, 1], [wx, wy + wh, 1, -1], [wx + ww, wy + wh, -1, -1]].forEach(function (k) {
+      g.beginPath();
+      g.moveTo(k[0] + 36 * k[2], k[1]);
+      g.lineTo(k[0], k[1]);
+      g.lineTo(k[0], k[1] + 36 * k[3]);
+      g.stroke();
     });
-    g.fillStyle = "#d98a1e";
-    g.font = "600 120px Georgia, serif";
-    g.textAlign = "center"; g.textBaseline = "middle";
-    g.fillText(String(i + 1), 256, 168);
+    // caption
     g.fillStyle = "#241a12";
-    g.font = "500 34px Futura, 'Trebuchet MS', sans-serif";
-    g.fillText(label.toUpperCase(), 256, 292);
+    g.font = "500 40px Cinzel, Georgia, serif";
+    g.textAlign = "center"; g.textBaseline = "middle";
+    g.fillText(label.toUpperCase(), W / 2, H - capH / 2 - 12);
+    g.fillStyle = "#fc4c02";
+    g.font = "22px Georgia, serif";
+    g.fillText("·  Φ  ·", W / 2, H - 24);
     var t = new THREE.CanvasTexture(c);
     t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 4;
     return t;
   }
 
   PANELS.forEach(function (p, i) {
     var theta = ((i + 1) / (PANELS.length + 1)) * Math.PI * 2;
-    var tex = p.src ? texLoader.load(p.src, function (t) { t.colorSpace = THREE.SRGBColorSpace; })
-                    : placeholderTexture(i, p.label);
-    var m = new THREE.Mesh(
-      new THREE.PlaneGeometry(PANEL_W, PANEL_H),
-      new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0 })
-    );
+    var mat = new THREE.MeshBasicMaterial({ map: cardTexture(i, p.label, null), transparent: true, opacity: 0 });
+    var m = new THREE.Mesh(new THREE.PlaneGeometry(PANEL_W, PANEL_H), mat);
+    // soft charcoal backing plane — reads as a drop shadow behind the card
     var frame = new THREE.Mesh(
-      new THREE.PlaneGeometry(PANEL_W + 10, PANEL_H + 10),
-      new THREE.MeshStandardMaterial({ color: BRONZE, roughness: 0.4, metalness: 0.6, transparent: true, opacity: 0 })
+      new THREE.PlaneGeometry(PANEL_W + 8, PANEL_H + 8),
+      new THREE.MeshBasicMaterial({ color: 0x120d09, transparent: true, opacity: 0 })
     );
     m.userData = { theta: theta, label: p.label, frame: frame };
     scene.add(frame);
     scene.add(m);
     panelMeshes.push(m);
+    if (p.src) {
+      var img = new Image();
+      img.onload = function () {
+        // rebuild once the photo (and the Cinzel face) are actually available
+        var ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+        ready.then(function () { mat.map = cardTexture(i, p.label, img); mat.needsUpdate = true; });
+      };
+      img.src = p.src;
+    }
   });
 
   function layoutRing() {
@@ -488,7 +537,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
   // ---------- drag-to-spin + idle turntable (hero stage) ----------
   var statueRot = 0;          // current display rotation
   var userRot = 0;            // accumulated user drag
-  var AUTO_VEL = 0.0025;      // slow museum turntable
+  var AUTO_VEL = 0;          // static hero (drag to spin); orientation fixed by MODEL_TWEAK.rotY
   var autoPausedUntil = 0;    // resume auto-spin a moment after the user lets go
   var dragging = false;
   var lastX = 0;
@@ -514,38 +563,18 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
     canvas.style.cursor = "grab";
   });
 
-  // ---------- camera: zoom into the globe, then orbit the model ----------
-  var ZOOM_END = 0.22;   // first ~22% of scroll = the zoom-in; rest = the orbit
-  function easeInOut(t) { t = Math.min(1, Math.max(0, t)); return 0.5 - 0.5 * Math.cos(Math.PI * t); }
-
+  // ---------- camera: the full statue in frame from the first pixel;
+  //            scroll simply orbits it once, no zoom-in phase ----------
   function placeCamera(p) {
     var gc = RIG.globeC;
-    var wide  = RIG.globeR * 6.4;   // establishing shot — whole statue
-    var close = RIG.globeR * 2.1;   // tight on the globe
-    var orbit = RIG.globeR * 4.7;   // frames the model while circling
-    var theta, dist, lookY;
-
-    if (p <= ZOOM_END) {
-      // Phase A — dolly straight in from the establishing shot onto the globe
-      var t = easeInOut(p / ZOOM_END);
-      theta = 0;
-      dist = wide + (close - wide) * t;
-      lookY = gc.y;
-      camera.position.set(gc.x, gc.y + (1 - t) * 70, gc.z + dist);
-    } else {
-      // Phase B — circle the whole model, pulling back out of the close-up
-      var pp = (p - ZOOM_END) / (1 - ZOOM_END);
-      theta = pp * Math.PI * 2;
-      var pull = easeInOut(Math.min(1, pp / 0.16));      // close -> orbit distance
-      dist = close + (orbit - close) * pull;
-      lookY = gc.y - pull * (gc.y - RIG.lookY);           // pan down globe -> model centre
-      camera.position.set(
-        gc.x + dist * Math.sin(theta),
-        gc.y + 24 - Math.sin(pp * Math.PI) * 22,
-        gc.z + dist * Math.cos(theta)
-      );
-    }
-    camera.lookAt(gc.x, lookY, gc.z);
+    var dist = RIG.globeR * 5.0;        // wide enough to hold base-to-globe at 45° fov
+    var theta = p * Math.PI * 2;        // one full orbit across the pinned scroll
+    camera.position.set(
+      gc.x + dist * Math.sin(theta),
+      gc.y + 24 - Math.sin(p * Math.PI) * 22,   // gentle vertical breathing mid-orbit
+      gc.z + dist * Math.cos(theta)
+    );
+    camera.lookAt(gc.x, RIG.lookY, gc.z);       // model centre, not the globe
     return theta;
   }
 
@@ -594,7 +623,7 @@ import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
       panelMeshes.forEach(function (m) {
         var d = angDiff(theta, m.userData.theta);
         var o = Math.max(0, Math.min(1, 1.45 - d * 1.6));
-        if (p < ZOOM_END + 0.01) o = 0;    // panels appear only once the orbit starts
+        if (p < 0.04) o = 0;               // panels appear once the hero copy clears
         m.material.opacity = o;
         m.userData.frame.material.opacity = o * 0.85;
         m.scale.setScalar(1 + Math.max(0, 0.5 - d) * 0.35);
