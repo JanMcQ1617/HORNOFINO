@@ -1,0 +1,16 @@
+# Hornofino — static site (no build step).
+# Netlify serves the repo root exactly as-is.
+[build]
+  publish = "."
+  command = ""
+
+# Long-cache the immutable-ish assets; always revalidate HTML.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
