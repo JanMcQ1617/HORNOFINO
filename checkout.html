@@ -8,28 +8,40 @@
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css?v=2" />
 </head>
 <body>
-  <header class="nav" id="top">
-    <a class="nav__brand" href="index.html" aria-label="Hornofino home">
-      <img class="nav__logo" src="assets/logo-dark.png" alt="Hornofino — Pan · Café · Vino" />
-    </a>
+  <div class="scrollbar" id="scrollbar"></div>
+  <header class="nav" id="nav">
+    <a class="brand" href="index.html" aria-label="Hornofino home">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
     <nav class="nav__links" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
+      <a href="pane-e-pasta.html">Trattoria</a>
       <a href="about.html">Our Story</a>
       <a href="locations.html">Locations</a>
       <a href="contact.html">Contact</a>
-      <a href="contact.html#order" class="nav__order-mobile">Order Online</a>
     </nav>
-    <a class="nav__cart" href="cart.html" aria-label="View basket">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
-      <span class="nav__cart-count" data-cart-count>0</span>
-    </a>
-    <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav__right">
+      <a class="nav__cart" href="cart.html" aria-label="View basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="nav__cart-count" data-cart-count>0</span>
+      </a>
+      <span class="magnetic"><a class="btn btn--solid nav__cta" href="contact.html#order">Order Online</a></span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </header>
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="pane-e-pasta.html">Trattoria</a>
+    <a href="about.html">Our Story</a>
+    <a href="locations.html">Locations</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html#order" style="color:var(--orange);opacity:1">Order Online →</a>
+    <p class="drawer__foot">Open daily · 6:00 – 19:00 · San Juan, PR</p>
+  </nav>
 
   <section class="page-banner">
     <p class="crumbs"><a href="index.html">Home</a> · <a href="cart.html">Basket</a> · Checkout</p>
@@ -39,20 +51,19 @@
   </section>
 
   <main class="checkout">
-    <!-- Customer details + pay -->
     <form class="form" id="checkoutForm" novalidate>
       <label for="co-name">Full name</label>
-      <input id="co-name" name="name" type="text" autocomplete="name" required placeholder="Maria Konstantopoulou" />
+      <input id="co-name" name="name" type="text" autocomplete="name" required placeholder="Maria Rivera" />
 
       <label for="co-email">Email</label>
       <input id="co-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
 
       <label for="co-fulfilment">Pickup or delivery</label>
       <select id="co-fulfilment" name="fulfilment">
-        <option>Pickup · Harbor Street</option>
-        <option>Pickup · Olive Square</option>
-        <option>Pickup · Marble Row</option>
-        <option>Delivery within the city</option>
+        <option>Pickup · Cupey (San Juan)</option>
+        <option>Pickup · Apolo (Guaynabo)</option>
+        <option>Pickup · Los Filtros (Bayamón)</option>
+        <option>Delivery within the San Juan metro</option>
       </select>
 
       <label for="co-notes">Order notes (optional)</label>
@@ -66,35 +77,38 @@
       <p class="pay-stub" id="payStub"></p>
     </form>
 
-    <!-- Order summary -->
     <aside class="checkout__summary">
       <h2>Order summary</h2>
       <ul class="summary-list" id="checkoutSummary"><!-- injected by cart.js --></ul>
       <div class="summary-total">
         <span>Total</span><strong id="checkoutTotal">$0.00</strong>
       </div>
-      <p class="pay-note"><a href="cart.html" style="color:var(--aegean);text-decoration:none;">← Edit basket</a></p>
+      <p class="pay-note"><a href="cart.html">← Edit basket</a></p>
     </aside>
   </main>
 
   <footer class="footer">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <img class="footer__logo" src="assets/logo-white.png" alt="Hornofino — Pan · Café · Vino" />
-        <p class="footer__tag">Bread born of fire &amp; the Aegean.</p>
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand" href="index.html">Horno<b>fino</b></a>
+          <p class="footer__tag">Bread born of fire. Baked at dawn, gone by sundown.</p>
+        </div>
+        <nav class="footer__col" aria-label="Footer menu">
+          <h4>Explore</h4>
+          <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="pane-e-pasta.html">Pane e Pasta</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a>
+        </nav>
+        <div class="footer__col"><h4>Visit</h4><p>San Juan, Puerto Rico</p><p>Open daily · 6:00 – 19:00</p><a href="contact.html">Contact &amp; catering</a></div>
+        <div class="footer__col"><h4>Follow</h4><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a><a href="contact.html#order" style="color:var(--orange)">Order Online →</a></div>
       </div>
-      <nav class="footer__col" aria-label="Footer menu">
-        <h4>Explore</h4>
-        <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a><a href="contact.html">Contact</a>
-      </nav>
-      <div class="footer__col"><h4>Visit</h4><p>112 Harbor Street<br />Open daily · 6:00 – 19:00</p></div>
-      <div class="footer__col"><h4>Follow</h4><div class="footer__social"><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a></div></div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="year"></span> Hornofino · Pan · Café · Vino. Crafted with fire and patience.</p>
+        <button class="totop" id="totop">Back to top ↑</button>
+      </div>
     </div>
-    <div class="meander-rule meander-rule--thin" aria-hidden="true"></div>
-    <p class="footer__copy">© <span id="year"></span> Hornofino · Φούρνος. Crafted with fire and patience.</p>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="cart.js"></script>
+  <script src="site.js?v=1"></script>
+  <script src="cart.js?v=3"></script>
 </body>
 </html>

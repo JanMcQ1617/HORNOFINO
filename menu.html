@@ -8,34 +8,44 @@
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css?v=2" />
 </head>
 <body>
-  <header class="nav" id="top">
-    <a class="nav__brand" href="index.html" aria-label="Hornofino home">
-      <img class="nav__logo" src="assets/logo-dark.png" alt="Hornofino — Pan · Café · Vino" />
-    </a>
+  <div class="scrollbar" id="scrollbar"></div>
+  <header class="nav" id="nav">
+    <a class="brand" href="index.html" aria-label="Hornofino home">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
     <nav class="nav__links" aria-label="Primary">
       <a href="index.html">Home</a>
-      <a href="menu.html" class="is-active" aria-current="page">Menu</a>
+      <a href="menu.html" class="active" aria-current="page">Menu</a>
+      <a href="pane-e-pasta.html">Trattoria</a>
       <a href="about.html">Our Story</a>
       <a href="locations.html">Locations</a>
       <a href="contact.html">Contact</a>
-      <a href="contact.html#order" class="nav__order-mobile">Order Online</a>
     </nav>
-    <a class="btn btn--ghost nav__cta" href="contact.html#order">Order Online</a>
-    <a class="nav__cart" href="cart.html" aria-label="View basket">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
-      <span class="nav__cart-count" data-cart-count>0</span>
-    </a>
-
-    <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav__right">
+      <a class="nav__cart" href="cart.html" aria-label="View basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="nav__cart-count" data-cart-count>0</span>
+      </a>
+      <span class="magnetic"><a class="btn btn--solid nav__cta" href="contact.html#order">Order Online</a></span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </header>
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="pane-e-pasta.html">Trattoria</a>
+    <a href="about.html">Our Story</a>
+    <a href="locations.html">Locations</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html#order" style="color:var(--orange);opacity:1">Order Online →</a>
+    <p class="drawer__foot">Open daily · 6:00 – 19:00 · San Juan, PR</p>
+  </nav>
 
   <section class="page-banner">
     <p class="crumbs"><a href="index.html">Home</a> · Menu</p>
-    <h1>The Menu</h1>
+    <h1>The whole <em>counter</em></h1>
     <p>The real thing — every price below is straight from our bakeries. Baked fresh each morning, sold the same day.</p>
     <div class="meander-rule" aria-hidden="true"></div>
   </section>
@@ -402,27 +412,31 @@
 
     <p class="menu-note">Prices in USD, as listed at our bakeries. Availability changes with the morning bake — favorites sell out.</p>
     <p style="text-align:center;margin-top:2rem"><a class="btn btn--solid" href="contact.html#order">Order Online</a></p>
-    <p style="text-align:center;margin-top:1.2rem"><a class="btn btn--line" href="index.html#pane-e-pasta">Dinner plans? Pane e Pasta →</a></p>
+    <p style="text-align:center;margin-top:1.2rem"><a class="btn btn--line" href="pane-e-pasta.html">Dinner plans? Pane e Pasta →</a></p>
   </main>
 
   <footer class="footer">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <img class="footer__logo" src="assets/logo-white.png" alt="Hornofino — Pan · Café · Vino" />
-        <p class="footer__tag">Bread born of fire &amp; the Aegean.</p>
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand" href="index.html">Horno<b>fino</b></a>
+          <p class="footer__tag">Bread born of fire. Baked at dawn, gone by sundown.</p>
+        </div>
+        <nav class="footer__col" aria-label="Footer menu">
+          <h4>Explore</h4>
+          <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="pane-e-pasta.html">Pane e Pasta</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a>
+        </nav>
+        <div class="footer__col"><h4>Visit</h4><p>San Juan, Puerto Rico</p><p>Open daily · 6:00 – 19:00</p><a href="contact.html">Contact &amp; catering</a></div>
+        <div class="footer__col"><h4>Follow</h4><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a><a href="contact.html#order" style="color:var(--orange)">Order Online →</a></div>
       </div>
-      <nav class="footer__col" aria-label="Footer menu">
-        <h4>Explore</h4>
-        <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a><a href="contact.html">Contact</a><a href="index.html#pane-e-pasta">Pane e Pasta</a>
-      </nav>
-      <div class="footer__col"><h4>Visit</h4><p>112 Harbor Street<br />Open daily · 6:00 – 19:00</p></div>
-      <div class="footer__col"><h4>Follow</h4><div class="footer__social"><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a></div></div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="year"></span> Hornofino · Pan · Café · Vino. Crafted with fire and patience.</p>
+        <button class="totop" id="totop">Back to top ↑</button>
+      </div>
     </div>
-    <div class="meander-rule meander-rule--thin" aria-hidden="true"></div>
-    <p class="footer__copy">© <span id="year"></span> Hornofino · Φούρνος. Crafted with fire and patience.</p>
   </footer>
 
-  <script src="script.js?v=5"></script>
+  <script src="site.js?v=1"></script>
   <script src="cart.js?v=3"></script>
 </body>
 </html>

@@ -4,102 +4,132 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Locations — Hornofino</title>
-  <meta name="description" content="Find your nearest Hornofino bakery — Harbor Street, Olive Square, and Marble Row. Hours, addresses, and directions." />
+  <meta name="description" content="Find your nearest Hornofino bakery in San Juan, Puerto Rico. Hours, addresses and directions for all three bakeries — pickup and delivery available." />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css?v=2" />
+  <style>
+    /* Pull the location cards higher up the page */
+    .page-banner{padding-bottom:1.25rem}
+    .locations{padding-top:1.25rem}
+    .place__tag{display:inline-block;align-self:flex-start;background:var(--orange);color:#fff;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.35em .8em;border-radius:100px}
+  </style>
 </head>
 <body>
-  <header class="nav" id="top">
-    <a class="nav__brand" href="index.html" aria-label="Hornofino home">
-      <img class="nav__logo" src="assets/logo-dark.png" alt="Hornofino — Pan · Café · Vino" />
-    </a>
+  <div class="scrollbar" id="scrollbar"></div>
+  <header class="nav" id="nav">
+    <a class="brand" href="index.html" aria-label="Hornofino home">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
     <nav class="nav__links" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
+      <a href="pane-e-pasta.html">Trattoria</a>
       <a href="about.html">Our Story</a>
-      <a href="locations.html" class="is-active" aria-current="page">Locations</a>
+      <a href="locations.html" class="active" aria-current="page">Locations</a>
       <a href="contact.html">Contact</a>
-      <a href="contact.html#order" class="nav__order-mobile">Order Online</a>
     </nav>
-    <a class="btn btn--ghost nav__cta" href="contact.html#order">Order Online</a>
-    <a class="nav__cart" href="cart.html" aria-label="View basket">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
-      <span class="nav__cart-count" data-cart-count>0</span>
-    </a>
-
-    <button class="nav__burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav__right">
+      <a class="nav__cart" href="cart.html" aria-label="View basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="nav__cart-count" data-cart-count>0</span>
+      </a>
+      <span class="magnetic"><a class="btn btn--solid nav__cta" href="contact.html#order">Order Online</a></span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </header>
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="pane-e-pasta.html">Trattoria</a>
+    <a href="about.html">Our Story</a>
+    <a href="locations.html">Locations</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html#order" style="color:var(--orange);opacity:1">Order Online →</a>
+    <p class="drawer__foot">Open daily · 6:00 – 19:00 · San Juan, PR</p>
+  </nav>
 
   <section class="page-banner">
     <p class="crumbs"><a href="index.html">Home</a> · Locations</p>
-    <h1>Find Us Nearby</h1>
-    <p>Three bakeries, the same fire and welcome. Drop in for the morning bake.</p>
+    <h1>Find us <em>nearby</em></h1>
+    <p>Three bakeries across the San Juan metro — Cupey, Guaynabo and Bayamón. Same fire, same welcome.</p>
     <div class="meander-rule" aria-hidden="true"></div>
   </section>
 
   <section class="locations">
     <div class="locations__grid">
       <article class="place">
-        <h3>Harbor Street</h3>
-        <p>112 Harbor Street<br />Open daily · 6:00 – 19:00<br />(555) 010-1120</p>
-        <a href="https://maps.google.com/?q=112+Harbor+Street" target="_blank" rel="noopener">Directions →</a>
+        <div class="place__media"><img src="assets/menu-hf/panes.jpg" alt="Fresh bread at the Cupey bakery" loading="lazy" /></div>
+        <div class="place__body">
+          <h3>Cupey</h3>
+          <p>Cupey Professional Mall<br />C. San Claudio<br />San Juan, PR 00926<br />Open daily · 6:00 – 19:00</p>
+          <a href="https://maps.google.com/?q=Hornofino+Cupey+Professional+Mall+C.+San+Claudio+San+Juan+00926" target="_blank" rel="noopener">Directions →</a>
+        </div>
       </article>
       <article class="place">
-        <h3>Olive Square</h3>
-        <p>4 Olive Square<br />Open daily · 6:30 – 20:00<br />(555) 010-0044</p>
-        <a href="https://maps.google.com/?q=4+Olive+Square" target="_blank" rel="noopener">Directions →</a>
+        <div class="place__media"><img src="assets/menu-hf/cafe-y-te.jpg" alt="Coffee at the Apolo bakery in Guaynabo" loading="lazy" /></div>
+        <div class="place__body">
+          <span class="place__tag">Home of Pane e Pasta</span>
+          <h3>Apolo · Guaynabo</h3>
+          <p>Centro Comercial Apolo<br />Av. Lic. R. Rodríguez Apolo, Local #7<br />Guaynabo, PR 00969<br />Open daily · 6:00 – 19:00</p>
+          <a href="https://maps.google.com/?q=Hornofino+Centro+Comercial+Apolo+Guaynabo+00969" target="_blank" rel="noopener">Directions →</a>
+        </div>
       </article>
       <article class="place">
-        <h3>Marble Row</h3>
-        <p>27 Marble Row<br />Open daily · 7:00 – 18:00<br />(555) 010-2700</p>
-        <a href="https://maps.google.com/?q=27+Marble+Row" target="_blank" rel="noopener">Directions →</a>
+        <div class="place__media"><img src="assets/menu-hf/reposteria.jpg" alt="The pastry case at the Los Filtros main store in Bayamón" loading="lazy" /></div>
+        <div class="place__body">
+          <span class="place__tag">Main store</span>
+          <h3>Los Filtros · Bayamón</h3>
+          <p>Centro Comercial Los Filtros, Local #9<br />Bayamón, PR 00956<br />Open daily · 6:00 – 19:00</p>
+          <a href="https://maps.google.com/?q=Hornofino+Centro+Comercial+Los+Filtros+Bayamon+00956" target="_blank" rel="noopener">Directions →</a>
+        </div>
       </article>
     </div>
   </section>
 
   <section class="values">
     <header class="section-head">
-      <p class="eyebrow">Good to know</p>
-      <h2>Before you visit</h2>
+      <p class="eyebrow eyebrow--center">Good to know</p>
+      <h2>Before you <em>visit</em></h2>
     </header>
     <div class="values__grid">
       <article class="value"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><h3>Bake times</h3><p>Bread is out by 7:00; pastries follow through the morning. Popular items sell out — come early.</p></article>
-      <article class="value"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><h3>Pickup &amp; delivery</h3><p>Order online for same-day pickup at any location, or delivery within the city.</p></article>
-      <article class="value"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span><h3>Catering</h3><p>Hosting something? We bake bread boards and pastry platters to order — just reach out.</p></article>
+      <article class="value"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><h3>Pickup &amp; delivery</h3><p>Order online for same-day pickup at any location, or delivery within the San Juan metro.</p></article>
+      <article class="value"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span><h3>Catering</h3><p>Hosting something? We bake bandejas and pastry platters to order — just reach out.</p></article>
     </div>
   </section>
 
   <section class="order" id="order">
-    <div class="meander-rule meander-rule--light" aria-hidden="true"></div>
     <div class="order__inner">
-      <p class="eyebrow eyebrow--light">Can't make it in?</p>
+      <p class="eyebrow eyebrow--center">Can't make it in?</p>
       <h2>Bring the bakery home</h2>
       <p>Order online and we'll have it ready, fresh from the morning bake.</p>
-      <a class="btn btn--solid btn--gold" href="contact.html#order">Order Online</a>
+      <div class="hero__actions"><span class="magnetic"><a class="btn btn--light" href="contact.html#order">Order Online</a></span></div>
     </div>
   </section>
 
   <footer class="footer">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <img class="footer__logo" src="assets/logo-white.png" alt="Hornofino — Pan · Café · Vino" />
-        <p class="footer__tag">Bread born of fire &amp; the Aegean.</p>
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand" href="index.html">Horno<b>fino</b></a>
+          <p class="footer__tag">Bread born of fire. Baked at dawn, gone by sundown.</p>
+        </div>
+        <nav class="footer__col" aria-label="Footer menu">
+          <h4>Explore</h4>
+          <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="pane-e-pasta.html">Pane e Pasta</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a>
+        </nav>
+        <div class="footer__col"><h4>Visit</h4><p>San Juan, Puerto Rico</p><p>Open daily · 6:00 – 19:00</p><a href="contact.html">Contact &amp; catering</a></div>
+        <div class="footer__col"><h4>Follow</h4><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a><a href="contact.html#order" style="color:var(--orange)">Order Online →</a></div>
       </div>
-      <nav class="footer__col" aria-label="Footer menu">
-        <h4>Explore</h4>
-        <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a><a href="contact.html">Contact</a>
-      </nav>
-      <div class="footer__col"><h4>Visit</h4><p>112 Harbor Street<br />Open daily · 6:00 – 19:00</p></div>
-      <div class="footer__col"><h4>Follow</h4><div class="footer__social"><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a></div></div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="year"></span> Hornofino · Pan · Café · Vino. Crafted with fire and patience.</p>
+        <button class="totop" id="totop">Back to top ↑</button>
+      </div>
     </div>
-    <div class="meander-rule meander-rule--thin" aria-hidden="true"></div>
-    <p class="footer__copy">© <span id="year"></span> Hornofino · Φούρνος. Crafted with fire and patience.</p>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="cart.js"></script>
+  <script src="site.js?v=1"></script>
+  <script src="cart.js?v=3"></script>
 </body>
 </html>

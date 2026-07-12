@@ -26,16 +26,14 @@
   <meta name="twitter:title" content="Hornofino — Artisan Bakery in San Juan, Puerto Rico" />
   <meta name="twitter:description" content="Fresh bread, pastries and quesitos baked daily in San Juan, Puerto Rico." />
   <meta name="twitter:image" content="https://janmcq1617.github.io/HORNOFINO/assets/hero.jpg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- ░░ Structured data (schema.org / JSON-LD) ░░
        ⚠ REPLACE BEFORE LAUNCH: add the real streetAddress, postalCode, telephone,
-       and exact geo coordinates for the physical San Juan location. Google will not
-       rank (and may distrust) a local business with a fake/placeholder address or phone.
-       Also create a Google Business Profile with this same name/address/phone (NAP). -->
+       and exact geo coordinates for the physical San Juan location. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -52,29 +50,10 @@
         "priceRange": "$$",
         "currenciesAccepted": "USD",
         "hasMenu": "https://janmcq1617.github.io/HORNOFINO/menu.html",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "San Juan",
-          "addressRegion": "PR",
-          "addressCountry": "PR"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 18.4655,
-          "longitude": -66.1057
-        },
-        "areaServed": [
-          { "@type": "City", "name": "San Juan" },
-          { "@type": "AdministrativeArea", "name": "Puerto Rico" }
-        ],
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            "opens": "06:00",
-            "closes": "19:00"
-          }
-        ],
+        "address": { "@type": "PostalAddress", "addressLocality": "San Juan", "addressRegion": "PR", "addressCountry": "PR" },
+        "geo": { "@type": "GeoCoordinates", "latitude": 18.4655, "longitude": -66.1057 },
+        "areaServed": [ { "@type": "City", "name": "San Juan" }, { "@type": "AdministrativeArea", "name": "Puerto Rico" } ],
+        "openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:00", "closes": "19:00" } ],
         "sameAs": []
       },
       {
@@ -87,394 +66,905 @@
         "publisher": { "@id": "https://janmcq1617.github.io/HORNOFINO/#business" }
       },
       {
-        "@type": "WebPage",
-        "@id": "https://janmcq1617.github.io/HORNOFINO/#webpage",
-        "url": "https://janmcq1617.github.io/HORNOFINO/",
-        "name": "Hornofino — Artisan Bakery & Café in San Juan, Puerto Rico",
-        "isPartOf": { "@id": "https://janmcq1617.github.io/HORNOFINO/#website" },
-        "about": { "@id": "https://janmcq1617.github.io/HORNOFINO/#business" },
-        "primaryImageOfPage": "https://janmcq1617.github.io/HORNOFINO/assets/hero.jpg",
-        "inLanguage": "en"
-      },
-      {
         "@type": "FAQPage",
         "@id": "https://janmcq1617.github.io/HORNOFINO/#faq",
         "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Where is Hornofino bakery located?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Hornofino is an artisan bakery and café located in San Juan, Puerto Rico, baking fresh bread and pastries daily." }
-          },
-          {
-            "@type": "Question",
-            "name": "What does Hornofino bake?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Hornofino bakes pan de agua, pan sobao, mallorcas, quesitos, croquetas, donas, flanes and full breakfast plates, all made from scratch daily." }
-          },
-          {
-            "@type": "Question",
-            "name": "What are Hornofino's opening hours?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Hornofino is open daily from 6:00 AM to 7:00 PM for fresh-baked bread, pastries and café service." }
-          },
-          {
-            "@type": "Question",
-            "name": "Does Hornofino offer pickup and delivery in Puerto Rico?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can order online for same-day pickup at Hornofino, or delivery within the San Juan area." }
-          }
+          { "@type": "Question", "name": "Where is Hornofino bakery located?", "acceptedAnswer": { "@type": "Answer", "text": "Hornofino is an artisan bakery and café located in San Juan, Puerto Rico, baking fresh bread and pastries daily." } },
+          { "@type": "Question", "name": "What does Hornofino bake?", "acceptedAnswer": { "@type": "Answer", "text": "Hornofino bakes pan de agua, pan sobao, mallorcas, quesitos, croquetas, donas, flanes and full breakfast plates, all made from scratch daily." } },
+          { "@type": "Question", "name": "What are Hornofino's opening hours?", "acceptedAnswer": { "@type": "Answer", "text": "Hornofino is open daily from 6:00 AM to 7:00 PM for fresh-baked bread, pastries and café service." } },
+          { "@type": "Question", "name": "Does Hornofino offer pickup and delivery in Puerto Rico?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can order online for same-day pickup at Hornofino, or delivery within the San Juan area." } }
         ]
       }
     ]
   }
   </script>
+
+  <style>
+  /* ============================================================
+     HORNOFINO — modern rebuild · orange-forward artisan bakery
+     Single-file homepage · scroll-driven motion · interactive
+     ============================================================ */
+  :root{
+    --bg:#fdf3ea;        /* warm cream ground */
+    --bg-2:#f7e8d7;      /* deeper cream band */
+    --cream:#fffaf3;
+    --surface:#ffffff;
+    --ink:#241a12;       /* warm charcoal */
+    --ink-soft:#6a5b4d;
+    --ink-dim:#9a8a79;
+    --orange:#fc4c02;    /* PRIMARY brand orange */
+    --orange-deep:#d83a00;
+    --amber:#e2941f;
+    --amber-deep:#b3741a;
+    --char:#1a1109;      /* dark sections */
+    --char-2:#251811;
+    --line:rgba(40,25,12,.14);
+    --line-2:rgba(255,255,255,.14);
+
+    --display:"Fraunces",Georgia,serif;
+    --sans:"Inter",system-ui,-apple-system,sans-serif;
+
+    --maxw:1200px;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --ease-out:cubic-bezier(.16,1,.3,1);
+    --radius:20px;
+    --nav-h:76px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-weight:400;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  body.preload{overflow:hidden;height:100vh}
+  h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.02;letter-spacing:-.02em;font-optical-sizing:auto}
+  em{font-style:italic;font-family:var(--display)}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  ::selection{background:var(--orange);color:#fff}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.25rem,5vw,3rem)}
+  .eyebrow{
+    font-family:var(--sans);font-size:.72rem;font-weight:600;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--orange);
+    display:inline-flex;align-items:center;gap:.7em;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.6}
+  .eyebrow--center{justify-content:center}
+  .eyebrow--light{color:var(--amber)}
+
+  /* ---- Buttons ------------------------------------------------ */
+  .btn{
+    --bg:var(--orange);--fg:#fff;
+    position:relative;display:inline-flex;align-items:center;gap:.6em;
+    font-family:var(--sans);font-size:.8rem;font-weight:600;
+    letter-spacing:.06em;text-decoration:none;
+    padding:1.05em 2em;border-radius:100px;border:1.5px solid var(--bg);
+    background:var(--bg);color:var(--fg);cursor:pointer;overflow:hidden;
+    transition:transform .5s var(--ease),box-shadow .5s var(--ease),background .35s,color .35s,border-color .35s;
+    will-change:transform;isolation:isolate;
+  }
+  .btn span{position:relative;z-index:1;display:inline-flex;align-items:center;gap:.6em}
+  .btn::after{ /* wipe fill */
+    content:"";position:absolute;inset:0;z-index:0;background:var(--ink);
+    transform:translateY(101%);border-radius:100px;transition:transform .5s var(--ease);
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px -12px rgba(252,76,2,.55)}
+  .btn:hover::after{transform:translateY(0)}
+  .btn--solid{--bg:var(--orange);--fg:#fff}
+  .btn--solid:hover{color:#fff}
+  .btn--ghost{--bg:transparent;--fg:var(--ink);border-color:var(--line)}
+  .btn--ghost::after{background:var(--orange)}
+  .btn--ghost:hover{color:#fff;border-color:var(--orange);box-shadow:0 14px 30px -12px rgba(252,76,2,.4)}
+  .btn--light{--bg:transparent;--fg:#fff;border-color:rgba(255,255,255,.5)}
+  .btn--light::after{background:#fff}
+  .btn--light:hover{color:var(--char)}
+  .btn--gold{--bg:var(--amber);--fg:#20160a}
+  .btn--gold::after{background:var(--char)}
+  .btn--gold:hover{color:#fff}
+  .btn .arr{transition:transform .45s var(--ease)}
+  .btn:hover .arr{transform:translateX(4px)}
+
+  .magnetic{display:inline-block;will-change:transform}
+
+  /* ---- Scroll progress + preloader --------------------------- */
+  .scrollbar{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:0 50%;
+    background:linear-gradient(90deg,var(--amber),var(--orange));z-index:120;transition:transform .1s linear}
+
+  .loader{position:fixed;inset:0;z-index:200;background:var(--char);color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;
+    transition:opacity .7s var(--ease),visibility .7s}
+  .loader::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(120% 80% at 50% 120%,rgba(252,76,2,.5),transparent 60%);opacity:.9}
+  .loader.done{opacity:0;visibility:hidden}
+  .loader__mark{position:relative;font-family:var(--display);font-weight:600;font-size:clamp(2rem,7vw,3.4rem);
+    letter-spacing:.02em;overflow:hidden}
+  .loader__mark span{display:inline-block;transform:translateY(110%);animation:rise .8s var(--ease) forwards}
+  .loader__bar{position:relative;width:min(320px,60vw);height:2px;background:rgba(255,255,255,.16);overflow:hidden}
+  .loader__bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--amber),var(--orange));transform:scaleX(0);transform-origin:0 50%}
+  .loader__pct{position:relative;font-size:.72rem;letter-spacing:.3em;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums}
+  @keyframes rise{to{transform:translateY(0)}}
+
+  /* ---- Nav --------------------------------------------------- */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 clamp(1.25rem,5vw,3rem);
+    transition:background .4s var(--ease),box-shadow .4s var(--ease),backdrop-filter .4s,border-color .4s;
+    border-bottom:1px solid transparent}
+  .nav.scrolled{background:rgba(253,243,234,.82);backdrop-filter:saturate(1.4) blur(14px);
+    -webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom-color:var(--line);
+    box-shadow:0 6px 30px -20px rgba(40,25,12,.5)}
+  .brand{font-family:var(--display);font-weight:600;font-size:1.32rem;letter-spacing:.02em;
+    text-decoration:none;color:var(--ink);display:inline-flex;align-items:baseline;gap:.15em}
+  .brand b{color:var(--orange);font-weight:600}
+  .brand small{font-family:var(--sans);font-size:.5rem;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--ink-dim);font-weight:600;margin-left:.4em;transform:translateY(-.5em)}
+  .nav__links{display:flex;align-items:center;gap:2.2rem}
+  .nav__links a{font-size:.82rem;font-weight:500;text-decoration:none;color:var(--ink);position:relative;padding:.2em 0;letter-spacing:.01em}
+  .nav__links a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1.5px;background:var(--orange);
+    transform:scaleX(0);transform-origin:0 50%;transition:transform .4s var(--ease)}
+  .nav__links a:hover::after,.nav__links a.active::after{transform:scaleX(1)}
+  .nav__right{display:flex;align-items:center;gap:1rem}
+  .nav__cart{position:relative;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;
+    color:var(--ink);text-decoration:none;transition:background .3s}
+  .nav__cart:hover{background:rgba(40,25,12,.06)}
+  .nav__cart svg{width:20px;height:20px}
+  .nav__cart-count{position:absolute;top:2px;right:2px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;
+    background:var(--orange);color:#fff;font-family:var(--sans);font-size:.6rem;font-weight:600;
+    display:grid;place-items:center;transform:scale(0);transition:transform .3s var(--ease)}
+  .nav__cart-count.has-items{transform:scale(1)}
+  .nav__cta{padding:.75em 1.4em;font-size:.76rem}
+  .burger{display:none;flex-direction:column;gap:5px;width:42px;height:42px;border:0;background:none;cursor:pointer;
+    align-items:center;justify-content:center}
+  .burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .4s var(--ease),opacity .3s}
+  body.menu-open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  body.menu-open .burger span:nth-child(2){opacity:0}
+  body.menu-open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  .drawer{position:fixed;inset:0;z-index:95;background:var(--char);color:#fff;
+    display:flex;flex-direction:column;justify-content:center;gap:.2rem;padding:2rem clamp(1.5rem,8vw,4rem);
+    clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .7s var(--ease);pointer-events:none}
+  body.menu-open .drawer{clip-path:circle(150% at calc(100% - 40px) 40px);pointer-events:auto}
+  .drawer a{font-family:var(--display);font-size:clamp(2rem,9vw,3.6rem);font-weight:500;text-decoration:none;
+    color:#fff;padding:.15em 0;opacity:.35;transition:opacity .3s,color .3s,transform .3s;transform:translateX(0)}
+  .drawer a:hover{opacity:1;color:var(--orange);transform:translateX(10px)}
+  .drawer__foot{margin-top:2rem;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+  /* ---- Reveal utility ---------------------------------------- */
+  .reveal{opacity:0;transform:translateY(38px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal-sm{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal-sm.in{opacity:1;transform:none}
+  [data-stagger]>*{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  [data-stagger].in>*{opacity:1;transform:none}
+
+  /* line-by-line clip reveal for headings */
+  .lines .ln{display:block;overflow:hidden}
+  .lines .ln>span{display:block;transform:translateY(105%);transition:transform 1s var(--ease)}
+  .lines.in .ln>span{transform:translateY(0)}
+  .lines.in .ln:nth-child(2)>span{transition-delay:.09s}
+  .lines.in .ln:nth-child(3)>span{transition-delay:.18s}
+
+  /* ---- Hero -------------------------------------------------- */
+  .hero{position:relative;min-height:100vh;padding:calc(var(--nav-h) + 3vh) 0 4rem;display:flex;align-items:center;overflow:hidden}
+  .hero__glow{position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(58% 50% at 78% 18%,rgba(252,76,2,.16),transparent 60%),
+      radial-gradient(50% 40% at 12% 88%,rgba(226,148,31,.18),transparent 60%)}
+  .hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,4vw,4rem);align-items:center;width:100%}
+  .hero__eyebrow{margin-bottom:1.6rem}
+  .hero h1{font-size:clamp(3.1rem,8.5vw,7.2rem);font-weight:400;letter-spacing:-.03em;line-height:.94}
+  .hero h1 em{color:var(--orange);font-weight:500}
+  .hero__sub{max-width:34ch;margin:1.8rem 0 2.4rem;font-size:clamp(1.02rem,1.4vw,1.18rem);color:var(--ink-soft);line-height:1.65}
+  .hero__actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+  .hero__trust{margin-top:2rem;font-size:.78rem;letter-spacing:.04em;color:var(--ink-dim);display:flex;gap:.7em;flex-wrap:wrap;align-items:center}
+  .hero__trust b{color:var(--orange);font-weight:600}
+  .dot{width:4px;height:4px;border-radius:50%;background:var(--ink-dim);display:inline-block}
+
+  .hero__art{position:relative;height:min(72vh,620px)}
+  .hero__img{position:absolute;border-radius:var(--radius);overflow:hidden;box-shadow:0 40px 80px -40px rgba(40,25,12,.5)}
+  .hero__img img{width:100%;height:100%;object-fit:cover}
+  .hero__img--a{inset:0 18% 26% 0;z-index:2}
+  .hero__img--b{width:46%;height:44%;right:0;bottom:0;z-index:3;border:5px solid var(--bg)}
+  .hero__seal{position:absolute;top:-22px;right:8%;z-index:4;width:112px;height:112px;
+    display:grid;place-items:center;color:var(--char)}
+  .hero__seal svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 22s linear infinite}
+  .hero__seal b{font-family:var(--display);font-weight:600;font-size:1.5rem;color:var(--orange)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .hero__scroll{position:absolute;left:clamp(1.25rem,5vw,3rem);bottom:1.6rem;z-index:2;
+    display:flex;align-items:center;gap:.6em;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim)}
+  .hero__scroll i{width:22px;height:34px;border:1.5px solid var(--ink-dim);border-radius:12px;position:relative}
+  .hero__scroll i::after{content:"";position:absolute;top:5px;left:50%;width:3px;height:6px;border-radius:2px;background:var(--orange);
+    transform:translateX(-50%);animation:wheel 1.6s var(--ease) infinite}
+  @keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}70%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+
+  /* embers */
+  .embers{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .embers i{position:absolute;bottom:-10px;width:6px;height:6px;border-radius:50%;
+    background:radial-gradient(circle,var(--amber),var(--orange));opacity:0;
+    animation:ember linear infinite}
+  @keyframes ember{0%{opacity:0;transform:translateY(0) scale(.6)}15%{opacity:.9}100%{opacity:0;transform:translateY(-90vh) scale(1.1)}}
+
+  /* ---- Marquee ----------------------------------------------- */
+  .marquee{background:var(--orange);color:#fff;padding:1.1rem 0;overflow:hidden;position:relative;
+    border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15)}
+  .marquee__row{display:flex;gap:2.5rem;width:max-content;animation:slide 32s linear infinite}
+  .marquee:hover .marquee__row{animation-play-state:paused}
+  .marquee__row span{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);font-weight:500;font-style:italic;
+    white-space:nowrap;display:inline-flex;align-items:center;gap:2.5rem}
+  .marquee__row span::after{content:"✱";font-style:normal;font-size:.7em;color:rgba(255,255,255,.6)}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ---- Section shell ----------------------------------------- */
+  section{position:relative}
+  .pad{padding:clamp(5rem,11vw,9rem) 0}
+  .section-head{max-width:640px;margin:0 auto 4rem;text-align:center}
+  .section-head h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:400;margin-top:1rem}
+  .section-head h2 em{color:var(--orange)}
+  .section-head p{margin-top:1rem;color:var(--ink-soft);font-size:1.08rem}
+
+  /* ---- Story (pinned word reveal) ---------------------------- */
+  .story{background:var(--char);color:#fff}
+  .story__pin{min-height:100vh;display:flex;align-items:center;position:sticky;top:0;overflow:hidden}
+  .story__pin::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(70% 60% at 20% 30%,rgba(252,76,2,.16),transparent 55%)}
+  .story__inner{position:relative;z-index:2;max-width:960px;margin:0 auto;padding:6rem clamp(1.25rem,5vw,3rem)}
+  .story__eyebrow{color:var(--amber);margin-bottom:2rem}
+  .story__text{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,4.4vw,3.2rem);line-height:1.28;letter-spacing:-.015em}
+  .story__text .w{display:inline-block;opacity:.16;transition:opacity .35s var(--ease),color .35s}
+  .story__text .w.lit{opacity:1}
+  .story__text em{color:var(--orange)}
+  .story__foot{margin-top:2.6rem}
+
+  /* ---- Signature (Mega Quesito) ------------------------------ */
+  .sig{overflow:hidden}
+  .sig .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+  .sig__media{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 80px -45px rgba(40,25,12,.55)}
+  .sig__media img{width:100%;height:118%;object-fit:cover;will-change:transform}
+  .sig__badge{position:absolute;left:1.2rem;top:1.2rem;z-index:2;background:var(--orange);color:#fff;
+    font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.55em 1em;border-radius:100px}
+  .sig h2{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:400;margin:1.2rem 0 0}
+  .sig h2 em{color:var(--orange)}
+  .sig p{margin:1.4rem 0;color:var(--ink-soft);max-width:44ch;font-size:1.06rem}
+  .sig__meta{display:flex;align-items:center;gap:1.4rem;margin:1.8rem 0 2.2rem}
+  .sig__price{font-family:var(--display);font-size:2.4rem;font-weight:500;color:var(--ink)}
+  .sig__price small{font-size:.9rem;color:var(--ink-dim);font-family:var(--sans);letter-spacing:.1em;text-transform:uppercase}
+  .sig__actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+
+  /* ---- Interactive menu explorer ----------------------------- */
+  .explore{background:var(--bg-2)}
+  .explore__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+  .explore__preview{position:relative;aspect-ratio:5/6;border-radius:var(--radius);overflow:hidden;
+    box-shadow:0 40px 80px -50px rgba(40,25,12,.5);background:var(--char)}
+  .explore__preview figure{position:absolute;inset:0;opacity:0;transform:scale(1.06);transition:opacity .7s var(--ease),transform .9s var(--ease)}
+  .explore__preview figure.active{opacity:1;transform:scale(1)}
+  .explore__preview img{width:100%;height:100%;object-fit:cover}
+  .explore__preview figcaption{position:absolute;left:1.4rem;bottom:1.3rem;right:1.4rem;color:#fff;z-index:2}
+  .explore__preview figcaption b{display:block;font-family:var(--display);font-size:1.7rem;font-weight:500}
+  .explore__preview figcaption span{font-size:.82rem;color:rgba(255,255,255,.8)}
+  .explore__preview::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(20,17,9,.72),transparent 45%)}
+
+  .explore__list{list-style:none}
+  .explore__item{border-top:1px solid var(--line);cursor:pointer}
+  .explore__item:last-child{border-bottom:1px solid var(--line)}
+  .explore__btn{width:100%;background:none;border:0;text-align:left;cursor:pointer;color:var(--ink);
+    display:flex;align-items:center;gap:1.2rem;padding:1.5rem .4rem;transition:padding .4s var(--ease),color .3s}
+  .explore__item.active .explore__btn{padding-left:1.4rem;color:var(--orange)}
+  .explore__no{font-family:var(--sans);font-size:.72rem;font-weight:600;color:var(--ink-dim);letter-spacing:.1em;min-width:2ch}
+  .explore__item.active .explore__no{color:var(--orange)}
+  .explore__name{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:500;flex:1;letter-spacing:-.01em}
+  .explore__price{font-size:.86rem;color:var(--ink-soft);font-weight:500;white-space:nowrap}
+  .explore__arr{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;
+    transition:background .3s,border-color .3s,transform .4s var(--ease);flex:none}
+  .explore__item.active .explore__arr{background:var(--orange);border-color:var(--orange);color:#fff;transform:rotate(-45deg)}
+  .explore__foot{margin-top:2.4rem}
+
+  /* ---- Ritual (sticky stack) --------------------------------- */
+  .ritual{background:var(--char);color:#fff}
+  .ritual__head{text-align:center;margin-bottom:1rem}
+  .ritual__head h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:400;margin-top:1rem;color:#fff}
+  .ritual__head h2 em{color:var(--orange)}
+  .ritual__stack{position:relative}
+  .ritual__card{position:sticky;top:calc(var(--nav-h) + 4vh);
+    display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:var(--radius);overflow:hidden;
+    background:var(--char-2);border:1px solid var(--line-2);margin-bottom:2rem;min-height:min(66vh,520px)}
+  .ritual__card .txt{padding:clamp(2rem,4vw,3.5rem);display:flex;flex-direction:column;justify-content:center}
+  .ritual__no{font-family:var(--display);font-size:3.4rem;font-weight:300;color:var(--orange);line-height:1}
+  .ritual__card h3{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:400;margin:.6rem 0 1rem;color:#fff}
+  .ritual__card p{color:rgba(255,255,255,.72);max-width:38ch;font-size:1.04rem}
+  .ritual__card .pic{position:relative;overflow:hidden}
+  .ritual__card .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+  /* ---- Bestsellers (add to cart) ----------------------------- */
+  .best__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+  .prod{background:var(--surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+    display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+  .prod:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(40,25,12,.4)}
+  .prod__media{aspect-ratio:1;overflow:hidden}
+  .prod__media img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+  .prod:hover .prod__media img{transform:scale(1.07)}
+  .prod__body{padding:1.3rem 1.3rem 1.5rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
+  .prod__body h3{font-size:1.35rem;font-weight:500}
+  .prod__body p{font-size:.85rem;color:var(--ink-soft);flex:1}
+  .prod__row{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem}
+  .prod__price{font-family:var(--display);font-size:1.4rem;font-weight:500}
+  .add{border:0;cursor:pointer;background:var(--ink);color:#fff;width:42px;height:42px;border-radius:50%;
+    display:grid;place-items:center;font-size:1.2rem;transition:background .3s,transform .4s var(--ease)}
+  .add:hover{background:var(--orange);transform:rotate(90deg) scale(1.06)}
+  .add.added{background:#2e7d32;transform:none}
+
+  /* ---- Pane e Pasta ------------------------------------------ */
+  .pane{background:var(--char-2);color:#fff;overflow:hidden}
+  .pane .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+  .pane__media{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 90px -50px #000}
+  .pane__media img{width:100%;height:114%;object-fit:cover;will-change:transform}
+  .pane__logo{width:min(240px,60%);margin-bottom:1.4rem;filter:brightness(0) invert(1)}
+  .pane h2{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:400;color:#fff;margin-bottom:1.2rem}
+  .pane h2 em{color:var(--amber)}
+  .pane__lead{color:rgba(255,255,255,.72);max-width:46ch;margin-bottom:2rem;font-size:1.05rem}
+  .pane__dishes{list-style:none;margin-bottom:2rem;border-top:1px solid var(--line-2)}
+  .pane__dishes li{display:flex;align-items:baseline;gap:.8rem;padding:.85rem 0;border-bottom:1px solid var(--line-2)}
+  .pane__dishes span{font-family:var(--display);font-size:1.15rem}
+  .pane__dishes i{flex:1;border-bottom:1px dotted rgba(255,255,255,.28);transform:translateY(-.25em)}
+  .pane__dishes b{font-weight:500;color:var(--amber);font-family:var(--display);font-size:1.15rem}
+  .pane__hours{font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:1.6rem;letter-spacing:.02em}
+
+  /* ---- Order CTA band ---------------------------------------- */
+  .cta{background:var(--orange);color:#fff;text-align:center;overflow:hidden;position:relative}
+  .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 50% 120%,rgba(0,0,0,.22),transparent 60%)}
+  .cta .wrap{position:relative;z-index:2}
+  .cta h2{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:400}
+  .cta h2 em{font-style:italic}
+  .cta p{max-width:42ch;margin:1.2rem auto 2.4rem;color:rgba(255,255,255,.9);font-size:1.1rem}
+  .cta__trust{margin-top:1.6rem;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+  .cta .embers i{background:radial-gradient(circle,#fff,var(--amber))}
+
+  /* ---- Reviews ----------------------------------------------- */
+  .reviews{overflow:hidden}
+  .reviews__track{display:flex;gap:1.5rem;width:max-content;animation:slide 40s linear infinite}
+  .reviews:hover .reviews__track{animation-play-state:paused}
+  .quote{width:min(400px,80vw);flex:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:2.2rem;display:flex;flex-direction:column;gap:1.2rem}
+  .quote__stars{color:var(--amber);letter-spacing:.15em;font-size:.9rem}
+  .quote blockquote{font-family:var(--display);font-size:1.25rem;line-height:1.4;font-weight:400}
+  .quote figcaption{font-size:.8rem;color:var(--ink-dim);letter-spacing:.06em;text-transform:uppercase;margin-top:auto}
+
+  /* ---- FAQ --------------------------------------------------- */
+  .faq__list{max-width:760px;margin:0 auto}
+  .faq__item{border-top:1px solid var(--line)}
+  .faq__item:last-child{border-bottom:1px solid var(--line)}
+  .faq__q{width:100%;background:none;border:0;cursor:pointer;text-align:left;color:var(--ink);
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.6rem .2rem;
+    font-family:var(--display);font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:500}
+  .faq__ico{position:relative;flex:none;width:26px;height:26px}
+  .faq__ico::before,.faq__ico::after{content:"";position:absolute;top:50%;left:50%;width:14px;height:2px;background:var(--orange);
+    transform:translate(-50%,-50%);transition:transform .4s var(--ease)}
+  .faq__ico::after{transform:translate(-50%,-50%) rotate(90deg)}
+  .faq__item.open .faq__ico::after{transform:translate(-50%,-50%) rotate(0)}
+  .faq__a{overflow:hidden;height:0;transition:height .45s var(--ease)}
+  .faq__a p{padding:0 .2rem 1.6rem;color:var(--ink-soft);max-width:62ch}
+  .faq__a a{color:var(--orange);text-decoration:underline;text-underline-offset:3px}
+
+  /* ---- Footer ------------------------------------------------ */
+  .footer{background:var(--char);color:#fff;padding:clamp(4rem,8vw,6rem) 0 2.5rem}
+  .footer__top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:3rem;border-bottom:1px solid var(--line-2)}
+  .footer__brand .brand{color:#fff;font-size:1.8rem}
+  .footer__brand .brand small{color:rgba(255,255,255,.4)}
+  .footer__tag{margin-top:1rem;color:rgba(255,255,255,.6);max-width:30ch;font-family:var(--display);font-style:italic;font-size:1.15rem}
+  .footer__col h4{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:1.1rem}
+  .footer__col a,.footer__col p{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:.92rem;
+    padding:.28rem 0;transition:color .3s}
+  .footer__col a:hover{color:var(--orange)}
+  .footer__bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding-top:2rem}
+  .footer__copy{font-size:.8rem;color:rgba(255,255,255,.45)}
+  .totop{background:none;border:1px solid var(--line-2);color:#fff;cursor:pointer;border-radius:100px;
+    padding:.6em 1.2em;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.6em;
+    transition:border-color .3s,color .3s}
+  .totop:hover{border-color:var(--orange);color:var(--orange)}
+
+  /* ---- Responsive -------------------------------------------- */
+  @media(max-width:920px){
+    .nav__links,.nav__cta{display:none}
+    .burger{display:flex}
+    .hero .wrap{grid-template-columns:1fr;gap:2.5rem}
+    .hero__art{height:min(56vh,440px);order:-1;margin-top:1rem}
+    .hero__sub{margin-inline:0}
+    .sig .wrap,.explore__grid,.pane .wrap{grid-template-columns:1fr}
+    .sig__media,.pane__media{aspect-ratio:4/3}
+    .explore__preview{display:none}
+    .ritual__card{grid-template-columns:1fr;min-height:0}
+    .ritual__card .pic{height:230px;order:-1}
+    .best__grid{grid-template-columns:repeat(2,1fr)}
+    .footer__top{grid-template-columns:1fr 1fr;gap:2rem}
+  }
+  @media(max-width:520px){
+    .best__grid{grid-template-columns:1fr}
+    .footer__top{grid-template-columns:1fr}
+    .hero__actions,.sig__actions{width:100%}
+    .btn{width:100%;justify-content:center}
+    .hero__seal{display:none}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .reveal,.reveal-sm,[data-stagger]>*,.lines .ln>span{opacity:1;transform:none}
+    .story__text .w{opacity:1}
+    .loader{display:none}
+    body.preload{overflow:auto;height:auto}
+  }
+  </style>
 </head>
-<body>
-  <!-- ░░ Navigation ░░ -->
-  <header class="nav nav--clear" id="top">
-    <a class="nav__brand" href="index.html" aria-label="Hornofino home">
-      <img class="nav__logo" src="assets/logo-white.png" alt="Hornofino — Pan · Café · Vino" />
-    </a>
+<body class="preload">
+
+  <!-- ░░ Scroll progress ░░ -->
+  <div class="scrollbar" id="scrollbar"></div>
+
+  <!-- ░░ Preloader ░░ -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__mark"><span>HORNOFINO</span></div>
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+    <div class="loader__pct"><span id="loaderPct">0</span>%</div>
+  </div>
+
+  <!-- ░░ Nav ░░ -->
+  <header class="nav" id="nav">
+    <a class="brand" href="index.html" aria-label="Hornofino home">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="index.html" class="is-active" aria-current="page">Home</a>
+      <a href="index.html" class="active" aria-current="page">Home</a>
       <a href="menu.html">Menu</a>
+      <a href="pane-e-pasta.html">Trattoria</a>
       <a href="about.html">Our Story</a>
       <a href="locations.html">Locations</a>
       <a href="contact.html">Contact</a>
-      <a href="contact.html#order" class="nav__order-mobile">Order Online</a>
     </nav>
-    <a class="btn btn--ghost nav__cta" href="contact.html#order">Order Online</a>
-    <a class="nav__cart" href="cart.html" aria-label="View basket">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
-      <span class="nav__cart-count" data-cart-count>0</span>
-    </a>
-
-    <button class="nav__burger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav__right">
+      <a class="nav__cart" href="cart.html" aria-label="View basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="nav__cart-count" data-cart-count>0</span>
+      </a>
+      <span class="magnetic"><a class="btn btn--solid nav__cta" href="contact.html#order"><span>Order Online</span></a></span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </header>
 
-  <!-- ░░ 3D Atlas hero — scroll orbits the camera; menu placeholders ring the globe ░░ -->
-  <section class="atlas" id="atlas">
-    <div class="atlas__sticky">
-      <canvas id="atlasCanvas" aria-hidden="true"></canvas>
-      <div class="atlas__hero" id="atlasHero">
-        <p class="eyebrow eyebrow--light">Φούρνος · Artisan Bakery &amp; Café · San Juan, Puerto Rico</p>
-        <h1 class="atlas__title">Bread born of<br /><em>fire &amp; the Aegean</em></h1>
-        <p class="atlas__sub">
-          Pan sobao at dawn, molten quesitos, café made the slow way —
-          baked in San Juan, sold the same day. Never the next.
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--solid" href="contact.html#order">Order Fresh Today</a>
-          <a class="btn btn--line btn--light" href="menu.html">See the Morning Bake</a>
+  <!-- ░░ Mobile drawer ░░ -->
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="pane-e-pasta.html">Trattoria</a>
+    <a href="about.html">Our Story</a>
+    <a href="locations.html">Locations</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html#order" style="color:var(--orange);opacity:1">Order Online →</a>
+    <p class="drawer__foot">Open daily · 6:00 – 19:00 · San Juan, PR</p>
+  </nav>
+
+  <!-- ░░ Hero ░░ -->
+  <section class="hero" id="home">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="embers" id="embers" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero__copy">
+        <p class="eyebrow hero__eyebrow reveal-sm">Artisan Bakery &amp; Café · San Juan, Puerto Rico</p>
+        <h1 class="lines" data-reveal><span class="ln"><span>Bread born</span></span><span class="ln"><span>of <em>fire</em>, baked</span></span><span class="ln"><span>at <em>dawn</em>.</span></span></h1>
+        <p class="hero__sub reveal-sm">Pan sobao at first light, molten quesitos, café made the slow way — baked in San Juan and sold the same day. Never the next.</p>
+        <div class="hero__actions reveal-sm">
+          <span class="magnetic"><a class="btn btn--solid" href="contact.html#order"><span>Order Fresh Today <span class="arr">→</span></span></a></span>
+          <span class="magnetic"><a class="btn btn--ghost" href="menu.html"><span>Explore the Menu</span></a></span>
         </div>
-        <p class="hero__trust">Open daily 6:00 – 19:00 · Three bakeries · Pickup &amp; delivery</p>
+        <p class="hero__trust reveal-sm"><b>Open daily 6–7</b><i class="dot"></i>Three bakeries<i class="dot"></i>Pickup &amp; delivery</p>
       </div>
-      <div class="atlas__overlay">
-        <h2 id="atlasLabel"></h2>
-        <p class="atlas__hint" id="atlasHint">Drag to spin · scroll to orbit</p>
+      <div class="hero__art" data-parallax-group>
+        <div class="hero__img hero__img--a" data-parallax="-24"><img src="assets/menu-hf/mega-quesito.jpg" alt="Molten Mega Quesito fresh from the Hornofino oven" /></div>
+        <div class="hero__img hero__img--b" data-parallax="36"><img src="assets/menu-hf/panes.jpg" alt="Pan de agua and pan sobao, warm from the morning bake" /></div>
+        <div class="hero__seal" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><defs><path id="c" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <text fill="var(--ink)" font-family="Inter" font-size="9.5" font-weight="600" letter-spacing="3.4"><textPath href="#c" startOffset="0">· BAKED DAILY · SAME DAY FRESH </textPath></text></svg>
+          <b>H</b>
+        </div>
       </div>
     </div>
+    <div class="hero__scroll" aria-hidden="true"><i></i>Scroll</div>
   </section>
 
   <!-- ░░ Marquee ░░ -->
   <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Καλημέρα</span><span>·</span><span>Baked Daily</span><span>·</span>
-      <span>Stone Oven</span><span>·</span><span>Sourdough</span><span>·</span>
-      <span>Φιλοξενία</span><span>·</span><span>Mediterranean</span><span>·</span>
-      <span>Καλημέρα</span><span>·</span><span>Baked Daily</span><span>·</span>
-      <span>Stone Oven</span><span>·</span><span>Sourdough</span><span>·</span>
-      <span>Φιλοξενία</span><span>·</span><span>Mediterranean</span><span>·</span>
+    <div class="marquee__row" id="marquee">
+      <span>Recién horneado</span><span>Pan de agua</span><span>Quesitos</span><span>Café con leche</span><span>Mallorcas</span><span>Horno de piedra</span>
+      <span>Recién horneado</span><span>Pan de agua</span><span>Quesitos</span><span>Café con leche</span><span>Mallorcas</span><span>Horno de piedra</span>
     </div>
   </div>
 
-  <!-- ░░ Menu Journey — the globe presents each main item at a waypoint ░░ -->
-  <section class="mjourney" id="mjourney">
-    <div class="mjourney__pin">
-      <p class="mjourney__eyebrow">Φ · Carried by Atlas</p>
-      <div class="mj-globe" aria-hidden="true"></div>
+  <!-- ░░ Story — pinned word reveal ░░ -->
+  <section class="story" id="story">
+    <div class="story__pin">
+      <div class="story__inner">
+        <p class="eyebrow story__eyebrow">Why we bake</p>
+        <p class="story__text" data-words>The crust cracks before you even taste it. Steam rises — wheat, salt, five in the morning. Warm enough that the butter gives up halfway. <em>Baked for the pleasure of it. Gone by sundown.</em></p>
+        <div class="story__foot"><span class="magnetic"><a class="btn btn--light" href="about.html"><span>Read our story <span class="arr">→</span></span></a></span></div>
+      </div>
+    </div>
+  </section>
 
-      <div class="mj-cards">
-        <article class="mj-item" data-waypoint="Mega Quesito">
-          <div class="mj-item__media"><img src="assets/menu-hf/mega-quesito.jpg" alt="Mega Quesito in its box" loading="lazy" /></div>
-          <div class="mj-item__body">
-            <span class="mj-item__no">01</span>
-            <h3>Mega Quesito</h3>
-            <p>The box barely closes. Molten quesito made for the whole table — guayaba and Nutella included.</p>
-            <span class="mj-item__price">from $16.95</span>
-          </div>
+  <!-- ░░ Signature — Mega Quesito ░░ -->
+  <section class="sig pad">
+    <div class="wrap">
+      <div class="sig__media reveal">
+        <span class="sig__badge">The one everyone shares</span>
+        <img src="assets/menu-hf/mega-caja.jpg" alt="The Mega Quesito — an oversized quesito that barely fits its box" data-parallax="-30" />
+      </div>
+      <div class="sig__copy">
+        <p class="eyebrow reveal-sm">Signature</p>
+        <h2 class="reveal-sm">The <em>Mega Quesito</em></h2>
+        <p class="reveal-sm">The box barely closes. A molten quesito built for the whole table — flaky, blistered, and pulled apart while it's still warm. Guayaba and Nutella included, because someone always asks.</p>
+        <div class="sig__meta reveal-sm">
+          <span class="sig__price">$16.95 <small>/ shareable</small></span>
+        </div>
+        <div class="sig__actions reveal-sm">
+          <button class="btn btn--solid" data-add-to-cart data-name="Mega Quesito" data-price="16.95"><span>Add to Basket <span class="arr">＋</span></span></button>
+          <span class="magnetic"><a class="btn btn--ghost" href="menu.html"><span>See the full menu</span></a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ Interactive menu explorer ░░ -->
+  <section class="explore pad" id="explore">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">From the oven</p>
+        <h2>Hover to <em>taste the counter</em></h2>
+        <p>Six things we bake every morning. Point at one — the case fills in.</p>
+      </div>
+      <div class="explore__grid">
+        <div class="explore__preview" id="preview" aria-hidden="true">
+          <figure class="active" data-key="panes"><img src="assets/menu-hf/panes.jpg" alt="Pan de agua and pan sobao" /><figcaption><b>Panes</b><span>Pan de agua, pan sobao, mallorcas &amp; croissants — warm from the morning bake.</span></figcaption></figure>
+          <figure data-key="sandwiches"><img src="assets/menu-hf/sandwiches.jpg" alt="Pressed sandwich with fries" /><figcaption><b>Sandwiches</b><span>Tripleta, cubano, media noche — on bread baked this morning.</span></figcaption></figure>
+          <figure data-key="reposteria"><img src="assets/menu-hf/reposteria.jpg" alt="Quesitos, flanes and sweet pastries" /><figcaption><b>Repostería</b><span>Quesitos, tres leches, flanes and donas — the sweet case empties from the front.</span></figcaption></figure>
+          <figure data-key="desayuno"><img src="assets/menu-hf/desayuno.jpg" alt="Breakfast plate with eggs and toast" /><figcaption><b>Desayuno</b><span>Eggs any way, with tostadas on the bread of your choice.</span></figcaption></figure>
+          <figure data-key="pasteleria"><img src="assets/menu-hf/pasteleria.jpg" alt="Croquetas and pastelillos" /><figcaption><b>Pastelería</b><span>Croquetas, pastelillos, sorullos — golden, crisp, dangerous by the dozen.</span></figcaption></figure>
+          <figure data-key="sopas"><img src="assets/menu-hf/sopas.jpg" alt="Bowls of soup and crema" /><figcaption><b>Sopas &amp; Cremas</b><span>Slow pots and warm cremas — comfort by the bowl.</span></figcaption></figure>
+        </div>
+        <ul class="explore__list" id="exploreList">
+          <li class="explore__item active" data-key="panes"><button class="explore__btn"><span class="explore__no">01</span><span class="explore__name">Panes</span><span class="explore__price">from $1.25</span><span class="explore__arr">→</span></button></li>
+          <li class="explore__item" data-key="sandwiches"><button class="explore__btn"><span class="explore__no">02</span><span class="explore__name">Sandwiches</span><span class="explore__price">from $5.95</span><span class="explore__arr">→</span></button></li>
+          <li class="explore__item" data-key="reposteria"><button class="explore__btn"><span class="explore__no">03</span><span class="explore__name">Repostería</span><span class="explore__price">from $1.95</span><span class="explore__arr">→</span></button></li>
+          <li class="explore__item" data-key="desayuno"><button class="explore__btn"><span class="explore__no">04</span><span class="explore__name">Desayuno</span><span class="explore__price">from $8.95</span><span class="explore__arr">→</span></button></li>
+          <li class="explore__item" data-key="pasteleria"><button class="explore__btn"><span class="explore__no">05</span><span class="explore__name">Pastelería</span><span class="explore__price">from $1.95</span><span class="explore__arr">→</span></button></li>
+          <li class="explore__item" data-key="sopas"><button class="explore__btn"><span class="explore__no">06</span><span class="explore__name">Sopas &amp; Cremas</span><span class="explore__price">from $4.95</span><span class="explore__arr">→</span></button></li>
+        </ul>
+      </div>
+      <div class="explore__foot" style="text-align:center"><span class="magnetic"><a class="btn btn--solid" href="menu.html"><span>View the full menu <span class="arr">→</span></span></a></span></div>
+    </div>
+  </section>
+
+  <!-- ░░ Ritual — sticky stack ░░ -->
+  <section class="ritual pad" id="ritual">
+    <div class="wrap">
+      <div class="ritual__head">
+        <p class="eyebrow eyebrow--center eyebrow--light">The daily ritual</p>
+        <h2>Four acts, <em>every morning</em></h2>
+      </div>
+      <div class="ritual__stack">
+        <article class="ritual__card">
+          <div class="txt"><span class="ritual__no">I</span><h3>The fire</h3><p>The oven wakes before the roosters. By the time the city opens its eyes, the crust already has its color.</p></div>
+          <div class="pic"><img src="assets/menu-hf/panes.jpg" alt="Loaves in the oven" data-parallax="-18" /></div>
         </article>
-        <article class="mj-item" data-waypoint="Panes">
-          <div class="mj-item__media"><img src="assets/menu-hf/panes.jpg" alt="Pan de agua and pan sobao" loading="lazy" /></div>
-          <div class="mj-item__body">
-            <span class="mj-item__no">02</span>
-            <h3>Panes</h3>
-            <p>Pan de agua, pan sobao, mallorcas and croissants — warm from the morning bake.</p>
-            <span class="mj-item__price">from $1.25</span>
-          </div>
+        <article class="ritual__card">
+          <div class="txt"><span class="ritual__no">II</span><h3>The wait</h3><p>The dough takes the hours it asks for — never the ones we'd prefer. Patience is the only secret ingredient.</p></div>
+          <div class="pic"><img src="assets/menu-hf/tostadas.jpg" alt="Tostadas resting" data-parallax="-18" /></div>
         </article>
-        <article class="mj-item" data-waypoint="Pastelería">
-          <div class="mj-item__media"><img src="assets/menu-hf/pasteleria.jpg" alt="Croquetas and pastelillos" loading="lazy" /></div>
-          <div class="mj-item__body">
-            <span class="mj-item__no">03</span>
-            <h3>Pastelería</h3>
-            <p>Croquetas, pastelillos, sorullos and empanadillas — golden, crisp, and dangerous by the dozen.</p>
-            <span class="mj-item__price">from $1.95</span>
-          </div>
+        <article class="ritual__card">
+          <div class="txt"><span class="ritual__no">III</span><h3>The tear</h3><p>That first pull — the crackle, the steam, the cheese that won't let go. Nobody waits until they get home.</p></div>
+          <div class="pic"><img src="assets/menu-hf/mega-quesito.jpg" alt="Pulling apart a quesito" data-parallax="-18" /></div>
         </article>
-        <article class="mj-item" data-waypoint="Repostería">
-          <div class="mj-item__media"><img src="assets/menu-hf/reposteria.jpg" alt="Quesitos, flanes and donas" loading="lazy" /></div>
-          <div class="mj-item__body">
-            <span class="mj-item__no">04</span>
-            <h3>Repostería</h3>
-            <p>Quesitos, flanes, tres leches and donas — the sweet case empties from the front.</p>
-            <span class="mj-item__price">from $1.95</span>
-          </div>
-        </article>
-        <article class="mj-item" data-waypoint="Desayuno">
-          <div class="mj-item__media"><img src="assets/menu-hf/desayuno.jpg" alt="Breakfast plate with eggs and toast" loading="lazy" /></div>
-          <div class="mj-item__body">
-            <span class="mj-item__no">05</span>
-            <h3>Desayuno</h3>
-            <p>Eggs any way you like them, with tostadas on the bread of your choice.</p>
-            <span class="mj-item__price">from $8.95</span>
-          </div>
+        <article class="ritual__card">
+          <div class="txt"><span class="ritual__no">IV</span><h3>The table</h3><p>Bread is only bread until it's shared. The table is set — and you're already invited.</p></div>
+          <div class="pic"><img src="assets/menu-hf/bandejas.jpg" alt="Trays laid out to share" data-parallax="-18" /></div>
         </article>
       </div>
-
-      <nav class="mj-rail" aria-label="Jump to menu item">
-        <button class="mj-rail__dot" data-label="Mega Quesito"></button>
-        <button class="mj-rail__dot" data-label="Panes"></button>
-        <button class="mj-rail__dot" data-label="Pastelería"></button>
-        <button class="mj-rail__dot" data-label="Repostería"></button>
-        <button class="mj-rail__dot" data-label="Desayuno"></button>
-      </nav>
-
-      <a class="btn btn--line btn--light mjourney__cta" href="menu.html">See the full menu</a>
     </div>
   </section>
 
-  <!-- ░░ The feeling — pinned sensory sequence, scroll reveals each line ░░ -->
-  <section class="senses" id="senses">
-    <div class="senses__pin">
-      <p class="senses__eyebrow">Why we bake</p>
-      <div class="senses__stage">
-        <p class="senses__line">The crust <em>cracks</em> before you even taste it.</p>
-        <p class="senses__line">Steam rises — wheat, salt, <em>five in the morning</em>.</p>
-        <p class="senses__line">Warm enough that the butter <em>gives up halfway</em>.</p>
-        <p class="senses__line">Baked for the pleasure of the soul. <em>Gone by sundown.</em></p>
+  <!-- ░░ Bestsellers — add to cart ░░ -->
+  <section class="best pad" id="best">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">Straight to your basket</p>
+        <h2>Counter <em>favorites</em></h2>
+        <p>Tap the ＋ and it's in your basket. Same-day pickup or delivery across San Juan.</p>
       </div>
-      <div class="senses__embers" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <p class="senses__cta"><a class="btn btn--line btn--light" href="about.html">Read our story</a></p>
+      <div class="best__grid" data-stagger>
+        <article class="prod">
+          <div class="prod__media"><img src="assets/menu-hf/mega-quesito.jpg" alt="Mega Quesito" loading="lazy" /></div>
+          <div class="prod__body"><h3>Mega Quesito</h3><p>Molten, shareable, guayaba &amp; Nutella included.</p>
+            <div class="prod__row"><span class="prod__price">$16.95</span><button class="add" data-add-to-cart data-name="Mega Quesito" data-price="16.95" aria-label="Add Mega Quesito">＋</button></div></div>
+        </article>
+        <article class="prod">
+          <div class="prod__media"><img src="assets/menu-hf/reposteria.jpg" alt="Quesito" loading="lazy" /></div>
+          <div class="prod__body"><h3>Quesito</h3><p>Flaky, blistered, filled the classic way.</p>
+            <div class="prod__row"><span class="prod__price">$1.95</span><button class="add" data-add-to-cart data-name="Quesito" data-price="1.95" aria-label="Add Quesito">＋</button></div></div>
+        </article>
+        <article class="prod">
+          <div class="prod__media"><img src="assets/menu-hf/pasteleria.jpg" alt="Pastelillos" loading="lazy" /></div>
+          <div class="prod__body"><h3>Pastelillos</h3><p>Golden, crisp, dangerous by the dozen.</p>
+            <div class="prod__row"><span class="prod__price">$1.95</span><button class="add" data-add-to-cart data-name="Pastelillos" data-price="1.95" aria-label="Add Pastelillos">＋</button></div></div>
+        </article>
+        <article class="prod">
+          <div class="prod__media"><img src="assets/menu-hf/desayuno.jpg" alt="Desayuno criollo" loading="lazy" /></div>
+          <div class="prod__body"><h3>Desayuno Criollo</h3><p>Eggs your way with tostadas on our bread.</p>
+            <div class="prod__row"><span class="prod__price">$8.95</span><button class="add" data-add-to-cart data-name="Desayuno Criollo" data-price="8.95" aria-label="Add Desayuno Criollo">＋</button></div></div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <!-- ░░ The ritual — four acts, hover/tap to lean in ░░ -->
-  <section class="ritual" id="ritual">
-    <header class="section-head">
-      <p class="eyebrow">The daily ritual</p>
-      <h2>Four acts, every morning</h2>
-    </header>
-    <div class="ritual__row">
-      <article class="ritual__act" style="--act-img:url('assets/menu-hf/panes.jpg')" tabindex="0">
-        <div class="ritual__veil" aria-hidden="true"></div>
-        <div class="ritual__body">
-          <span class="ritual__no">I</span>
-          <h3>The fire</h3>
-          <p>The oven wakes before the roosters. By the time the city opens its eyes, the crust already has its color.</p>
+  <!-- ░░ Pane e Pasta ░░ -->
+  <section class="pane pad" id="pane-e-pasta">
+    <div class="wrap">
+      <div class="pane__media reveal"><img src="assets/menu-hf/pane-e-pasta.jpg" alt="A plated dish at Pane e Pasta" data-parallax="-30" /></div>
+      <div class="pane__copy">
+        <img class="pane__logo reveal-sm" src="assets/menu-hf/pane-e-pasta-logo.png" alt="Pane e Pasta" loading="lazy" />
+        <p class="eyebrow eyebrow--light reveal-sm">Fine dining · by Hornofino</p>
+        <h2 class="reveal-sm">When the ovens rest, the kitchen turns <em>Italian</em></h2>
+        <p class="pane__lead reveal-sm">Our fine-dining table — Italian cooking built on the same bread, the same fire, the same welcome. Fresh pasta, carpaccio, risotto, and a wine list that takes its time.</p>
+        <ul class="pane__dishes reveal-sm">
+          <li><span>Pulpo alla Griglia</span><i></i><b>$23</b></li>
+          <li><span>Risotto Camarone</span><i></i><b>$26</b></li>
+          <li><span>Tagliata di Manzo</span><i></i><b>$39</b></li>
+          <li><span>Filetto di Manzo al Vino Rosso</span><i></i><b>$45</b></li>
+        </ul>
+        <p class="pane__hours reveal-sm">Mon–Fri 10:00–22:00 · Sat 8:00–22:00 · Sun 8:00–19:00 · Reservations by phone</p>
+        <div class="hero__actions reveal-sm">
+          <span class="magnetic"><a class="btn btn--gold" href="pane-e-pasta.html"><span>Explore the Trattoria <span class="arr">→</span></span></a></span>
+          <span class="magnetic"><a class="btn btn--light" href="https://hornofinoapolo.wixsite.com/pane-e-pasta" target="_blank" rel="noopener"><span>Reserve a Table</span></a></span>
         </div>
-      </article>
-      <article class="ritual__act" style="--act-img:url('assets/menu-hf/tostadas.jpg')" tabindex="0">
-        <div class="ritual__veil" aria-hidden="true"></div>
-        <div class="ritual__body">
-          <span class="ritual__no">II</span>
-          <h3>The wait</h3>
-          <p>The dough takes the hours it asks for — never the ones we'd prefer. Patience is the only secret ingredient.</p>
-        </div>
-      </article>
-      <article class="ritual__act" style="--act-img:url('assets/menu-hf/mega-quesito.jpg')" tabindex="0">
-        <div class="ritual__veil" aria-hidden="true"></div>
-        <div class="ritual__body">
-          <span class="ritual__no">III</span>
-          <h3>The tear</h3>
-          <p>That first pull — the crackle, the steam, the cheese that won't let go. Nobody waits until they get home.</p>
-        </div>
-      </article>
-      <article class="ritual__act" style="--act-img:url('assets/menu-hf/bandejas.jpg')" tabindex="0">
-        <div class="ritual__veil" aria-hidden="true"></div>
-        <div class="ritual__body">
-          <span class="ritual__no">IV</span>
-          <h3>The table</h3>
-          <p>Bread is only bread until it's shared. Φιλοξενία — the table is set, and you're already invited.</p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ░░ Menu teaser ░░ -->
-  <section class="menu" id="menu">
-    <header class="section-head">
-      <p class="eyebrow">The Menu</p>
-      <h2>From the oven, with care</h2>
-      <p class="section-head__sub">A small, seasonal selection — made fresh, sold the same day.</p>
-    </header>
-
-    <div class="menu__grid">
-      <article class="card" data-waypoint="Panes · from $1.25">
-        <div class="card__media card__media--cover"><img src="assets/menu-hf/panes.jpg" alt="Pan de agua and pan sobao loaves" loading="lazy" /></div>
-        <div class="card__body">
-          <h3>Panes</h3>
-          <p>Pan de agua, pan sobao, mallorcas, croissants — by the pound or the panecillo.</p>
-          <span class="card__price">from $1.25</span>
-        </div>
-      </article>
-      <article class="card" data-waypoint="Sandwiches · from $5.95">
-        <div class="card__media card__media--cover"><img src="assets/menu-hf/sandwiches.jpg" alt="Pressed sandwich with fries" loading="lazy" /></div>
-        <div class="card__body">
-          <h3>Sandwiches</h3>
-          <p>Bocadillos, tripleta, cubano, media noche — on bread baked this morning.</p>
-          <span class="card__price">from $5.95</span>
-        </div>
-      </article>
-      <article class="card" data-waypoint="Repostería · from $1.95">
-        <div class="card__media card__media--cover"><img src="assets/menu-hf/reposteria.jpg" alt="Quesitos and sweet pastries" loading="lazy" /></div>
-        <div class="card__body">
-          <h3>Repostería</h3>
-          <p>Quesitos, tres leches, flanes, donas and mallorcas glaceadas — by the piece.</p>
-          <span class="card__price">from $1.95</span>
-        </div>
-      </article>
-    </div>
-    <p style="text-align:center;margin-top:2.5rem"><a class="btn btn--solid" href="menu.html">View the full menu</a></p>
-  </section>
-
-  <!-- ░░ Pane e Pasta — fine dining ░░ -->
-  <section class="pane" id="pane-e-pasta">
-    <div class="pane__media" aria-hidden="true">
-      <img src="assets/menu-hf/pane-e-pasta.jpg" alt="" loading="lazy" />
-    </div>
-    <div class="pane__body">
-      <img class="pane__logo" src="assets/menu-hf/pane-e-pasta-logo.png" alt="Pane e Pasta" loading="lazy" />
-      <p class="eyebrow eyebrow--pane">Fine dining · by Hornofino</p>
-      <h2>When the ovens rest, the kitchen turns Italian</h2>
-      <p class="pane__lead">
-        Pane e Pasta is our fine-dining table — Italian cooking built on the
-        same bread, the same fire, and the same welcome. Fresh pasta, carpaccio,
-        risotto, and a wine list that takes its time.
-      </p>
-      <ul class="pane__dishes">
-        <li><span>Pulpo alla Griglia</span><i></i><b>$23</b></li>
-        <li><span>Risotto Camarone</span><i></i><b>$26</b></li>
-        <li><span>Tagliata di Manzo</span><i></i><b>$39</b></li>
-        <li><span>Filetto di Manzo al Vino Rosso</span><i></i><b>$45</b></li>
-      </ul>
-      <p class="pane__hours">Mon – Fri 10:00 – 22:00 · Sat 8:00 – 22:00 · Sun 8:00 – 19:00<br />Reservations confirmed by phone</p>
-      <a class="btn btn--gold" href="https://hornofinoapolo.wixsite.com/pane-e-pasta" target="_blank" rel="noopener">Reserve a Table</a>
+      </div>
     </div>
   </section>
 
   <!-- ░░ Order CTA ░░ -->
-  <section class="order" id="order">
-    <div class="meander-rule meander-rule--light" aria-hidden="true"></div>
-    <div class="order__inner" data-waypoint="Order Online">
-      <p class="eyebrow eyebrow--light">Online Ordering</p>
-      <h2>The oven is already lit</h2>
-      <p>Order for same-day pickup at any of our three bakeries, or delivery to your door across San Juan.</p>
-      <a class="btn btn--solid btn--gold" href="contact.html#order">Start an Order</a>
-      <p class="order__trust">Same-day fresh · Pickup or delivery · Catering welcome</p>
+  <section class="cta pad" id="order">
+    <div class="embers" id="embers2" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="eyebrow eyebrow--center reveal-sm" style="color:rgba(255,255,255,.8)">Online ordering</p>
+      <h2 class="reveal-sm">The oven is <em>already lit</em></h2>
+      <p class="reveal-sm">Order for same-day pickup at any of our three bakeries, or delivery to your door across San Juan.</p>
+      <span class="magnetic reveal-sm"><a class="btn btn--light" href="contact.html#order"><span>Start an Order <span class="arr">→</span></span></a></span>
+      <p class="cta__trust reveal-sm">Same-day fresh · Pickup or delivery · Catering welcome</p>
     </div>
   </section>
 
   <!-- ░░ Reviews ░░ -->
-  <section class="reviews" id="reviews">
-    <header class="section-head">
-      <p class="eyebrow">From the counter</p>
-      <h2>Kind words</h2>
-    </header>
-    <div class="reviews__grid">
-      <figure class="quote" data-waypoint="Elena loves the koulouri">
-        <blockquote>“The koulouri tastes like a morning in Thessaloniki. I'm hooked.”</blockquote>
-        <figcaption>— Elena P.</figcaption>
-      </figure>
-      <figure class="quote" data-waypoint="Marcus is a regular">
-        <blockquote>“Simple, beautiful, and the bread is unreal. My new daily stop.”</blockquote>
-        <figcaption>— Marcus T.</figcaption>
-      </figure>
-      <figure class="quote" data-waypoint="Pure φιλοξενία">
-        <blockquote>“Feels like being welcomed into someone's home. Pure φιλοξενία.”</blockquote>
-        <figcaption>— Sofia R.</figcaption>
-      </figure>
+  <section class="reviews pad" id="reviews">
+    <div class="section-head">
+      <p class="eyebrow eyebrow--center">From the counter</p>
+      <h2>Kind <em>words</em></h2>
+    </div>
+    <div class="reviews__track">
+      <figure class="quote"><div class="quote__stars">★★★★★</div><blockquote>“The bread is unreal — simple, beautiful, and always warm. My new daily stop.”</blockquote><figcaption>— Marcus T.</figcaption></figure>
+      <figure class="quote"><div class="quote__stars">★★★★★</div><blockquote>“That Mega Quesito disappeared before it hit the table. Order two.”</blockquote><figcaption>— Elena P.</figcaption></figure>
+      <figure class="quote"><div class="quote__stars">★★★★★</div><blockquote>“Feels like being welcomed into someone's home. Café, pan, and a real hello.”</blockquote><figcaption>— Sofía R.</figcaption></figure>
+      <figure class="quote"><div class="quote__stars">★★★★★</div><blockquote>“Get there early. The good stuff sells out and now I understand why.”</blockquote><figcaption>— Diego M.</figcaption></figure>
+      <figure class="quote" aria-hidden="true"><div class="quote__stars">★★★★★</div><blockquote>“The bread is unreal — simple, beautiful, and always warm. My new daily stop.”</blockquote><figcaption>— Marcus T.</figcaption></figure>
+      <figure class="quote" aria-hidden="true"><div class="quote__stars">★★★★★</div><blockquote>“That Mega Quesito disappeared before it hit the table. Order two.”</blockquote><figcaption>— Elena P.</figcaption></figure>
+      <figure class="quote" aria-hidden="true"><div class="quote__stars">★★★★★</div><blockquote>“Feels like being welcomed into someone's home. Café, pan, and a real hello.”</blockquote><figcaption>— Sofía R.</figcaption></figure>
+      <figure class="quote" aria-hidden="true"><div class="quote__stars">★★★★★</div><blockquote>“Get there early. The good stuff sells out and now I understand why.”</blockquote><figcaption>— Diego M.</figcaption></figure>
     </div>
   </section>
 
-  <!-- ░░ FAQ — mirrors the FAQPage structured data above ░░ -->
-  <section class="faq" id="faq">
-    <header class="section-head">
-      <p class="eyebrow">Good to know</p>
-      <h2>Questions, answered</h2>
-    </header>
-    <details class="faq__item">
-      <summary>Where is Hornofino located?</summary>
-      <p>We're an artisan bakery and café in San Juan, Puerto Rico, baking fresh bread and pastries daily — find every address on the <a href="locations.html">locations page</a>.</p>
-    </details>
-    <details class="faq__item">
-      <summary>What do you bake?</summary>
-      <p>Pan de agua, pan sobao, mallorcas, quesitos, croquetas, donas, flanes and full breakfast plates — all made from scratch, every day. There's also a fine-dining side: <a href="#pane-e-pasta">Pane e Pasta</a>.</p>
-    </details>
-    <details class="faq__item">
-      <summary>What are your hours?</summary>
-      <p>Open daily from 6:00 AM to 7:00 PM. Bread is out of the oven by 7:00; pastries follow through the morning. Favorites sell out — come early.</p>
-    </details>
-    <details class="faq__item">
-      <summary>Do you offer pickup and delivery?</summary>
-      <p>Yes. Order online for same-day pickup at any bakery, or delivery within the San Juan area. For catering and large orders, <a href="contact.html">reach out</a> and we'll take it from there.</p>
-    </details>
-    <p class="faq__cta"><a class="btn btn--solid" href="contact.html#order">Order Online</a></p>
+  <!-- ░░ FAQ ░░ -->
+  <section class="faq pad" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow eyebrow--center">Good to know</p>
+        <h2>Questions, <em>answered</em></h2>
+      </div>
+      <div class="faq__list" id="faqList">
+        <div class="faq__item"><button class="faq__q">Where is Hornofino located?<span class="faq__ico"></span></button><div class="faq__a"><p>We're an artisan bakery and café in San Juan, Puerto Rico, baking fresh bread and pastries daily — find every address on the <a href="locations.html">locations page</a>.</p></div></div>
+        <div class="faq__item"><button class="faq__q">What do you bake?<span class="faq__ico"></span></button><div class="faq__a"><p>Pan de agua, pan sobao, mallorcas, quesitos, croquetas, donas, flanes and full breakfast plates — all made from scratch, every day. There's also a fine-dining side: <a href="#pane-e-pasta">Pane e Pasta</a>.</p></div></div>
+        <div class="faq__item"><button class="faq__q">What are your hours?<span class="faq__ico"></span></button><div class="faq__a"><p>Open daily from 6:00 AM to 7:00 PM. Bread is out of the oven by 7:00; pastries follow through the morning. Favorites sell out — come early.</p></div></div>
+        <div class="faq__item"><button class="faq__q">Do you offer pickup and delivery?<span class="faq__ico"></span></button><div class="faq__a"><p>Yes. Order online for same-day pickup at any bakery, or delivery within the San Juan area. For catering and large orders, <a href="contact.html">reach out</a> and we'll take it from there.</p></div></div>
+      </div>
+    </div>
   </section>
 
   <!-- ░░ Footer ░░ -->
   <footer class="footer">
-    <div class="footer__top">
-      <div class="footer__brand" data-waypoint="Φούρνος · The end of the flight">
-        <img class="footer__logo" src="assets/logo-white.png" alt="Hornofino — Pan · Café · Vino" />
-        <p class="footer__tag">Bread born of fire &amp; the Aegean.</p>
-      </div>
-      <nav class="footer__col" aria-label="Footer menu">
-        <h4>Explore</h4>
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="about.html">Our Story</a>
-        <a href="locations.html">Locations</a>
-        <a href="contact.html">Contact</a>
-        <a href="index.html#pane-e-pasta">Pane e Pasta</a>
-      </nav>
-      <div class="footer__col">
-        <h4>Visit</h4>
-        <p>112 Harbor Street<br />Open daily · 6:00 – 19:00</p>
-      </div>
-      <div class="footer__col">
-        <h4>Follow</h4>
-        <div class="footer__social">
-          <a href="#" onclick="return false;" aria-label="Instagram">Instagram</a>
-          <a href="#" onclick="return false;" aria-label="Facebook">Facebook</a>
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand" href="index.html">Horno<b>fino</b></a>
+          <p class="footer__tag">Bread born of fire. Baked at dawn, gone by sundown.</p>
+        </div>
+        <nav class="footer__col" aria-label="Explore">
+          <h4>Explore</h4>
+          <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="pane-e-pasta.html">Pane e Pasta</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a>
+        </nav>
+        <div class="footer__col">
+          <h4>Visit</h4>
+          <p>San Juan, Puerto Rico</p><p>Open daily · 6:00 – 19:00</p><a href="contact.html">Contact &amp; catering</a>
+        </div>
+        <div class="footer__col">
+          <h4>Follow</h4>
+          <a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a>
+          <a href="contact.html#order" style="color:var(--orange)">Order Online →</a>
         </div>
       </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="year"></span> Hornofino · Pan · Café · Vino. Crafted with fire and patience.</p>
+        <button class="totop" id="totop">Back to top ↑</button>
+      </div>
     </div>
-    <div class="meander-rule meander-rule--thin" aria-hidden="true"></div>
-    <p class="footer__copy">© <span id="year"></span> Hornofino · Φούρνος. Crafted with fire and patience.</p>
   </footer>
 
-  <script src="script.js?v=5"></script>
   <script src="cart.js?v=3"></script>
-  <script src="hero-scrub.js?v=3" defer></script>
-  <script src="menu-journey.js?v=3" defer></script>
-  <script src="shooting-stars.js?v=3" defer></script>
-  <script type="importmap">
-    { "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
-    } }
+  <script>
+  (function(){
+    "use strict";
+    var RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var doc = document.documentElement;
+
+    /* ---- Preloader ---- */
+    (function(){
+      var loader=document.getElementById("loader"),bar=document.getElementById("loaderBar"),pct=document.getElementById("loaderPct");
+      function finish(){document.body.classList.remove("preload");loader&&loader.classList.add("done");kick();}
+      if(RM||!loader){document.body.classList.remove("preload");kick();return;}
+      var p=0,dur=1100,t0=performance.now();
+      (function step(now){
+        var k=Math.min(1,(now-t0)/dur);p=Math.round(k*100);
+        pct.textContent=p;bar.style.transform="scaleX("+(k)+")";
+        if(k<1)requestAnimationFrame(step);else setTimeout(finish,180);
+      })(t0);
+      // safety: never trap the page
+      setTimeout(finish,2600);
+    })();
+
+    /* ---- Nav scroll state + progress bar ---- */
+    var nav=document.getElementById("nav"),sb=document.getElementById("scrollbar");
+    function onScroll(){
+      var y=window.pageYOffset||doc.scrollTop;
+      nav.classList.toggle("scrolled",y>30);
+      var h=doc.scrollHeight-window.innerHeight;
+      sb.style.transform="scaleX("+(h>0?Math.min(1,y/h):0)+")";
+      parallax(y);
+      lightWords();
+    }
+
+    /* ---- Mobile drawer ---- */
+    var burger=document.getElementById("burger");
+    function closeMenu(){document.body.classList.remove("menu-open");burger.setAttribute("aria-expanded","false");}
+    burger&&burger.addEventListener("click",function(){
+      var open=document.body.classList.toggle("menu-open");
+      burger.setAttribute("aria-expanded",String(open));
+    });
+    document.querySelectorAll("#drawer a").forEach(function(a){a.addEventListener("click",closeMenu);});
+    document.addEventListener("keydown",function(e){if(e.key==="Escape")closeMenu();});
+
+    /* ---- Reveal on scroll ---- */
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target);} });
+    },{threshold:.16,rootMargin:"0px 0px -8% 0px"});
+    document.querySelectorAll(".reveal,.reveal-sm,[data-stagger],[data-reveal]").forEach(function(el){io.observe(el);});
+    // stagger delays
+    document.querySelectorAll("[data-stagger]").forEach(function(g){
+      Array.prototype.forEach.call(g.children,function(c,i){c.style.transitionDelay=(i*90)+"ms";});
+    });
+
+    /* ---- Parallax (scroll-driven, works without rAF loop) ---- */
+    var pxEls=[].slice.call(document.querySelectorAll("[data-parallax]"));
+    function parallax(y){
+      if(RM)return;var vh=window.innerHeight;
+      pxEls.forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.bottom<-200||r.top>vh+200)return;
+        var mid=r.top+r.height/2, prog=(mid-vh/2)/vh; // -1..1 roughly
+        var amt=parseFloat(el.getAttribute("data-parallax"))||0;
+        el.style.transform="translate3d(0,"+(prog*amt).toFixed(2)+"px,0)";
+      });
+    }
+
+    /* ---- Story: word-by-word light on scroll ---- */
+    var storyEl=document.querySelector(".story"),wordEls=[];
+    (function(){
+      var p=document.querySelector("[data-words]");if(!p)return;
+      var text=p.textContent, frag=document.createDocumentFragment(), hasEm=p.querySelector("em");
+      // rebuild preserving the trailing <em> emphasis
+      p.innerHTML="";
+      var parts=text.split(/(\s+)/);
+      parts.forEach(function(tok){
+        if(/^\s+$/.test(tok)){p.appendChild(document.createTextNode(tok));return;}
+        var s=document.createElement("span");s.className="w";s.textContent=tok;p.appendChild(s);wordEls.push(s);
+      });
+    })();
+    function lightWords(){
+      if(RM||!storyEl||!wordEls.length)return;
+      var pin=storyEl.querySelector(".story__pin"),r=storyEl.getBoundingClientRect();
+      var total=storyEl.offsetHeight-window.innerHeight;if(total<=0)return;
+      var prog=Math.min(1,Math.max(0,-r.top/total));
+      var n=Math.floor(prog*1.25*wordEls.length);
+      wordEls.forEach(function(w,i){w.classList.toggle("lit",i<n);});
+    }
+    // give the story extra scroll length for the reveal
+    if(storyEl&&!RM){storyEl.style.minHeight="180vh";}
+
+    /* ---- Interactive menu explorer ---- */
+    (function(){
+      var items=[].slice.call(document.querySelectorAll(".explore__item"));
+      var figs=[].slice.call(document.querySelectorAll("#preview figure"));
+      function activate(key){
+        items.forEach(function(it){it.classList.toggle("active",it.getAttribute("data-key")===key);});
+        figs.forEach(function(f){f.classList.toggle("active",f.getAttribute("data-key")===key);});
+      }
+      items.forEach(function(it){
+        var key=it.getAttribute("data-key");
+        it.addEventListener("mouseenter",function(){activate(key);});
+        it.querySelector(".explore__btn").addEventListener("focus",function(){activate(key);});
+        it.querySelector(".explore__btn").addEventListener("click",function(){window.location.href="menu.html";});
+      });
+    })();
+
+    /* ---- FAQ accordion ---- */
+    document.querySelectorAll(".faq__item").forEach(function(item){
+      var q=item.querySelector(".faq__q"),a=item.querySelector(".faq__a");
+      q.addEventListener("click",function(){
+        var open=item.classList.contains("open");
+        document.querySelectorAll(".faq__item.open").forEach(function(o){o.classList.remove("open");o.querySelector(".faq__a").style.height="0px";});
+        if(!open){item.classList.add("open");a.style.height=a.scrollHeight+"px";}
+      });
+    });
+
+    /* ---- Magnetic buttons ---- */
+    if(!RM&&window.matchMedia("(pointer:fine)").matches){
+      document.querySelectorAll(".magnetic").forEach(function(m){
+        var strength=18;
+        m.addEventListener("mousemove",function(e){
+          var r=m.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
+          m.style.transform="translate("+(x/r.width*strength)+"px,"+(y/r.height*strength)+"px)";
+        });
+        m.addEventListener("mouseleave",function(){m.style.transform="";});
+        m.style.transition="transform .5s var(--ease)";
+      });
+    }
+
+    /* ---- Embers ---- */
+    function seedEmbers(host,n){
+      if(!host||RM)return;
+      for(var i=0;i<n;i++){var e=document.createElement("i");
+        e.style.left=(Math.random()*100)+"%";
+        e.style.animationDuration=(5+Math.random()*6)+"s";
+        e.style.animationDelay=(-Math.random()*8)+"s";
+        var s=(3+Math.random()*5);e.style.width=e.style.height=s+"px";
+        host.appendChild(e);}
+    }
+    seedEmbers(document.getElementById("embers"),16);
+    seedEmbers(document.getElementById("embers2"),14);
+
+    /* ---- Add-to-cart feedback (cart.js handles storage; add nav pop) ---- */
+    document.querySelectorAll("[data-add-to-cart]").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        var badge=document.querySelector(".nav__cart");
+        if(badge){badge.animate([{transform:"scale(1)"},{transform:"scale(1.25)"},{transform:"scale(1)"}],{duration:420,easing:"cubic-bezier(.22,1,.36,1)"});}
+        if(btn.classList.contains("add")){var t=btn.textContent;btn.classList.add("added");btn.textContent="✓";
+          setTimeout(function(){btn.classList.remove("added");btn.textContent=t;},900);}
+      });
+    });
+
+    /* ---- Misc ---- */
+    var yr=document.getElementById("year");if(yr)yr.textContent=new Date().getFullYear();
+    var totop=document.getElementById("totop");totop&&totop.addEventListener("click",function(){window.scrollTo({top:0,behavior:RM?"auto":"smooth"});});
+
+    var kicked=false;
+    function kick(){if(kicked)return;kicked=true;onScroll();}
+    window.addEventListener("scroll",onScroll,{passive:true});
+    window.addEventListener("resize",function(){onScroll();
+      document.querySelectorAll(".faq__item.open .faq__a").forEach(function(a){a.style.height=a.scrollHeight+"px";});
+    });
+    onScroll();
+  })();
   </script>
-  <script type="module" src="atlas.js?v=10"></script>
-  <script type="module" src="menu-globe.js?v=3"></script>
 </body>
 </html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pane e Pasta — Fine-Dining Trattoria by Hornofino · San Juan</title>
+  <meta name="description" content="Pane e Pasta is Hornofino's fine-dining Italian trattoria in San Juan, Puerto Rico — fresh pasta, carpaccio, risotto, wood-fired secondi and a wine list that takes its time. Reservations welcome." />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css?v=2" />
+  <style>
+    /* Trattoria nav-on-dark overrides */
+    body.pp{background:#140d08}
+    .pp .nav .brand,.pp .nav .nav__links a,.pp .nav__cart{color:#f3e9dd}
+    .pp .nav .brand b{color:var(--pp-gold)}
+    .pp .nav .brand small{color:rgba(243,233,221,.45)}
+    .pp .nav .nav__links a::after{background:var(--pp-gold)}
+    .pp .nav.scrolled{background:rgba(20,13,8,.82);border-bottom-color:rgba(243,233,221,.12);box-shadow:0 6px 30px -20px #000}
+    .pp .burger span{background:#f3e9dd}
+    .pp .nav__cta.btn--solid{background:var(--pp-gold);border-color:var(--pp-gold);color:#2a1e0a}
+    .pp .nav__cta.btn--solid:hover{background:#dab461;border-color:#dab461}
+    .pp .nav__cart:hover{background:rgba(243,233,221,.1)}
+    .pp .scrollbar{background:linear-gradient(90deg,#6e1f1f,var(--pp-gold))}
+    .pp .drawer{background:#140d08}
+    .pp .drawer a:hover{color:var(--pp-gold)}
+  </style>
+</head>
+<body class="pp">
+  <div class="scrollbar" id="scrollbar"></div>
+  <header class="nav" id="nav">
+    <a class="brand" href="index.html" aria-label="Hornofino home">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Bakery Menu</a>
+      <a href="pane-e-pasta.html" class="active" aria-current="page">Trattoria</a>
+      <a href="#carta">Carta</a>
+      <a href="#bar">Bar</a>
+      <a href="locations.html">Locations</a>
+    </nav>
+    <div class="nav__right">
+      <a class="nav__cart" href="cart.html" aria-label="View basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="nav__cart-count" data-cart-count>0</span>
+      </a>
+      <span class="magnetic"><a class="btn btn--solid nav__cta" href="https://hornofinoapolo.wixsite.com/pane-e-pasta" target="_blank" rel="noopener">Reserve</a></span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="drawer" id="drawer" aria-label="Mobile">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Bakery Menu</a>
+    <a href="pane-e-pasta.html">Trattoria</a>
+    <a href="#carta">Carta</a>
+    <a href="#bar">Bar</a>
+    <a href="locations.html">Locations</a>
+    <a href="https://hornofinoapolo.wixsite.com/pane-e-pasta" target="_blank" rel="noopener" style="color:var(--pp-gold);opacity:1">Reserve a Table →</a>
+    <p class="drawer__foot">Dinner · Mon–Sun · San Juan, PR</p>
+  </nav>
+
+  <!-- ░░ Hero ░░ -->
+  <section class="pp-hero">
+    <div class="pp-hero__bg" aria-hidden="true"><img src="assets/menu-hf/pane-e-pasta.jpg" alt="" /></div>
+    <div class="embers" aria-hidden="true"></div>
+    <div class="wrap">
+      <img class="pp-hero__logo" src="assets/menu-hf/pane-e-pasta-logo.png" alt="Pane e Pasta" />
+      <p class="pp-eyebrow">Fine dining · by Hornofino</p>
+      <h1>When the ovens rest,<br />the kitchen turns <em>Italian</em></h1>
+      <p class="pp-hero__sub">Fresh pasta, carpaccio, risotto and wood-fired secondi — built on the same bread, the same fire, and the same welcome as the bakery next door.</p>
+      <div class="pp-hero__actions">
+        <span class="magnetic"><a class="btn btn--goldpp" href="https://hornofinoapolo.wixsite.com/pane-e-pasta" target="_blank" rel="noopener">Reserve a Table <span class="arr">→</span></a></span>
+        <span class="magnetic"><a class="btn btn--outlinepp" href="#carta">View the Carta</a></span>
+      </div>
+      <p class="pp-hero__meta">Dinner nightly · Cocktails &amp; 40+ whiskies · Reservations by phone</p>
+    </div>
+  </section>
+
+  <!-- ░░ Lead / story ░░ -->
+  <section class="pp-section pp-band">
+    <div class="pp-lead">
+      <div class="pp-lead__media reveal"><img src="assets/menu-hf/tostadas.jpg" alt="A plated course at Pane e Pasta" loading="lazy" /></div>
+      <div class="pp-lead__copy">
+        <p class="pp-eyebrow">The table after dark</p>
+        <h2>A trattoria grown from a <em>bakery</em></h2>
+        <p>Pane e Pasta began the way the best things do — with leftover fire and a good idea. The bread was already the best in the neighborhood; the kitchen simply kept going after the pastries were gone.</p>
+        <p>Pasta rolled the same morning. Sauces that simmer while you sit. A short, serious wine list, and a room that fills with the smell of garlic, butter and the last of the day's loaves. Slow food, the way it was meant to be shared.</p>
+        <p class="pp-hero__meta" style="justify-content:flex-start">Pane · Pasta · Vino — la vita è bella.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ Feature trio ░░ -->
+  <section class="pp-section">
+    <div class="pp-head">
+      <p class="pp-eyebrow">Why dine with us</p>
+      <h2>Three things on <em>every table</em></h2>
+    </div>
+    <div class="pp-feature">
+      <article class="pp-card"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M12 3v8"/><path d="M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg></span><h3>Pasta made daily</h3><p>Rolled, cut and dried in-house every morning — tagliatelle, gnocchi, and whatever the chef is feeling.</p></article>
+      <article class="pp-card"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M12 2a5 5 0 0 0-5 5c0 3 2 5 5 8 3-3 5-5 5-8a5 5 0 0 0-5-5z"/></svg></span><h3>Fire &amp; wine</h3><p>Wood-fired secondi and an Italian-led cellar. Ask for the pour that suits your plate.</p></article>
+      <article class="pp-card"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.51 4.04 3 5.5l7 7z"/></svg></span><h3>The same welcome</h3><p>The bakery's generous hospitality, dressed for dinner. You're a guest, never a covers number.</p></article>
+    </div>
+  </section>
+
+  <!-- ░░ Carta ░░ -->
+  <!-- Menu is a representative selection; the four "signature" dishes carry the bakery's real prices.
+       Confirm the current seasonal carta before launch. -->
+  <section class="pp-section pp-band--wine" id="carta">
+    <div class="pp-head">
+      <p class="pp-eyebrow">La carta</p>
+      <h2>What we're <em>cooking</em></h2>
+      <p>A selection from the kitchen — the full carta changes with the season.</p>
+    </div>
+    <div class="pp-menu">
+      <div class="pp-course">
+        <div class="pp-course__title"><h3>Antipasti</h3></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Pulpo alla Griglia</span><span class="pp-dish__desc">Grilled octopus, crushed potato, salmoriglio</span></div><span class="pp-dish__price">$23</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Carpaccio di Manzo</span><span class="pp-dish__desc">Thin-sliced beef, arugula, parmigiano, lemon</span></div><span class="pp-dish__price">$18</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Burrata &amp; Prosciutto di Parma</span><span class="pp-dish__desc">Creamy burrata, 18-month prosciutto, warm bread</span></div><span class="pp-dish__price">$19</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Calamari Fritti</span><span class="pp-dish__desc">Crisp calamari, lemon, spicy pomodoro</span></div><span class="pp-dish__price">$16</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Bruschetta al Pomodoro</span><span class="pp-dish__desc">Toasted pan de agua, tomato, basil, olive oil</span></div><span class="pp-dish__price">$12</span></div>
+      </div>
+
+      <div class="pp-course">
+        <div class="pp-course__title"><h3>Primi</h3></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Risotto Camarone</span><span class="pp-dish__desc">Shrimp risotto, white wine, herbs</span></div><span class="pp-dish__price">$26</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Tagliatelle al Ragù</span><span class="pp-dish__desc">House pasta, slow beef &amp; pork ragù</span></div><span class="pp-dish__price">$22</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Spaghetti alle Vongole</span><span class="pp-dish__desc">Clams, garlic, white wine, chili</span></div><span class="pp-dish__price">$24</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Gnocchi Pomodoro e Burrata</span><span class="pp-dish__desc">Potato gnocchi, San Marzano, torn burrata</span></div><span class="pp-dish__price">$20</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Lasagna della Casa</span><span class="pp-dish__desc">Layered pasta, béchamel, ragù, parmigiano</span></div><span class="pp-dish__price">$21</span></div>
+      </div>
+
+      <div class="pp-course">
+        <div class="pp-course__title"><h3>Secondi</h3></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Tagliata di Manzo</span><span class="pp-dish__desc">Sliced steak, arugula, parmigiano, aged balsamic</span></div><span class="pp-dish__price">$39</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Filetto di Manzo al Vino Rosso</span><span class="pp-dish__desc">Beef tenderloin, red-wine reduction</span></div><span class="pp-dish__price">$45</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Osso Buco alla Milanese</span><span class="pp-dish__desc">Braised veal shank, saffron risotto, gremolata</span></div><span class="pp-dish__price">$34</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Salmone alla Griglia</span><span class="pp-dish__desc">Grilled salmon, lemon, seasonal vegetables</span></div><span class="pp-dish__price">$28</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Pollo alla Parmigiana</span><span class="pp-dish__desc">Breaded chicken, pomodoro, mozzarella</span></div><span class="pp-dish__price">$26</span></div>
+      </div>
+
+      <div class="pp-course">
+        <div class="pp-course__title"><h3>Dolci</h3></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Tiramisù</span><span class="pp-dish__desc">Espresso-soaked savoiardi, mascarpone, cocoa</span></div><span class="pp-dish__price">$10</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Cannoli Siciliani</span><span class="pp-dish__desc">Crisp shells, sweet ricotta, pistachio</span></div><span class="pp-dish__price">$9</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Panna Cotta ai Frutti Rossi</span><span class="pp-dish__desc">Vanilla cream, red-berry coulis</span></div><span class="pp-dish__price">$9</span></div>
+        <div class="pp-dish"><div class="pp-dish__main"><span class="pp-dish__name">Affogato al Caffè</span><span class="pp-dish__desc">Gelato "drowned" in Hornofino espresso</span></div><span class="pp-dish__price">$8</span></div>
+      </div>
+
+      <p class="pp-note">Prices in USD — the carta changes with the season, so confirm current dishes when you reserve. See the <a href="#bar" style="color:var(--pp-gold)">bar &amp; cocktails</a> below.</p>
+    </div>
+  </section>
+
+  <!-- ░░ Bar — cocktails · whisky · wine ░░ -->
+  <section class="pp-section pp-band" id="bar">
+    <div class="pp-head">
+      <p class="pp-eyebrow">Il bar</p>
+      <h2>Cócteles, <em>whisky</em> &amp; vino</h2>
+      <p>Classic Italian cocktails, a deep whisky shelf, and a wine list that takes its time.</p>
+    </div>
+    <div class="pp-drinks">
+
+      <!-- Cocktails -->
+      <div class="pp-subhead"><h3>Signature Cocktails</h3><em>Shaken &amp; stirred</em></div>
+      <div class="pp-cocktails">
+        <article class="pp-cocktail">
+          <div class="pp-cocktail__top"><span class="pp-cocktail__name">Italian Margarita</span><span class="pp-cocktail__price">$11</span></div>
+          <p class="pp-cocktail__ing">Reposado tequila · amaretto · orange liqueur · fresh lime</p>
+          <div class="pp-tags"><span class="pp-tag">Strong · 27%</span><span class="pp-tag">Sour / Sweet</span></div>
+        </article>
+        <article class="pp-cocktail">
+          <div class="pp-cocktail__top"><span class="pp-cocktail__name">Negroni Sbagliato</span><span class="pp-cocktail__price">$9</span></div>
+          <p class="pp-cocktail__ing">Campari · sweet vermouth · prosecco</p>
+          <div class="pp-tags"><span class="pp-tag">Medium · 18%</span><span class="pp-tag">Bitter / Sweet</span></div>
+        </article>
+        <article class="pp-cocktail">
+          <div class="pp-cocktail__top"><span class="pp-cocktail__name">Americano</span><span class="pp-cocktail__price">$8</span></div>
+          <p class="pp-cocktail__ing">Campari · sweet vermouth · club soda</p>
+          <div class="pp-tags"><span class="pp-tag">Strong · 22%</span><span class="pp-tag">Sweet</span></div>
+        </article>
+        <article class="pp-cocktail">
+          <div class="pp-cocktail__top"><span class="pp-cocktail__name">Espresso Martini</span><span class="pp-cocktail__price">$10</span></div>
+          <p class="pp-cocktail__ing">Vodka · espresso · coffee liqueur · simple syrup</p>
+          <div class="pp-tags"><span class="pp-tag">Strong · 23%</span><span class="pp-tag">Bitter</span></div>
+        </article>
+        <article class="pp-cocktail">
+          <div class="pp-cocktail__top"><span class="pp-cocktail__name">Bellini</span><span class="pp-cocktail__price">$14</span></div>
+          <p class="pp-cocktail__ing">Prosecco · peach purée</p>
+          <div class="pp-tags"><span class="pp-tag">Light · 8%</span><span class="pp-tag">Sour / Sweet</span></div>
+        </article>
+      </div>
+
+      <!-- Whisky (transcribed from the printed menu) -->
+      <div class="pp-subhead"><h3>Whisky</h3><em>Neat · rocks · your way</em></div>
+      <div class="pp-pours">
+        <div class="pp-pours__col">
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Dewar's 27</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$45</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Dewar's 25</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$35</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Dewar's 15</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$11</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Dewar's 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$10</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Dewar's</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$6</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Buchanan's 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Buchanan's 18</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$16</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Jameson</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$7</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Sheep Dog</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$6</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Skrewball</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Monkey Shoulder</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$7</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Cutty Sark</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$6</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Aberfeldy 21</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$30</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Aberfeldy 16</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$16</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Aberfeldy 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Johnnie Walker Black Label</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Johnnie Walker Blue Label</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$55</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Kaiyo</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$11.50</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Glenmorangie 10</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8.25</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Glenmorangie 18</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$16</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Glenfiddich 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$9</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Bowmore 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$11.50</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Compass Box Artist Blend</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Egan's</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8.50</span></div>
+          </div>
+        </div>
+        <div class="pp-pours__col">
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Pinch 15</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Buka</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$9</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Brenne</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8.50</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Few Bourbon</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8.50</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Few Rye</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$9</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Chivas Regal 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Chivas Regal 18</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$16</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Chivas Mizunara</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Jim Beam Black</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$6</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Jim Beam</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$6</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Jim Beam Fizz</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$6</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Maker's Mark</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$7</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Glenrothes 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$9</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Woodford Reserve</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Jack Daniel's Old No.7</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Jack Daniel's Apple</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$7</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Jack Daniel's Fire</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$6</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Singleton 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$8</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Bruichladdich</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$10</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Macallan 12</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$12</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Macallan 15</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$23</span></div>
+            <div class="pp-pour"><span class="pp-pour__name">Macallan 18</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$55</span></div>
+          </div>
+          <div class="pp-group">
+            <div class="pp-pour"><span class="pp-pour__name">Dalmore 15</span><span class="pp-pour__dots"></span><span class="pp-pour__price">$19</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wine — list coming from the client; replace this placeholder when it arrives -->
+      <div class="pp-subhead"><h3>Vino / Wine</h3><em>By the glass &amp; bottle</em></div>
+      <div class="pp-wine-soon">
+        <p class="pp-eyebrow" style="justify-content:center;display:flex">Coming soon</p>
+        <p>Our Italian-led cellar — reds, whites, prosecco and a rotating by-the-glass selection — is being finalized. Ask your server for tonight's pours, or check back soon for the full list.</p>
+      </div>
+
+      <p class="pp-legal">Please enjoy responsibly · Must be 21+ to be served alcohol · El consumo de alcohol durante el embarazo puede causar daño al bebé.</p>
+    </div>
+  </section>
+
+  <!-- ░░ Hours / reserve ░░ -->
+  <section class="pp-section pp-band">
+    <div class="pp-hours">
+      <div class="pp-lead__media reveal" style="aspect-ratio:5/4"><img src="assets/menu-hf/pane-e-pasta.jpg" alt="The dining room at Pane e Pasta" loading="lazy" /></div>
+      <div>
+        <p class="pp-eyebrow">Hours &amp; reservations</p>
+        <h2>Come for <em>dinner</em></h2>
+        <ul class="pp-hours__list">
+          <li><b>Monday – Friday</b><span>10:00 – 22:00</span></li>
+          <li><b>Saturday</b><span>8:00 – 22:00</span></li>
+          <li><b>Sunday</b><span>8:00 – 19:00</span></li>
+        </ul>
+        <p class="pp-hero__meta" style="justify-content:flex-start;margin:1.4rem 0 1.8rem">Reservations confirmed by phone · San Juan, Puerto Rico</p>
+        <span class="magnetic"><a class="btn btn--wine" href="https://hornofinoapolo.wixsite.com/pane-e-pasta" target="_blank" rel="noopener">Reserve a Table <span class="arr">→</span></a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ CTA ░░ -->
+  <section class="pp-cta">
+    <div class="embers" aria-hidden="true"></div>
+    <div class="wrap" style="position:relative;z-index:2">
+      <p class="pp-eyebrow">Buonasera</p>
+      <h2>The table is <em>set</em></h2>
+      <p>Pull up a chair for pasta, wine and the last of the day's bread. We'll be expecting you.</p>
+      <span class="magnetic"><a class="btn btn--goldpp" href="https://hornofinoapolo.wixsite.com/pane-e-pasta" target="_blank" rel="noopener">Reserve a Table <span class="arr">→</span></a></span>
+    </div>
+  </section>
+
+  <footer class="footer pp-footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="brand" href="index.html">Horno<b>fino</b></a>
+          <p class="footer__tag">Pane e Pasta — the trattoria by Hornofino.</p>
+        </div>
+        <nav class="footer__col" aria-label="Footer menu">
+          <h4>Explore</h4>
+          <a href="index.html">Home</a><a href="menu.html">Bakery Menu</a><a href="pane-e-pasta.html">Trattoria</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a>
+        </nav>
+        <div class="footer__col"><h4>Dinner</h4><p>Mon–Fri 10:00–22:00</p><p>Sat 8:00–22:00 · Sun 8:00–19:00</p><a href="https://hornofinoapolo.wixsite.com/pane-e-pasta" target="_blank" rel="noopener">Reserve →</a></div>
+        <div class="footer__col"><h4>Follow</h4><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a><a href="contact.html">Contact</a></div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© <span id="year"></span> Hornofino · Pane e Pasta. Crafted with fire and patience.</p>
+        <button class="totop" id="totop">Back to top ↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="site.js?v=1"></script>
+  <script src="cart.js?v=3"></script>
+</body>
+</html>
