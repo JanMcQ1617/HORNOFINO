@@ -14,7 +14,9 @@
     /* Pull the location cards higher up the page */
     .page-banner{padding-bottom:1.25rem}
     .locations{padding-top:1.25rem}
+    .place__tags{display:flex;gap:.4rem;flex-wrap:wrap;align-self:flex-start}
     .place__tag{display:inline-block;align-self:flex-start;background:var(--orange);color:#fff;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.35em .8em;border-radius:100px}
+    .place__tag--gold{background:var(--amber);color:#20160a}
   </style>
 </head>
 <body>
@@ -69,7 +71,6 @@
       <article class="place">
         <div class="place__media"><img src="assets/menu-hf/cafe-y-te.jpg" alt="Coffee at the Apolo bakery in Guaynabo" loading="lazy" /></div>
         <div class="place__body">
-          <span class="place__tag">Home of Pane e Pasta</span>
           <h3>Apolo · Guaynabo</h3>
           <p>Centro Comercial Apolo<br />Av. Lic. R. Rodríguez Apolo, Local #7<br />Guaynabo, PR 00969<br />Open daily · 6:00 – 19:00</p>
           <a href="https://maps.google.com/?q=Hornofino+Centro+Comercial+Apolo+Guaynabo+00969" target="_blank" rel="noopener">Directions →</a>
@@ -78,7 +79,7 @@
       <article class="place">
         <div class="place__media"><img src="assets/menu-hf/reposteria.jpg" alt="The pastry case at the Los Filtros main store in Bayamón" loading="lazy" /></div>
         <div class="place__body">
-          <span class="place__tag">Main store</span>
+          <div class="place__tags"><span class="place__tag">Main store</span><span class="place__tag place__tag--gold">Home of Pane e Pasta</span></div>
           <h3>Los Filtros · Bayamón</h3>
           <p>Centro Comercial Los Filtros, Local #9<br />Bayamón, PR 00956<br />Open daily · 6:00 – 19:00</p>
           <a href="https://maps.google.com/?q=Hornofino+Centro+Comercial+Los+Filtros+Bayamon+00956" target="_blank" rel="noopener">Directions →</a>
