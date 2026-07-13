@@ -85,8 +85,8 @@
 
     if (!ids.length) {
       wrap.innerHTML =
-        '<div class="cart-empty"><p>Your basket is empty.</p>' +
-        '<a class="btn btn--solid" href="menu.html">Browse the menu</a></div>';
+        '<div class="cart-empty"><p>Tu canasta está vacía.</p>' +
+        '<a class="btn btn--solid" href="menu.html">Explora el menú</a></div>';
       var sum = document.getElementById("cartSummary");
       if (sum) sum.style.display = "none";
       return;
@@ -97,14 +97,14 @@
       return (
         '<div class="cart-row" data-id="' + escapeAttr(id) + '">' +
           '<div><div class="cart-row__name">' + escapeHtml(it.name) + '</div>' +
-            '<span class="cart-row__unit">' + money(it.price) + ' each</span></div>' +
+            '<span class="cart-row__unit">' + money(it.price) + ' c/u</span></div>' +
           '<div class="qty">' +
-            '<button type="button" data-act="dec" aria-label="Decrease">–</button>' +
+            '<button type="button" data-act="dec" aria-label="Disminuir">–</button>' +
             '<span>' + it.qty + '</span>' +
-            '<button type="button" data-act="inc" aria-label="Increase">+</button>' +
+            '<button type="button" data-act="inc" aria-label="Aumentar">+</button>' +
           '</div>' +
           '<div class="cart-row__line">' + money(it.qty * it.price) + '</div>' +
-          '<button class="cart-row__remove" data-act="rm" aria-label="Remove">✕</button>' +
+          '<button class="cart-row__remove" data-act="rm" aria-label="Eliminar">✕</button>' +
         '</div>'
       );
     }).join("");
@@ -133,7 +133,7 @@
     var form = document.getElementById("checkoutForm");
 
     if (!ids.length) {
-      list.innerHTML = '<li><span>Your basket is empty.</span></li>';
+      list.innerHTML = '<li><span>Tu canasta está vacía.</span></li>';
       var totEl0 = document.getElementById("checkoutTotal");
       if (totEl0) totEl0.textContent = money(0);
       if (form) form.style.display = "none";
@@ -179,15 +179,15 @@
           if (data.url) window.location.href = data.url;            // Stripe-hosted checkout
           else throw new Error(data.error || "No checkout URL returned");
         })
-        .catch(function (err) { showStub("Couldn't start payment: " + err.message); });
+        .catch(function (err) { showStub("No se pudo iniciar el pago: " + err.message); });
       return;
     }
 
     // STUB path: Stripe not configured yet
     showStub(
-      "Order received, " + (customer.name || "friend") + "! " +
-      "Total " + money(total(cart)) + ". Card payment isn't connected yet — " +
-      "add your Stripe keys (see STRIPE-SETUP.md) to take real payments. Your basket has been saved."
+      "¡Orden recibida, " + (customer.name || "amig@") + "! " +
+      "Total " + money(total(cart)) + ". El pago con tarjeta aún no está conectado — " +
+      "añade tus llaves de Stripe (ver STRIPE-SETUP.md) para cobrar de verdad. Tu canasta quedó guardada."
     );
   }
 

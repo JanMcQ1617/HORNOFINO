@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact &amp; Order — Hornofino</title>
-  <meta name="description" content="Order online from Hornofino for pickup or delivery in San Juan, ask about catering, or just say hello. Fresh from the morning bake." />
+  <title>Contacto y Pedidos — Hornofino</title>
+  <meta name="description" content="Ordena online de Hornofino para pickup o delivery en San Juan, pregunta por catering o simplemente saluda. Fresco de la hornada de la mañana." />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,84 +14,84 @@
 <body>
   <div class="scrollbar" id="scrollbar"></div>
   <header class="nav" id="nav">
-    <a class="brand" href="index.html" aria-label="Hornofino home">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
+    <a class="brand" href="index.html" aria-label="Inicio de Hornofino">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="menu.html">Menú</a>
       <a href="pane-e-pasta.html">Trattoria</a>
-      <a href="about.html">Our Story</a>
-      <a href="locations.html">Locations</a>
-      <a href="contact.html" class="active" aria-current="page">Contact</a>
+      <a href="about.html">Nuestra Historia</a>
+      <a href="locations.html">Localidades</a>
+      <a href="contact.html" class="active" aria-current="page">Contacto</a>
     </nav>
     <div class="nav__right">
-      <a class="nav__cart" href="cart.html" aria-label="View basket">
+      <a class="nav__cart" href="cart.html" aria-label="Ver canasta">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
         <span class="nav__cart-count" data-cart-count>0</span>
       </a>
-      <span class="magnetic"><a class="btn btn--solid nav__cta" href="#order">Order Online</a></span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <span class="magnetic"><a class="btn btn--solid nav__cta" href="#order">Ordena Online</a></span>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </header>
-  <nav class="drawer" id="drawer" aria-label="Mobile">
-    <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
+  <nav class="drawer" id="drawer" aria-label="Móvil">
+    <a href="index.html">Inicio</a>
+    <a href="menu.html">Menú</a>
     <a href="pane-e-pasta.html">Trattoria</a>
-    <a href="about.html">Our Story</a>
-    <a href="locations.html">Locations</a>
-    <a href="contact.html">Contact</a>
-    <a href="#order" style="color:var(--orange);opacity:1">Order Online →</a>
-    <p class="drawer__foot">Open daily · 6:00 – 19:00 · San Juan, PR</p>
+    <a href="about.html">Nuestra Historia</a>
+    <a href="locations.html">Localidades</a>
+    <a href="contact.html">Contacto</a>
+    <a href="#order" style="color:var(--orange);opacity:1">Ordena Online →</a>
+    <p class="drawer__foot">Abierto todos los días · 6:00 – 19:00 · San Juan, PR</p>
   </nav>
 
   <section class="page-banner" id="order">
-    <p class="crumbs"><a href="index.html">Home</a> · Contact &amp; Order</p>
-    <h1>Order &amp; say <em>hello</em></h1>
-    <p>Place an order for pickup or delivery, ask about catering, or just send a kind word.</p>
+    <p class="crumbs"><a href="index.html">Inicio</a> · Contacto y Pedidos</p>
+    <h1>Ordena y <em>saluda</em></h1>
+    <p>Haz tu orden para pickup o delivery, pregunta por catering o simplemente envía un saludo.</p>
     <div class="meander-rule" aria-hidden="true"></div>
   </section>
 
   <main class="contact">
     <div class="contact__info">
-      <h2>We'd love to hear from you</h2>
-      <p>Pickup orders are ready the same day, fresh from the morning bake. Delivery is available across San Juan. For events and large orders, tell us a little about what you need and we'll take it from there.</p>
+      <h2>Nos encanta saber de ti</h2>
+      <p>Las órdenes de pickup están listas el mismo día, frescas de la hornada de la mañana. Hay delivery en todo San Juan. Para eventos y órdenes grandes, cuéntanos un poco de lo que necesitas y nos encargamos.</p>
       <ul class="contact__list">
-        <li><strong>Order line</strong>(555) 010-1120</li>
+        <li><strong>Línea de pedidos</strong>(555) 010-1120</li>
         <li><strong>Email</strong>hello@hornofino.example</li>
         <li><strong>Catering</strong>events@hornofino.example</li>
-        <li><strong>Hours</strong>Daily · 6:00 – 19:00</li>
-        <li><strong>Main store</strong>Centro Comercial Los Filtros, Local #9, Bayamón, PR 00956</li>
+        <li><strong>Horario</strong>Todos los días · 6:00 – 19:00</li>
+        <li><strong>Tienda principal</strong>Centro Comercial Los Filtros, Local #9, Bayamón, PR 00956</li>
       </ul>
     </div>
 
     <form class="form reveal-sm" id="orderForm" novalidate>
-      <label for="name">Your name</label>
+      <label for="name">Tu nombre</label>
       <input id="name" name="name" type="text" autocomplete="name" required placeholder="Maria Rivera" />
 
-      <label for="email">Email</label>
+      <label for="email">Correo electrónico</label>
       <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
 
-      <label for="location">Pickup location</label>
+      <label for="location">Localidad de pickup</label>
       <select id="location" name="location">
         <option>Cupey · San Juan</option>
         <option>Apolo · Guaynabo</option>
         <option>Los Filtros · Bayamón (Main)</option>
-        <option>Delivery within the San Juan metro</option>
+        <option>Delivery en el área metro de San Juan</option>
       </select>
 
-      <label for="type">I'm reaching out about</label>
+      <label for="type">Te escribo por</label>
       <select id="type" name="type">
-        <option>An online order</option>
-        <option>Catering / large order</option>
-        <option>A question</option>
-        <option>Just saying hello</option>
+        <option>Una orden online</option>
+        <option>Catering / orden grande</option>
+        <option>Una pregunta</option>
+        <option>Solo saludar</option>
       </select>
 
-      <label for="message">Your order or message</label>
-      <textarea id="message" name="message" required placeholder="2 pan sobao, a Mega Quesito, pickup at 8am…"></textarea>
+      <label for="message">Tu orden o mensaje</label>
+      <textarea id="message" name="message" required placeholder="2 panes sobao, un Mega Quesito, pickup a las 8am…"></textarea>
 
-      <button class="btn btn--solid" type="submit">Send Request</button>
-      <p class="form__note">This is a demo form — submissions are confirmed on-screen and not sent anywhere yet.</p>
-      <p class="form__success" id="formSuccess">¡Gracias! Your request has been noted — we'll be in touch shortly.</p>
+      <button class="btn btn--solid" type="submit">Enviar Solicitud</button>
+      <p class="form__note">Este es un formulario de demostración — las solicitudes se confirman en pantalla y aún no se envían a ningún lado.</p>
+      <p class="form__success" id="formSuccess">¡Gracias! Tu solicitud quedó anotada — te contactamos pronto.</p>
     </form>
   </main>
 
@@ -100,18 +100,18 @@
       <div class="footer__top">
         <div class="footer__brand">
           <a class="brand" href="index.html">Horno<b>fino</b></a>
-          <p class="footer__tag">Bread born of fire. Baked at dawn, gone by sundown.</p>
+          <p class="footer__tag">Pan nacido del fuego. Horneado al amanecer, se acaba al atardecer.</p>
         </div>
-        <nav class="footer__col" aria-label="Footer menu">
-          <h4>Explore</h4>
-          <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="pane-e-pasta.html">Pane e Pasta</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a>
+        <nav class="footer__col" aria-label="Menú del pie de página">
+          <h4>Explora</h4>
+          <a href="index.html">Inicio</a><a href="menu.html">Menú</a><a href="pane-e-pasta.html">Pane e Pasta</a><a href="about.html">Nuestra Historia</a><a href="locations.html">Localidades</a>
         </nav>
-        <div class="footer__col"><h4>Visit</h4><p>San Juan, Puerto Rico</p><p>Open daily · 6:00 – 19:00</p><a href="contact.html">Contact &amp; catering</a></div>
-        <div class="footer__col"><h4>Follow</h4><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a><a href="#order" style="color:var(--orange)">Order Online →</a></div>
+        <div class="footer__col"><h4>Visítanos</h4><p>San Juan, Puerto Rico</p><p>Abierto todos los días · 6:00 – 19:00</p><a href="contact.html">Contacto y catering</a></div>
+        <div class="footer__col"><h4>Síguenos</h4><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a><a href="#order" style="color:var(--orange)">Ordena Online →</a></div>
       </div>
       <div class="footer__bottom">
-        <p class="footer__copy">© <span id="year"></span> Hornofino · Pan · Café · Vino. Crafted with fire and patience.</p>
-        <button class="totop" id="totop">Back to top ↑</button>
+        <p class="footer__copy">© <span id="year"></span> Hornofino · Pan · Café · Vino. Hecho con fuego y paciencia.</p>
+        <button class="totop" id="totop">Volver arriba ↑</button>
       </div>
     </div>
   </footer>

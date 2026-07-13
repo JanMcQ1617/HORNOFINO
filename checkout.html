@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checkout — Hornofino</title>
-  <meta name="description" content="Complete your Hornofino order. Secure card payment via Stripe." />
+  <meta name="description" content="Completa tu orden de Hornofino. Pago seguro con tarjeta vía Stripe." />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,76 +14,76 @@
 <body>
   <div class="scrollbar" id="scrollbar"></div>
   <header class="nav" id="nav">
-    <a class="brand" href="index.html" aria-label="Hornofino home">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
+    <a class="brand" href="index.html" aria-label="Inicio de Hornofino">Horno<b>fino</b><small>Pan·Café·Vino</small></a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="menu.html">Menú</a>
       <a href="pane-e-pasta.html">Trattoria</a>
-      <a href="about.html">Our Story</a>
-      <a href="locations.html">Locations</a>
-      <a href="contact.html">Contact</a>
+      <a href="about.html">Nuestra Historia</a>
+      <a href="locations.html">Localidades</a>
+      <a href="contact.html">Contacto</a>
     </nav>
     <div class="nav__right">
-      <a class="nav__cart" href="cart.html" aria-label="View basket">
+      <a class="nav__cart" href="cart.html" aria-label="Ver canasta">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
         <span class="nav__cart-count" data-cart-count>0</span>
       </a>
-      <span class="magnetic"><a class="btn btn--solid nav__cta" href="contact.html#order">Order Online</a></span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <span class="magnetic"><a class="btn btn--solid nav__cta" href="contact.html#order">Ordena Online</a></span>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </header>
-  <nav class="drawer" id="drawer" aria-label="Mobile">
-    <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
+  <nav class="drawer" id="drawer" aria-label="Móvil">
+    <a href="index.html">Inicio</a>
+    <a href="menu.html">Menú</a>
     <a href="pane-e-pasta.html">Trattoria</a>
-    <a href="about.html">Our Story</a>
-    <a href="locations.html">Locations</a>
-    <a href="contact.html">Contact</a>
-    <a href="contact.html#order" style="color:var(--orange);opacity:1">Order Online →</a>
-    <p class="drawer__foot">Open daily · 6:00 – 19:00 · San Juan, PR</p>
+    <a href="about.html">Nuestra Historia</a>
+    <a href="locations.html">Localidades</a>
+    <a href="contact.html">Contacto</a>
+    <a href="contact.html#order" style="color:var(--orange);opacity:1">Ordena Online →</a>
+    <p class="drawer__foot">Abierto todos los días · 6:00 – 19:00 · San Juan, PR</p>
   </nav>
 
   <section class="page-banner">
-    <p class="crumbs"><a href="index.html">Home</a> · <a href="cart.html">Basket</a> · Checkout</p>
+    <p class="crumbs"><a href="index.html">Inicio</a> · <a href="cart.html">Canasta</a> · Checkout</p>
     <h1>Checkout</h1>
-    <p>Confirm your details and pay securely. Pickup or delivery from the morning bake.</p>
+    <p>Confirma tus datos y paga seguro. Pickup o delivery de la hornada de la mañana.</p>
     <div class="meander-rule" aria-hidden="true"></div>
   </section>
 
   <main class="checkout">
     <form class="form" id="checkoutForm" novalidate>
-      <label for="co-name">Full name</label>
+      <label for="co-name">Nombre completo</label>
       <input id="co-name" name="name" type="text" autocomplete="name" required placeholder="Maria Rivera" />
 
-      <label for="co-email">Email</label>
+      <label for="co-email">Correo electrónico</label>
       <input id="co-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
 
-      <label for="co-fulfilment">Pickup or delivery</label>
+      <label for="co-fulfilment">Pickup o delivery</label>
       <select id="co-fulfilment" name="fulfilment">
         <option>Pickup · Cupey (San Juan)</option>
         <option>Pickup · Apolo (Guaynabo)</option>
         <option>Pickup · Los Filtros (Bayamón)</option>
-        <option>Delivery within the San Juan metro</option>
+        <option>Delivery en el área metro de San Juan</option>
       </select>
 
-      <label for="co-notes">Order notes (optional)</label>
-      <textarea id="co-notes" name="notes" placeholder="Pickup at 8am, slice the bread, etc."></textarea>
+      <label for="co-notes">Notas de la orden (opcional)</label>
+      <textarea id="co-notes" name="notes" placeholder="Pickup a las 8am, pan rebanado, etc."></textarea>
 
-      <button class="btn btn--solid" type="submit">Pay with Card</button>
+      <button class="btn btn--solid" type="submit">Pagar con Tarjeta</button>
       <p class="pay-secure">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-        Secure checkout via Stripe — we never see your card details
+        Checkout seguro vía Stripe — nunca vemos los datos de tu tarjeta
       </p>
       <p class="pay-stub" id="payStub"></p>
     </form>
 
     <aside class="checkout__summary">
-      <h2>Order summary</h2>
+      <h2>Resumen de la orden</h2>
       <ul class="summary-list" id="checkoutSummary"><!-- injected by cart.js --></ul>
       <div class="summary-total">
         <span>Total</span><strong id="checkoutTotal">$0.00</strong>
       </div>
-      <p class="pay-note"><a href="cart.html">← Edit basket</a></p>
+      <p class="pay-note"><a href="cart.html">← Editar canasta</a></p>
     </aside>
   </main>
 
@@ -92,18 +92,18 @@
       <div class="footer__top">
         <div class="footer__brand">
           <a class="brand" href="index.html">Horno<b>fino</b></a>
-          <p class="footer__tag">Bread born of fire. Baked at dawn, gone by sundown.</p>
+          <p class="footer__tag">Pan nacido del fuego. Horneado al amanecer, se acaba al atardecer.</p>
         </div>
-        <nav class="footer__col" aria-label="Footer menu">
-          <h4>Explore</h4>
-          <a href="index.html">Home</a><a href="menu.html">Menu</a><a href="pane-e-pasta.html">Pane e Pasta</a><a href="about.html">Our Story</a><a href="locations.html">Locations</a>
+        <nav class="footer__col" aria-label="Menú del pie de página">
+          <h4>Explora</h4>
+          <a href="index.html">Inicio</a><a href="menu.html">Menú</a><a href="pane-e-pasta.html">Pane e Pasta</a><a href="about.html">Nuestra Historia</a><a href="locations.html">Localidades</a>
         </nav>
-        <div class="footer__col"><h4>Visit</h4><p>San Juan, Puerto Rico</p><p>Open daily · 6:00 – 19:00</p><a href="contact.html">Contact &amp; catering</a></div>
-        <div class="footer__col"><h4>Follow</h4><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a><a href="contact.html#order" style="color:var(--orange)">Order Online →</a></div>
+        <div class="footer__col"><h4>Visítanos</h4><p>San Juan, Puerto Rico</p><p>Abierto todos los días · 6:00 – 19:00</p><a href="contact.html">Contacto y catering</a></div>
+        <div class="footer__col"><h4>Síguenos</h4><a href="#" onclick="return false;">Instagram</a><a href="#" onclick="return false;">Facebook</a><a href="contact.html#order" style="color:var(--orange)">Ordena Online →</a></div>
       </div>
       <div class="footer__bottom">
-        <p class="footer__copy">© <span id="year"></span> Hornofino · Pan · Café · Vino. Crafted with fire and patience.</p>
-        <button class="totop" id="totop">Back to top ↑</button>
+        <p class="footer__copy">© <span id="year"></span> Hornofino · Pan · Café · Vino. Hecho con fuego y paciencia.</p>
+        <button class="totop" id="totop">Volver arriba ↑</button>
       </div>
     </div>
   </footer>
